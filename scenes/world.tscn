@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci2t4q6c7pt6d"]
+
+[ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
+[ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
+
+[node name="World" type="Node2D"]
+
+[node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
+z_index = -100
+
+[node name="GridTileMapLayer" type="TileMapLayer" parent="."]
+modulate = Color(0.14902, 0.14902, 0.14902, 0.670588)
+z_index = -100
+
+[node name="WorldTileMapLayer" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+script = ExtResource("1_e02pw")
+
+[node name="Player" parent="WorldTileMapLayer" instance=ExtResource("1_ldq18")]
+
+[node name="Camera2D" type="Camera2D" parent="WorldTileMapLayer/Player"]
+zoom = Vector2(4, 4)
+limit_left = -1024
+limit_top = -1024
+limit_right = 1024
+limit_bottom = 1024
+limit_smoothed = true
+position_smoothing_enabled = true
