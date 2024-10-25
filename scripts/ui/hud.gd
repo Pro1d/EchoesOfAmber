@@ -1,4 +1,5 @@
 extends Control
+class_name HUD
 
 @onready var _leave_textures : Array[Control] = [
 	%TextureRect1, %TextureRect2, %TextureRect3

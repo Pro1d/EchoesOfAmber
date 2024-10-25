@@ -15,6 +15,6 @@ func _ready() -> void:
 			continue
 		
 		var spawner : Spawner = leaves_spawner.instantiate()
-		spawner.type = spawner_type
+		spawner.type = Leave.str_to_leave_type(spawner_type)
 		spawner.global_position = to_global(map_to_local(cell))
 		add_child(spawner)
