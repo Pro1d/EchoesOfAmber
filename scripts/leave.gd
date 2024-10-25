@@ -1,7 +1,12 @@
 extends RigidBody2D
 class_name Leave
 
+signal on_attraction_point_reached();
+
 @onready var sprite : Node2D =  $Polygon2D
+@onready var anim : AnimationPlayer = $Anim
+
+var attraction_point_reached : bool = false
 var attraction_point: Node2D =  null
 var elevation_z              : float = 16 # 0 = ground
 var leave_gravity  := 10 # px/s
@@ -26,10 +31,14 @@ func _ready() -> void:
 	lateral_offset = randf_range(0, 3.14)
 	lateral_movement_speed_factor = randf_range(0.7, 1.3)
 	lateral_movement_amplitude_factor = randf_range(0.8, 1.5)
+	self.anim.play("spawn")
 
 func _process(delta: float) -> void:
 	sprite.position.y = -elevation_z
 	
+	if attraction_point_reached:
+		return
+
 	if elevation_z != 0:
 		var speed := Time.get_ticks_msec() * 0.005 * lateral_movement_speed_factor
 		var amplitude := 0.1 * lateral_movement_amplitude_factor
@@ -46,15 +55,17 @@ func _process(delta: float) -> void:
 			total_time_close_to_attraction_point += delta
 
 	else:
-#		print("its 0 now baby")
 		total_time_close_to_attraction_point = 0.0
 	
 	if total_time_close_to_attraction_point >= max_time_close_to_attaction_point:
-		# TODO: animation de jump into bag de la feuille
-		queue_free()
+		on_attraction_point_reached.emit()
+		attraction_point_reached = true
 
 	if current_time_on_ground >= max_time_on_ground:
 		# TODO: animation de mort de la feuille
+		self.anim.play("despawn")
+		await self.anim.animation_finished
+		print("queue free!")
 		queue_free()
 		
 

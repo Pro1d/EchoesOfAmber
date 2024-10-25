@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED := 64.0
 const ACCEL := SPEED / 0.2
 
@@ -23,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 func _on_leave_entered_area(body: Leave) -> void:
 	if not body is Leave:
 		return
-		
+	
 	body.set_attraction_point(self)
 	
 	

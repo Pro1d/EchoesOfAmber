@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=4 uid="uid://ci2t4q6c7pt6d"]
+[gd_scene load_steps=5 format=4 uid="uid://ci2t4q6c7pt6d"]
 
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
 [ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_7mn6k")
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
 z_index = -100
@@ -29,6 +31,7 @@ tile_set = ExtResource("1_wbhuw")
 script = ExtResource("1_e02pw")
 
 [node name="Player" parent="WorldTileMapLayer" instance=ExtResource("1_ldq18")]
+unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="WorldTileMapLayer/Player"]
 zoom = Vector2(4, 4)
