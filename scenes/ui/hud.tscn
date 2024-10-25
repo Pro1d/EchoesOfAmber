@@ -1,0 +1,123 @@
+[gd_scene load_steps=7 format=3 uid="uid://ci1cf3v7p1lc8"]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_uwui3"]
+[ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_xt31b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhaqv"]
+atlas = ExtResource("1_xt31b")
+region = Rect2(0, 264, 12, 12)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hiog1"]
+font_size = 26
+outline_size = 17
+outline_color = Color(0.148989, 0.148989, 0.148989, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmjed"]
+atlas = ExtResource("1_xt31b")
+region = Rect2(12, 264, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmxjg"]
+atlas = ExtResource("1_xt31b")
+region = Rect2(24, 264, 12, 12)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_uwui3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 20.0
+grow_vertical = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="TextureRect1" type="TextureRect" parent="MarginContainer/HBoxContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_nhaqv")
+
+[node name="Leave1Label" type="Label" parent="MarginContainer/HBoxContainer/Control/TextureRect1"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+label_settings = SubResource("LabelSettings_hiog1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/Control2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_rmjed")
+
+[node name="Leave2Label" type="Label" parent="MarginContainer/HBoxContainer/Control2/TextureRect2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+label_settings = SubResource("LabelSettings_hiog1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/HBoxContainer/Control3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_lmxjg")
+
+[node name="Leave3Label" type="Label" parent="MarginContainer/HBoxContainer/Control3/TextureRect3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+label_settings = SubResource("LabelSettings_hiog1")
+horizontal_alignment = 1
+vertical_alignment = 1
