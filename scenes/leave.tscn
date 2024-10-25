@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1gxgkkfwfv1j"]
+
+[ext_resource type="Script" path="res://scripts/leave.gd" id="1_gjxgv"]
+[ext_resource type="SpriteFrames" uid="uid://ylhhs1pbn5uy" path="res://resources/sprite/leave_sprite.tres" id="2_b70pu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gkaol"]
+
+[node name="Leave" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_gjxgv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gkaol")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 24)
+sprite_frames = ExtResource("2_b70pu")
+centered = false
+offset = Vector2(-8, -32)
