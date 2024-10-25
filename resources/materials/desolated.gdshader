@@ -5,7 +5,7 @@ uniform float factor: hint_range(0.0, 1.0, 0.01) = 0.8;
 void fragment() {
 	vec3 avg = vec3(dot(COLOR.rgb, vec3(0.333)));
 	float desaturate = factor;
-	float darken = factor * 0.5;
+	float darken = factor * 0.4;
 	COLOR.rgb = mix(COLOR.rgb, avg, desaturate) * (1.0 - darken);
 }
 
