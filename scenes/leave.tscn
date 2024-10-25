@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dknlk80clvbbd"]
+[gd_scene load_steps=4 format=3 uid="uid://d1gxgkkfwfv1j"]
 
 [ext_resource type="Script" path="res://scripts/leave.gd" id="1_gjxgv"]
 [ext_resource type="SpriteFrames" uid="uid://ylhhs1pbn5uy" path="res://resources/sprite/leave_sprite.tres" id="2_b70pu"]
@@ -8,17 +8,24 @@ radius = 6.0
 
 [node name="Leave" type="RigidBody2D"]
 collision_layer = 4
-collision_mask = 5
+collision_mask = 0
 linear_damp = 1.0
 script = ExtResource("1_gjxgv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.128, 0.128)
 shape = SubResource("CircleShape2D_gkaol")
 
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0.18538, 0.122229, 1)
+polygon = PackedVector2Array(1, -1, 1, 1, -1, 1, -1, -1)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 24)
+visible = false
+position = Vector2(-5, -3)
+scale = Vector2(0.25, 0.25)
 sprite_frames = ExtResource("2_b70pu")
 animation = &"0"
 autoplay = "0"
 centered = false
-offset = Vector2(-8, -32)
+offset = Vector2(-8, -8)

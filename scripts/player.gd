@@ -17,7 +17,7 @@ func _physics_process(_delta: float) -> void:
 	)
 
 	velocity = velocity.move_toward(command.normalized() * SPEED, ACCEL)
-	
+	leaves_attraction_area.monitoring = Input.is_action_pressed('attract_leaves')
 	move_and_slide()
 	
 func _on_leave_entered_area(body: Leave) -> void:
@@ -32,4 +32,3 @@ func _on_leave_exited_area(body: Leave) -> void:
 		return 
 
 	body.set_attraction_point(null)
-	print("leave exited " + body.name)
