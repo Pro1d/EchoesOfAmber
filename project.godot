@@ -103,6 +103,11 @@ move_right={
 2d_physics/layer_1="world"
 3d_physics/layer_1="world"
 2d_physics/layer_2="player"
+2d_physics/layer_3="leaves"
+
+[physics]
+
+2d/default_gravity_vector=Vector2(0, 0)
 
 [rendering]
 

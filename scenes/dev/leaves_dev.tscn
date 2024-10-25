@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq0dnynevu1rf"]
+
+[ext_resource type="PackedScene" uid="uid://ci2t4q6c7pt6d" path="res://scenes/world.tscn" id="1_j846b"]
+[ext_resource type="PackedScene" uid="uid://d1gxgkkfwfv1j" path="res://scenes/leave.tscn" id="2_cssdu"]
+
+[node name="LeavesDev" type="Node2D"]
+
+[node name="World" parent="." instance=ExtResource("1_j846b")]
+
+[node name="Leave" parent="World/WorldTileMapLayer" index="1" instance=ExtResource("2_cssdu")]
+position = Vector2(86, -39)
+
+[node name="Leave2" parent="World/WorldTileMapLayer" index="2" instance=ExtResource("2_cssdu")]
+position = Vector2(-52, -43)
+
+[editable path="World"]
