@@ -29,7 +29,7 @@ var type: LeaveType   = LeaveType.RED # red, green, yellow
 
 # Leave dying on ground mechanic
 var current_time_on_ground := 0.0 # seconds
-var max_time_on_ground := 2.0 # seconds
+var max_time_on_ground : float # seconds
 
 # Into bag mechanic
 # total amount of time the leave stayed close to the player
@@ -63,6 +63,7 @@ func _ready() -> void:
 			randf_range(0.55, 0.65), 
 			randf_range(0.15, 0.25))
 	
+	self.sprite.modulate.a = 0
 	self.anim.play("spawn")
 
 func _process(delta: float) -> void:
