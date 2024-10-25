@@ -6,8 +6,8 @@ class_name Spawner
 
 # Settings for the leaves
 var spawn_period : float = 1.0 # leaves / second
-var max_alive_leaves : float = 100 # max alive entities
-var max_time_on_ground : float = 40.0 # seconds
+var max_alive_leaves : float = 25 # max alive entities
+var max_time_on_ground : float = 25.0 # seconds
 
 var type : Leave.LeaveType = Leave.LeaveType.RED
 var elapsed : float = 0.0
