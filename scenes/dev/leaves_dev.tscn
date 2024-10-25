@@ -10,7 +10,19 @@
 [node name="Leave" parent="World/WorldTileMapLayer" index="1" instance=ExtResource("2_cssdu")]
 position = Vector2(86, -39)
 
-[node name="Leave2" parent="World/WorldTileMapLayer" index="2" instance=ExtResource("2_cssdu")]
+[node name="Leave3" parent="World/WorldTileMapLayer" index="2" instance=ExtResource("2_cssdu")]
+position = Vector2(-78, 54)
+
+[node name="Leave4" parent="World/WorldTileMapLayer" index="3" instance=ExtResource("2_cssdu")]
+position = Vector2(39, 51)
+
+[node name="Leave5" parent="World/WorldTileMapLayer" index="4" instance=ExtResource("2_cssdu")]
+position = Vector2(24, -63)
+
+[node name="Leave6" parent="World/WorldTileMapLayer" index="5" instance=ExtResource("2_cssdu")]
+position = Vector2(-67, 11)
+
+[node name="Leave2" parent="World/WorldTileMapLayer" index="6" instance=ExtResource("2_cssdu")]
 position = Vector2(-52, -43)
 
 [editable path="World"]
