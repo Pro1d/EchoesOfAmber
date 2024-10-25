@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="2_mevrw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gkaol"]
+radius = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrg7m"]
 atlas = ExtResource("2_mevrw")
@@ -31,4 +32,4 @@ shape = SubResource("CircleShape2D_gkaol")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jvnh5")
 centered = false
-offset = Vector2(-8, -32)
+offset = Vector2(-8, -31)
