@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout="res://resources/audio/default_bus_layout.tres"
 
+[autoload]
+
+Config="*res://scripts/singleton/Config.gd"
+
 [debug]
 
 gdscript/warnings/unassigned_variable=2
