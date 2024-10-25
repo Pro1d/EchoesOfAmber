@@ -4,8 +4,11 @@ class_name Spawner
 
 @onready var leave_resource := preload('res://scenes/leave.tscn')
 
-var spawn_period := 1.5 # leaves / second
-var max_alive_leaves := 10 # max alive entities
+# Settings for the leaves
+var spawn_period : float = 1.0 # leaves / second
+var max_alive_leaves : float = 25 # max alive entities
+var max_time_on_ground : float = 25.0 # seconds
+
 var type : Leave.LeaveType = Leave.LeaveType.RED
 var elapsed : float = 0.0
 var spawned_entities := []
@@ -29,6 +32,7 @@ func _process(delta: float) -> void:
 			randf_range(-spawn_offset_range, spawn_offset_range),
 			randf_range(-spawn_offset_range, spawn_offset_range)
 		)
+		leave.max_time_on_ground = max_time_on_ground
 		Config.root_2d.add_child(leave)
 		spawned_entities.append(leave)
 		elapsed = 0
