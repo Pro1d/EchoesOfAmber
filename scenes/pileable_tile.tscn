@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv0mag745ri5a"]
+
+[ext_resource type="Script" path="res://scripts/pileable_tile.gd" id="1_m3gff"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qq0un"]
+
+[node name="PileableTile" type="Node2D"]
+script = ExtResource("1_m3gff")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.12549)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qq0un")
