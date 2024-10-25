@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://lgcp167hngoh"]
+[gd_scene load_steps=6 format=3 uid="uid://lgcp167hngoh"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0guwy"]
 [ext_resource type="SpriteFrames" uid="uid://bvwnn4cjsqldm" path="res://resources/sprite/player_sprite.tres" id="2_n0gkl"]
@@ -8,12 +8,15 @@ radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7oolu"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfu36"]
+size = Vector2(11, 11)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_0guwy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gkaol")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -35,3 +38,13 @@ shape = SubResource("CircleShape2D_7oolu")
 unique_name_in_owner = true
 position = Vector2(-7.22, -7.81)
 gizmo_extents = 15.0
+
+[node name="PileContactArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PileContactArea"]
+position = Vector2(0, -8)
+scale = Vector2(1.965, 1.965)
+shape = SubResource("RectangleShape2D_pfu36")

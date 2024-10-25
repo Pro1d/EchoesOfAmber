@@ -34,4 +34,4 @@ func _process(delta: float) -> void:
 		elapsed = 0
 	
 	# Remove dead entities from the list
-	self.spawned_entities = self.spawned_entities.filter(func(e: Leave) -> bool: return is_instance_valid(e));
+	self.spawned_entities = self.spawned_entities.filter(func(e: Variant) -> bool: return is_instance_valid(e));
