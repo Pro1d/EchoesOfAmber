@@ -6,7 +6,4 @@
 
 [node name="World" parent="." instance=ExtResource("1_j846b")]
 
-[node name="LeavesSpawner" type="Node2D" parent="World"]
-position = Vector2(135, 89)
-
 [editable path="World"]

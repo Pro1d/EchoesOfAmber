@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
-[ext_resource type="TileSet" uid="uid://orqjecypyw5o" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
+[ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 
 [node name="World" type="Node2D"]
 
