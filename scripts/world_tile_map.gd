@@ -24,4 +24,5 @@ func _ready() -> void:
 		if spawner_type in ['pile']:
 			var tile : PileableTile = pileable_tile.instantiate()
 			tile.global_position = to_global(map_to_local(cell))
+			tile.tilemap_cell = cell
 			add_child(tile)
