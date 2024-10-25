@@ -5,6 +5,7 @@ signal on_attraction_point_reached();
 
 @onready var sprite : Node2D =  $Polygon2D
 @onready var anim : AnimationPlayer = $Anim
+@onready var graphic : Polygon2D = $Polygon2D
 
 var attraction_point_reached : bool = false
 var attraction_point: Node2D =  null
@@ -19,8 +20,8 @@ var max_time_on_ground := 2.0 # seconds
 # Into bag mechanic
 # total amount of time the leave stayed close to the player
 var total_time_close_to_attraction_point := 0.0 
-var max_time_close_to_attaction_point := 1.0
-var attraction_point_close_distance := 8.0
+var max_time_close_to_attaction_point := 0.7
+var attraction_point_close_distance := 16.0
 
 # Offsets to break homogeneity
 var lateral_offset : float = 0 # random offset
@@ -31,6 +32,23 @@ func _ready() -> void:
 	lateral_offset = randf_range(0, 3.14)
 	lateral_movement_speed_factor = randf_range(0.7, 1.3)
 	lateral_movement_amplitude_factor = randf_range(0.8, 1.5)
+	
+	if type == 'red':
+		self.graphic.color = Color(
+			randf_range(0.85, 0.95), 
+			randf_range(0.30, 0.4), 
+			randf_range(0.2, 0.3))
+	elif type == 'green':
+		self.graphic.color = Color(
+			randf_range(0.5, 0.6), 
+			randf_range(0.6, 0.8), 
+			randf_range(0.35, 0.45))
+	else:
+		self.graphic.color = Color(
+			randf_range(0.75, 0.85), 
+			randf_range(0.55, 0.65), 
+			randf_range(0.15, 0.25))
+	
 	self.anim.play("spawn")
 
 func _process(delta: float) -> void:
@@ -58,14 +76,20 @@ func _process(delta: float) -> void:
 		total_time_close_to_attraction_point = 0.0
 	
 	if total_time_close_to_attraction_point >= max_time_close_to_attaction_point:
-		on_attraction_point_reached.emit()
 		attraction_point_reached = true
+		var tween := self.create_tween()
+		tween.tween_property(self, 'global_position', attraction_point.global_position, 0.3)
+		tween.tween_property(sprite, 'position', Vector2(0, -16), 0.3)
+		await tween.finished
+		self.anim.play("reached")
+		await self.anim.animation_finished
+		on_attraction_point_reached.emit()
+		queue_free()
 
 	if current_time_on_ground >= max_time_on_ground:
 		# TODO: animation de mort de la feuille
 		self.anim.play("despawn")
 		await self.anim.animation_finished
-		print("queue free!")
 		queue_free()
 		
 
