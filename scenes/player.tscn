@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://lgcp167hngoh"]
+[gd_scene load_steps=8 format=3 uid="uid://lgcp167hngoh"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0guwy"]
 [ext_resource type="SpriteFrames" uid="uid://bvwnn4cjsqldm" path="res://resources/sprite/player_sprite.tres" id="2_n0gkl"]
+[ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="3_rmtxy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gkaol"]
 radius = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eirh2"]
+atlas = ExtResource("3_rmtxy")
+region = Rect2(0, 241, 6, 23)
+filter_clip = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7oolu"]
 
@@ -19,13 +25,23 @@ script = ExtResource("1_0guwy")
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gkaol")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="StaffSprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 0)
+texture = SubResource("AtlasTexture_eirh2")
+centered = false
+offset = Vector2(-3, -22)
+
+[node name="BodyAnimatedSpite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_n0gkl")
+animation = &"walking"
+autoplay = "walking"
+frame_progress = 0.483221
 centered = false
 offset = Vector2(-12, -23)
 
 [node name="LeavesAttractionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 0
 collision_mask = 4
 monitorable = false
@@ -36,11 +52,13 @@ shape = SubResource("CircleShape2D_7oolu")
 
 [node name="AttractionPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(-7.22, -7.81)
 gizmo_extents = 15.0
 
 [node name="PileContactArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 8
 collision_mask = 8
 
