@@ -1,7 +1,21 @@
 extends RigidBody2D
 class_name Leave
 
-signal on_attraction_point_reached();
+signal on_attraction_point_reached(leave_type: LeaveType);
+
+enum LeaveType {
+	RED = 0,
+	YELLOW = 1,
+	GREEN = 2,
+}
+
+static func str_to_leave_type(leave_str: String) -> LeaveType:
+	match leave_str:
+		'red': return LeaveType.RED
+		'yellow': return LeaveType.YELLOW
+		'green': return LeaveType.GREEN
+		_: return LeaveType.GREEN
+
 
 @onready var sprite : Node2D =  $Polygon2D
 @onready var anim : AnimationPlayer = $Anim
@@ -9,9 +23,9 @@ signal on_attraction_point_reached();
 
 var attraction_point_reached : bool = false
 var attraction_point: Node2D =  null
-var elevation_z              : float = 16 # 0 = ground
+var elevation_z : float = 16 # 0 = ground
 var leave_gravity  := 10 # px/s
-var type: String   =  'red' # red, green, yellow
+var type: LeaveType   = LeaveType.RED # red, green, yellow
 
 # Leave dying on ground mechanic
 var current_time_on_ground := 0.0 # seconds
@@ -33,12 +47,12 @@ func _ready() -> void:
 	lateral_movement_speed_factor = randf_range(0.7, 1.3)
 	lateral_movement_amplitude_factor = randf_range(0.8, 1.5)
 	
-	if type == 'red':
+	if type == LeaveType.RED:
 		self.graphic.color = Color(
 			randf_range(0.85, 0.95), 
 			randf_range(0.30, 0.4), 
 			randf_range(0.2, 0.3))
-	elif type == 'green':
+	elif type == LeaveType.GREEN:
 		self.graphic.color = Color(
 			randf_range(0.5, 0.6), 
 			randf_range(0.6, 0.8), 
@@ -83,7 +97,7 @@ func _process(delta: float) -> void:
 		await tween.finished
 		self.anim.play("reached")
 		await self.anim.animation_finished
-		on_attraction_point_reached.emit()
+		on_attraction_point_reached.emit(self.type)
 		queue_free()
 
 	if current_time_on_ground >= max_time_on_ground:

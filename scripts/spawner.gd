@@ -6,7 +6,7 @@ class_name Spawner
 
 var spawn_period := 1.5 # leaves / second
 var max_alive_leaves := 10 # max alive entities
-var type : String = 'red'
+var type : Leave.LeaveType = Leave.LeaveType.RED
 var elapsed : float = 0.0
 var spawned_entities := []
 var spawn_period_offset : float = 0.0
