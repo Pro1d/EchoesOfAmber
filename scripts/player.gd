@@ -25,6 +25,8 @@ func _physics_process(_delta: float) -> void:
 	
 	if not attract_leaves: # dont move while attracting leaves
 		velocity = velocity.move_toward(command.normalized() * SPEED, ACCEL)
+	else:
+		velocity = Vector2()
 
 	leaves_attraction_area.monitoring = attract_leaves
 	
