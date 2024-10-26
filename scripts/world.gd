@@ -34,9 +34,6 @@ func _pause_game() -> void:
 	hud.hide()
 	Config.sfx.play_page_turn_fx()
 
-func _on_area_cleared(area: AreaManager.AreaData) -> void:
-	print("Cleared area: " + str(area.area_id))
-
 func _on_player_try_spawn_leaves(leave_type: Leave.LeaveType, pileable_tile: PileableTile) -> void:
 	var cost := 10
 	
@@ -63,6 +60,15 @@ func _update_leaves_hud(animate: bool) -> void:
 # Cinematic stuff starts here
 # ================================================================================================
 
+func _on_area_cleared(area: AreaManager.AreaData) -> void:
+	print("Cleared area: " + str(area.area_id))
+	player.lock_player = true
+	await blackbars.set_enabled(true)
+	# Let the transitions happen in the world
+	await get_tree().create_timer(5).timeout
+	await blackbars.set_enabled(false)
+	player.lock_player = false
+	
 # Starts the game introduction
 func _start_introduction() -> void:
 	player.lock_player = true

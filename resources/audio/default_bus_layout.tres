@@ -2,7 +2,7 @@
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_eeyjl"]
 resource_name = "Amplify"
-volume_db = 24.0
+volume_db = 12.0
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectAmplify_eeyjl")

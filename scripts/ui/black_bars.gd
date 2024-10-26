@@ -1,7 +1,6 @@
 extends Control
 class_name BlackBars
 
-@onready var player: AnimationPlayer = $AnimationPlayer
 @onready var top_rect : ColorRect = $TopRect
 @onready var bottom_rect : ColorRect = $BottomRect
 

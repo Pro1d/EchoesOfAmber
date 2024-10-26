@@ -145,7 +145,10 @@ func refresh_area_state(data: AreaData, animate: bool) -> void:
 		return
 	
 	data.is_in_cleared_state = is_cleared
-	
+
+	if is_cleared:
+		on_area_cleared.emit(data)
+
 	_refresh_area_visual_state(data, animate)
 	_refresh_area_audio_state(data, animate)
 
@@ -196,9 +199,6 @@ func _refresh_area_audio_state(data: AreaData, animate: bool) -> void:
 		
 		if not play:
 			audio.stop()
-	
-	if is_cleared:
-		on_area_cleared.emit(data)
 	
 	tween.kill()
 

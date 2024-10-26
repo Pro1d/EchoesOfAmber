@@ -94,9 +94,18 @@ attenuation = 2.37841
 max_polyphony = 4
 bus = &"Ambience"
 script = ExtResource("10_vqmp0")
-area_id = 1
 is_desolated = true
 nominal_volume_db = -32.0
+
+[node name="H Forest 2" type="AudioStreamPlayer2D" parent="AreaManager/MapAudio"]
+position = Vector2(230, 71)
+stream = ExtResource("10_wnl7t")
+autoplay = true
+max_distance = 300.0
+attenuation = 2.37841
+max_polyphony = 4
+bus = &"Ambience"
+script = ExtResource("10_vqmp0")
 
 [node name="D Forest 1" type="AudioStreamPlayer2D" parent="AreaManager/MapAudio"]
 position = Vector2(536, 297)
@@ -117,10 +126,11 @@ attenuation = 2.37841
 max_polyphony = 4
 bus = &"Ambience"
 script = ExtResource("10_vqmp0")
+area_id = 1
 nominal_volume_db = -4.6
 
 [node name="A1 DEAD Crows" type="AudioStreamPlayer2D" parent="AreaManager/MapAudio"]
-position = Vector2(458, 67)
+position = Vector2(487, 70)
 stream = ExtResource("13_vdco3")
 autoplay = true
 max_distance = 300.0
@@ -142,6 +152,19 @@ max_polyphony = 4
 bus = &"Ambience"
 script = ExtResource("10_vqmp0")
 area_id = 2
+
+[node name="A3 DEAD Crows" type="AudioStreamPlayer2D" parent="AreaManager/MapAudio"]
+position = Vector2(161, 313)
+stream = ExtResource("13_vdco3")
+autoplay = true
+max_distance = 300.0
+attenuation = 2.37841
+max_polyphony = 4
+bus = &"Ambience"
+script = ExtResource("10_vqmp0")
+area_id = 3
+is_desolated = true
+nominal_volume_db = -32.0
 
 [node name="A3 Forest 3" type="AudioStreamPlayer2D" parent="AreaManager/MapAudio"]
 position = Vector2(236, 293)
