@@ -180,12 +180,12 @@ func on_tile_cleared(tile: Vector2i) -> void:
 		var data : AreaData = area_data[area_id]
 		var index := data.tiles_to_clear.find(tile)
 		
-		if index > 0:
+		if index >= 0:
 			data.tiles_to_clear.remove_at(index)
 			_on_area_tile_cleared(area_id, tile)
 		
 		index = data.trees_to_clear.find(tile)
-		if index > 0:
+		if index >= 0:
 			data.trees_to_clear.remove_at(index)
 			_on_area_tree_cleared(area_id, tile)
 	
