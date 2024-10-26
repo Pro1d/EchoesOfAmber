@@ -17,7 +17,7 @@ class AreaData:
 		if area_id != AreaManager.AREA_ID_BASE:
 			return trees_to_clear.is_empty()
 		else:
-			print("tiles to clear " + str(tiles_to_clear))
+			# print("tiles to clear " + str(tiles_to_clear))
 			return tiles_to_clear.is_empty()
 
 # Signal launched when an area is completely cleared.
@@ -180,8 +180,6 @@ func refresh_area_state(data: AreaData, animate: bool) -> void:
 
 # Notifies to the area manager that a tile has been cleared (de-desolated).
 func on_tile_cleared(tile: Vector2i) -> void:
-	print("tile cleared!")
-
 	for area_id: int in area_data:
 		var data : AreaData = area_data[area_id]
 		var index := data.tiles_to_clear.find(tile)
