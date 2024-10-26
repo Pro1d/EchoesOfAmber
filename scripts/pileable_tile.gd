@@ -124,7 +124,15 @@ func _get_tree_type(leave_type: Leave.LeaveType) -> BuildingType:
 		Leave.LeaveType.GREEN: return BuildingType.GreenTree
 		Leave.LeaveType.YELLOW: return BuildingType.YellowTree
 		_: return BuildingType.RedTree	
+
+func _get_leave_type(tree_type: BuildingType) -> Leave.LeaveType:
+	match tree_type:
+		BuildingType.RedTree: return Leave.LeaveType.RED
+		BuildingType.GreenTree: return Leave.LeaveType.GREEN
+		BuildingType.YellowTree: return Leave.LeaveType.YELLOW
+		_: return Leave.LeaveType.RED	
 	
+
 func spread_leaves(leave_type: Leave.LeaveType) -> void:
 	if can_spawn_leave():
 		if is_colored:
@@ -167,3 +175,6 @@ func _build(building_type: BuildingType) -> void:
 	var coords : Vector2i = buildings_map[building_type]
 	var tilemap: TileMapLayer = Config.root_2d
 	tilemap.set_cell(tilemap_cell, 0, coords)
+	
+	if building_type in [BuildingType.RedTree, BuildingType.GreenTree, BuildingType.YellowTree]:
+		Config.root_2d.add_spawner(tilemap_cell, _get_leave_type(building_type))

@@ -110,7 +110,6 @@ func _propagate_leaves(tile: Vector2i) -> void:
 		return
 	
 	center_tile.build_tree(center_tile.get_color_type())
-	Config.root_2d.add_spawner(tile, center_tile.get_color_type())
 	
 	for x_offset in range(-1, 2):
 		for y_offset in range(-1, 2):
