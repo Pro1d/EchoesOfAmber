@@ -9,6 +9,7 @@ class AreaData:
 	var trees_to_clear : Array[Vector2i] = []
 	var dead_area_ambiance : Array[AreaAmbienceNode] = []
 	var alive_area_ambiance : Array[AreaAmbienceNode] = []
+	var area_visuals : Array[AreaAmbienceVisual] = []
 	
 	# True when the transition from dead to alive has been done on the area
 	var is_in_cleared_state : bool = false
@@ -25,6 +26,7 @@ signal on_area_cleared(data: AreaData)
 
 @onready var map_audio := %MapAudio
 @onready var global_sfx : GlobalSFX = %GlobalSFX
+@onready var map_visuals := %MapVisuals
 
 # map of: area ID => area data
 var area_data := {}
@@ -84,10 +86,20 @@ func _register_audio_ambience_nodes() -> void:
 		else:
 			data.alive_area_ambiance.append(amb)
 
+func _register_visual_ambience_nodes() -> void:
+	for node in map_visuals.get_children():
+		if not node is AreaAmbienceVisual:
+			continue
+
+		var amb : AreaAmbienceVisual = node
+		var data : AreaData = _get_area_data(amb.area_id)
+		
+		data.area_visuals.append(amb)
 
 func _ready() -> void:
 	_register_tiles_to_clear()
-	_register_audio_ambience_nodes()	
+	_register_audio_ambience_nodes()
+	_register_visual_ambience_nodes()
 	
 	for area_id: int in area_data:
 		var data : AreaData = area_data[area_id]
@@ -134,6 +146,19 @@ func refresh_area_state(data: AreaData, animate: bool) -> void:
 	
 	data.is_in_cleared_state = is_cleared
 	
+	_refresh_area_visual_state(data, animate)
+	_refresh_area_audio_state(data, animate)
+
+
+func _refresh_area_visual_state(data: AreaData, animate: bool) -> void:
+	var is_cleared := data.is_cleared()
+	
+	for visual: AreaAmbienceVisual in data.area_visuals:
+		visual.transition(animate, is_cleared != visual.is_desolated)
+	
+
+func _refresh_area_audio_state(data: AreaData, animate: bool) -> void:
+	var is_cleared := data.is_cleared()
 	var min_volume : float = -64
 	var all_audios := []
 	all_audios.append_array(data.dead_area_ambiance)
