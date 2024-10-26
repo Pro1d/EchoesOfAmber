@@ -32,6 +32,21 @@ atlas = ExtResource("3_rmtxy")
 region = Rect2(0, 241, 6, 23)
 filter_clip = true
 
+[sub_resource type="Animation" id="Animation_gahx7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_ertig"]
 resource_name = "magic"
 loop_mode = 1
@@ -46,21 +61,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.122173]
-}
-
-[sub_resource type="Animation" id="Animation_gahx7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5emc4"]
@@ -89,6 +89,9 @@ fill_to = Vector2(0, 1)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_0guwy")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 visible = false
@@ -164,6 +167,7 @@ stream = ExtResource("4_0s2g2")
 volume_db = -64.0
 autoplay = true
 max_distance = 50.0
+max_polyphony = 4
 bus = &"Ambience"
 parameters/looping = true
 
@@ -173,6 +177,7 @@ stream = ExtResource("5_x6iy1")
 volume_db = -64.0
 autoplay = true
 max_distance = 50.0
+max_polyphony = 4
 bus = &"Ambience"
 parameters/looping = true
 
