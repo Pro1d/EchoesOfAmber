@@ -163,9 +163,13 @@ func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 		is_structure_built = true
 
 		var building_type := get_building_type()
-
-		for p in spawned_piles:
-			await p.animate_build()
+		
+		spawned_piles[0].animate_build()
+		await get_tree().create_timer(0.07).timeout
+		spawned_piles[1].animate_build()
+		await get_tree().create_timer(0.07).timeout
+		spawned_piles[2].animate_build()
+		await get_tree().create_timer(0.15).timeout
 
 		_build(building_type)
 
