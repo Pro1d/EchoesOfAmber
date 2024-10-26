@@ -17,9 +17,8 @@ static func str_to_leave_type(leave_str: String) -> LeaveType:
 		_: return LeaveType.GREEN
 
 
-@onready var sprite : Node2D =  $Polygon2D
 @onready var anim : AnimationPlayer = $Anim
-@onready var graphic : Polygon2D = $Polygon2D
+@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 
 var attraction_point_reached : bool = false
 var attraction_point: Node2D =  null
@@ -47,22 +46,7 @@ func _ready() -> void:
 	lateral_movement_speed_factor = randf_range(0.7, 1.3)
 	lateral_movement_amplitude_factor = randf_range(0.8, 1.5)
 	
-	if type == LeaveType.RED:
-		self.graphic.color = Color(
-			randf_range(0.85, 0.95), 
-			randf_range(0.30, 0.4), 
-			randf_range(0.2, 0.3))
-	elif type == LeaveType.GREEN:
-		self.graphic.color = Color(
-			randf_range(0.5, 0.6), 
-			randf_range(0.6, 0.8), 
-			randf_range(0.35, 0.45))
-	else:
-		self.graphic.color = Color(
-			randf_range(0.75, 0.85), 
-			randf_range(0.55, 0.65), 
-			randf_range(0.15, 0.25))
-	
+	self.sprite.play(str(LeaveType.RED))
 	self.sprite.modulate.a = 0
 	self.anim.play("spawn")
 

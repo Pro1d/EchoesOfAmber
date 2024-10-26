@@ -6,7 +6,7 @@ signal on_leave_in_backpack(leave_type: Leave.LeaveType)
 signal on_try_spawn_leaves(leave_type: Leave.LeaveType, tile: PileableTile)
 
 const SPEED := 64.0
-const ACCEL := SPEED / 0.2
+const ACCEL := SPEED / 0.15
 
 @onready var attraction_point : Node2D = %AttractionPoint
 @onready var leaves_attraction_area : Area2D = %LeavesAttractionArea
@@ -17,10 +17,14 @@ const ACCEL := SPEED / 0.2
 
 @onready var footstep_players : Array[AudioStreamPlayer2D] = [%FootstepL, %FootstepR]
 
+@onready var _body_sprite := %BodyAnimatedSprite2D as AnimatedSprite2D
+@onready var _staff_sprite := %StaffSprite2D as Sprite2D
+@onready var _staff_animation := %StaffAnimationPlayer as AnimationPlayer
 
 # list of PileableTile to which the player currently has contact
 var contacted_pile_tiles : Array[PileableTile] = []
 var leaves_hooked_count := 0
+var _attracting_leaves := false
 
 # Footsteps
 var foot_step_period : float    =  0.5
@@ -39,21 +43,21 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("move_up", "move_down"),
 	)
 	
-	var attract_leaves := Input.is_action_pressed('attract_leaves')
+	_update_display(command)
 	
-	if not attract_leaves: # dont move while attracting leaves
-		velocity = velocity.move_toward(command.normalized() * SPEED, ACCEL)
+	if Input.is_action_just_pressed('attract_leaves'):
+		_start_attract_leaves()
+	elif Input.is_action_just_released('attract_leaves'):
+		_stop_attract_leaves()
+	
+	if not _attracting_leaves: # dont move while attracting leaves
+		velocity = velocity.move_toward(command.normalized() * SPEED, ACCEL * delta)
 	else:
-		velocity = Vector2()
-		
-
-	leaves_attraction_area.monitoring = attract_leaves
+		velocity = velocity.move_toward(Vector2.ZERO, ACCEL * delta)
 	
 	_handle_pile_deposit_input()
 	_handle_footstep_sound(delta)
-	_handle_leave_sound(attract_leaves, delta)
-	
-	wind_particles.emitting = attract_leaves
+	_handle_leave_sound(_attracting_leaves, delta)
 	
 	move_and_slide()
 
@@ -114,7 +118,8 @@ func _on_leave_entered_area(body: Leave) -> void:
 		return
 	
 	leaves_hooked_count += 1
-	body.on_attraction_point_reached.connect(_on_leave_in_backpack)
+	if not body.on_attraction_point_reached.is_connected(_on_leave_in_backpack):
+		body.on_attraction_point_reached.connect(_on_leave_in_backpack)
 	body.set_attraction_point(attraction_point)
 	
 func _on_leave_exited_area(body: Leave) -> void:
@@ -156,3 +161,40 @@ func _on_leave_in_backpack(leave_type: Leave.LeaveType) -> void:
 func play_pile_desposit_animation(_leave_type: Leave.LeaveType, _success: bool) -> void:
 	# TODO
 	pass
+
+func _update_display(move_direction: Vector2) -> void:
+	# Orientation
+	if not is_zero_approx(move_direction.x):
+		_body_sprite.scale.x = signf(move_direction.x)
+	# Animation
+	if move_direction.is_zero_approx():
+		_body_sprite.play("idle")
+	else:
+		_body_sprite.play("walking")
+
+var _staff_tween : Tween
+func _start_attract_leaves() -> void:
+	_attracting_leaves = true
+	leaves_attraction_area.monitoring = _attracting_leaves
+	wind_particles.emitting = _attracting_leaves
+	# Animation
+	if _staff_tween != null:
+		_staff_tween.kill()
+	_staff_tween = create_tween()
+	_staff_tween.tween_property(_staff_sprite, "position", Vector2(0.5, -3), 0.3).from_current() \
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	_staff_tween.tween_callback(_staff_animation.play.bind("magic"))
+
+func _stop_attract_leaves() -> void:
+	_attracting_leaves = false
+	leaves_attraction_area.monitoring = _attracting_leaves
+	wind_particles.emitting = _attracting_leaves
+	# Animation
+	if _staff_tween != null:
+		_staff_tween.kill()
+	_staff_tween = create_tween()
+	_staff_animation.stop(true)
+	_staff_tween.tween_property(_staff_sprite, "position", Vector2.ZERO, 0.3).from_current() \
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	_staff_tween.parallel().tween_property(_staff_sprite, "rotation", 0.0, 0.3).from_current() \
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)

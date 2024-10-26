@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://lgcp167hngoh"]
+[gd_scene load_steps=19 format=3 uid="uid://lgcp167hngoh"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0guwy"]
 [ext_resource type="SpriteFrames" uid="uid://bvwnn4cjsqldm" path="res://resources/sprite/player_sprite.tres" id="2_n0gkl"]
@@ -10,15 +10,69 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gkaol"]
 radius = 4.0
 
+[sub_resource type="Gradient" id="Gradient_lq1in"]
+interpolation_mode = 1
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sdx1v"]
+gradient = SubResource("Gradient_lq1in")
+width = 14
+height = 4
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.935567, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75045"]
+atlas = ExtResource("3_rmtxy")
+region = Rect2(12, 251, 9, 12)
+filter_clip = true
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_eirh2"]
 atlas = ExtResource("3_rmtxy")
 region = Rect2(0, 241, 6, 23)
 filter_clip = true
 
+[sub_resource type="Animation" id="Animation_ertig"]
+resource_name = "magic"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.122173]
+}
+
+[sub_resource type="Animation" id="Animation_gahx7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5emc4"]
+_data = {
+"RESET": SubResource("Animation_gahx7"),
+"magic": SubResource("Animation_ertig")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_7oolu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfu36"]
-size = Vector2(11, 11)
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dm0b"]
+radius = 5.15349
 
 [sub_resource type="Gradient" id="Gradient_1ys8d"]
 colors = PackedColorArray(1, 1, 1, 0.145098, 1, 1, 1, 0.27451)
@@ -35,19 +89,46 @@ script = ExtResource("1_0guwy")
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gkaol")
 
-[node name="StaffSprite2D" type="Sprite2D" parent="."]
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.180392)
+texture = SubResource("GradientTexture2D_sdx1v")
+
+[node name="BodyAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = ExtResource("2_n0gkl")
+animation = &"idle"
+autoplay = "walking"
+offset = Vector2(0, -11)
+
+[node name="BackpackSprite2D" type="Sprite2D" parent="BodyAnimatedSprite2D"]
+show_behind_parent = true
+position = Vector2(-11, 10)
+texture = SubResource("AtlasTexture_75045")
+centered = false
+offset = Vector2(-3, -22)
+
+[node name="AttractionPoint" type="Marker2D" parent="BodyAnimatedSprite2D/BackpackSprite2D"]
+unique_name_in_owner = true
+position = Vector2(2, -9)
+gizmo_extents = 15.0
+
+[node name="StaffAnchor" type="Node2D" parent="BodyAnimatedSprite2D"]
 position = Vector2(8, 0)
+
+[node name="StaffSprite2D" type="Sprite2D" parent="BodyAnimatedSprite2D/StaffAnchor"]
+unique_name_in_owner = true
+show_behind_parent = true
 texture = SubResource("AtlasTexture_eirh2")
 centered = false
 offset = Vector2(-3, -22)
 
-[node name="BodyAnimatedSpite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_n0gkl")
-animation = &"walking"
-autoplay = "walking"
-frame_progress = 0.483221
-centered = false
-offset = Vector2(-12, -23)
+[node name="StaffAnimationPlayer" type="AnimationPlayer" parent="BodyAnimatedSprite2D/StaffAnchor/StaffSprite2D"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_5emc4")
+}
+speed_scale = 0.59
 
 [node name="LeavesAttractionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -59,12 +140,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeavesAttractionArea"]
 scale = Vector2(7, 7)
 shape = SubResource("CircleShape2D_7oolu")
-
-[node name="AttractionPoint" type="Marker2D" parent="."]
-unique_name_in_owner = true
-visible = false
-position = Vector2(-7.22, -7.81)
-gizmo_extents = 15.0
+debug_color = Color(0.2542, 0.62, 0.449293, 0.113725)
 
 [node name="PileContactArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -73,9 +149,10 @@ collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PileContactArea"]
-position = Vector2(0, -8)
+position = Vector2(-9, -4.76837e-07)
 scale = Vector2(1.965, 1.965)
-shape = SubResource("RectangleShape2D_pfu36")
+shape = SubResource("CircleShape2D_0dm0b")
+debug_color = Color(0.618173, 0.509802, 0.455737, 0.42)
 
 [node name="Audio" type="Node2D" parent="."]
 
