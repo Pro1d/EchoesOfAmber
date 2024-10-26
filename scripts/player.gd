@@ -82,18 +82,18 @@ func _handle_footstep_sound(delta: float) -> void:
 		last_foot = (last_foot + 1) % len(footstep_players)
 		
 func _handle_leave_sound(attract_leaves: bool, delta: float) -> void:
-	var max_volume : float = -3
+	var max_volume : float = 0
 	var min_volume : float = -64
 	var leaves_for_full_volume : float = 40
 	var target_volume := lerpf(min_volume, max_volume, clampf(leaves_hooked_count / leaves_for_full_volume, 0, 1))
-	leaves_sound.volume_db = lerp(leaves_sound.volume_db, target_volume, 1.2 * delta)
+	leaves_sound.volume_db = lerp(leaves_sound.volume_db, target_volume, 1.5 * delta)
 	
 	var wind_min_volume : float = -64
 	var wind_max_volume : float = -12
 	var wind_target_volume := wind_max_volume if attract_leaves else (wind_min_volume - 1.0) 
-	var interp_speed : float = 0.7 if attract_leaves else 0.8
+	var interp_speed : float = 1.1 if attract_leaves else 1.5
 	strong_wind_sound.volume_db = lerp(strong_wind_sound.volume_db, wind_target_volume, interp_speed * delta)
-	
+
 	# Play / pause to save CPU while pausing.
 	if strong_wind_sound.volume_db <= wind_min_volume and strong_wind_sound.playing:
 		strong_wind_sound.stop()

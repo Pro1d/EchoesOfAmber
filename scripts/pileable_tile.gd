@@ -12,6 +12,7 @@ var is_structure_built := false # true when a structure has been built on the ti
 var is_colored := false # true when the tile has been colored
 var spawned_piles : Array[LeavePile] =  []
 var buildable := false # true if a structure can be built on the tile
+var built_structure: BuildingType # struture that has been built
 
 var _color := Leave.LeaveType.RED
 
@@ -88,6 +89,9 @@ func set_highlight(enabled: bool) -> void:
 
 
 func get_building_type() -> BuildingType:
+	if is_structure_built != null:
+		return built_structure
+
 	var red_piles := len(spawned_piles.filter(func (p: LeavePile) -> bool: return p.pile_type == Leave.LeaveType.RED))
 	var green_piles := len(spawned_piles.filter(func (p: LeavePile) -> bool: return p.pile_type == Leave.LeaveType.GREEN))
 	var yellow_piles := len(spawned_piles.filter(func (p: LeavePile) -> bool: return p.pile_type == Leave.LeaveType.YELLOW))
@@ -151,6 +155,7 @@ func _colorize_tile(leave_type: Leave.LeaveType) -> void:
 	is_colored = true
 	_color = leave_type
 	on_tile_state_changed.emit(self)
+	Config.sfx.play_grass_fx()
 
 func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 	var pile : LeavePile = leave_pile_resource.instantiate()
@@ -158,6 +163,7 @@ func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 	pile.global_position = global_position + offsets[len(spawned_piles)]
 	spawned_piles.append(pile)
 	Config.root_2d.add_child(pile)
+	Config.sfx.play_grass_fx()
 	
 	if len(spawned_piles) == 3:
 		is_structure_built = true
@@ -173,12 +179,38 @@ func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 
 		_build(building_type)
 
-		on_tile_state_changed.emit(self)
+# Propagate leaves around this building.
+func propagate_leaves() -> void:
+	for x_offset in range(-1, 2):
+		for y_offset in range(-1, 2):
+			# Don't process the center tile
+			if x_offset == 0 and y_offset == 0:
+				continue
+
+			var propagation_pos := self.tilemap_cell + Vector2i(x_offset, y_offset)
+			var propagated_tile := Config.ground_2d.get_pileable_tile_at(propagation_pos)
+
+			if propagated_tile == null:
+				continue
+			
+			# If there is a tree built on the tile, the tree gets the priority over the soil.
+			var color := get_color_type()
+			if built_structure and built_structure in [BuildingType.RedTree, BuildingType.GreenTree, BuildingType.YellowTree]:
+				color = _get_leave_type(built_structure)
+
+			propagated_tile.spread_leaves(color)
+			await get_tree().create_timer(0.1).timeout
+
 
 func _build(building_type: BuildingType) -> void:
 	var coords : Vector2i = buildings_map[building_type]
 	var tilemap: TileMapLayer = Config.root_2d
 	tilemap.set_cell(tilemap_cell, 0, coords)
+
+	Config.sfx.play_build_fx()
 	
 	if building_type in [BuildingType.RedTree, BuildingType.GreenTree, BuildingType.YellowTree]:
 		Config.root_2d.add_spawner(tilemap_cell, _get_leave_type(building_type))
+		propagate_leaves()
+
+	on_tile_state_changed.emit(self)

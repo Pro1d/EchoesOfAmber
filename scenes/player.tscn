@@ -91,6 +91,9 @@ collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_0guwy")
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
 [node name="Shape" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_gkaol")
@@ -189,6 +192,7 @@ stream = ExtResource("4_0s2g2")
 volume_db = -64.0
 autoplay = true
 max_distance = 50.0
+max_polyphony = 4
 bus = &"Ambience"
 parameters/looping = true
 
@@ -198,6 +202,7 @@ stream = ExtResource("5_x6iy1")
 volume_db = -64.0
 autoplay = true
 max_distance = 50.0
+max_polyphony = 4
 bus = &"Ambience"
 parameters/looping = true
 

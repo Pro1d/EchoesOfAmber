@@ -4,6 +4,7 @@ extends Node
 
 var root_2d : WorldTileMap  # parent node of all y-sorted 2D nodes
 var ground_2d: GroundTileMap
+var sfx : GlobalSFX
 
 const leaf_colors : Array[Color] = [
 	Color(0.871, 0.329, 0.243),
