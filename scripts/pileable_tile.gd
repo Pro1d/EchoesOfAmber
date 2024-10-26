@@ -32,7 +32,7 @@ var buildings_map := {
 	BuildingType.RedStuff: Vector2i(0, 7),
 	BuildingType.YellowStuff: Vector2i(1, 7),
 	BuildingType.GreenStuff: Vector2i(2, 7),
- 	BuildingType.AllStarStuff: Vector2i(4, 7),
+ 	BuildingType.AllStarStuff: Vector2i(5, 7),
 }
 
 # Color to coordinate of the ground tile with the given color.
