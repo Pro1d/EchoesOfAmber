@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://jfsucfljdrhs"]
+
+[ext_resource type="Script" path="res://scripts/area_ambience_visual.gd" id="1_gwjuh"]
+
+[sub_resource type="Gradient" id="Gradient_pk6aw"]
+colors = PackedColorArray(0.98, 0.83986, 0.2156, 0.541176, 0.98, 0.83986, 0.2156, 0.0392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k5aor"]
+gradient = SubResource("Gradient_pk6aw")
+fill_to = Vector2(1, 1)
+
+[node name="MapVisuals" type="Node2D"]
+
+[node name="Area1 Alive" type="Node2D" parent="." node_paths=PackedStringArray("items")]
+script = ExtResource("1_gwjuh")
+area_id = 1
+items = [NodePath("Light1")]
+fade_duration = 5.0
+
+[node name="Light1" type="Polygon2D" parent="Area1 Alive"]
+z_index = 5
+position = Vector2(208, -24)
+color = Color(0.98, 0.98, 0.98, 1)
+texture = SubResource("GradientTexture2D_k5aor")
+texture_scale = Vector2(0.24, 0.24)
+polygon = PackedVector2Array(300, -41, 243, 213, 315, 217, 364, -34)
+
+[node name="Home Alive" type="Node2D" parent="." node_paths=PackedStringArray("items")]
+script = ExtResource("1_gwjuh")
+items = [NodePath("Light2")]
+fade_duration = 5.0
+
+[node name="Light2" type="Polygon2D" parent="Home Alive"]
+z_index = 5
+position = Vector2(-71, 14)
+color = Color(0.98, 0.98, 0.98, 1)
+texture = SubResource("GradientTexture2D_k5aor")
+texture_scale = Vector2(0.79, 0.79)
+polygon = PackedVector2Array(317, -54, 227, 99, 270, 100, 362, -45)
+
+[node name="Area 2" type="Node2D" parent="." node_paths=PackedStringArray("items")]
+script = ExtResource("1_gwjuh")
+items = [NodePath("Light2")]
+fade_duration = 5.0
+
+[node name="Light2" type="Polygon2D" parent="Area 2"]
+z_index = 5
+position = Vector2(-228, -8)
+color = Color(0.98, 0.98, 0.98, 1)
+texture = SubResource("GradientTexture2D_k5aor")
+texture_scale = Vector2(0.79, 0.79)
+polygon = PackedVector2Array(317, -54, 227, 99, 270, 100, 362, -45)
+
+[node name="Light3" type="Polygon2D" parent="Area 2"]
+z_index = 5
+position = Vector2(-223, 55)
+color = Color(0.98, 0.98, 0.98, 1)
+texture = SubResource("GradientTexture2D_k5aor")
+texture_scale = Vector2(0.79, 0.79)
+polygon = PackedVector2Array(350, -97, 227, 99, 270, 100, 388, -97)
