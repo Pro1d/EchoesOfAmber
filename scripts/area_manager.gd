@@ -110,6 +110,7 @@ func _propagate_leaves(tile: Vector2i) -> void:
 		return
 	
 	center_tile.build_tree(center_tile.get_color_type())
+	Config.root_2d.add_spawner(tile, center_tile.get_color_type())
 	
 	for x_offset in range(-1, 2):
 		for y_offset in range(-1, 2):
@@ -196,6 +197,3 @@ func on_tile_cleared(tile: Vector2i) -> void:
 	
 		if area_id != 0:
 			print("area " + str(area_id) + " trees left to clear: " + str(len(data.trees_to_clear)))
-			print(data.trees_to_clear)
-		
-		
