@@ -42,7 +42,6 @@ visible = false
 
 [node name="BlackBars" parent="AreaManager/CanvasGroup/CanvasLayer" instance=ExtResource("6_g3rxi")]
 unique_name_in_owner = true
-visible = false
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="AreaManager/CanvasGroup"]
 z_index = -100

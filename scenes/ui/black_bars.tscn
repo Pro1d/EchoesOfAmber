@@ -10,12 +10,14 @@ offset_bottom = 40.0
 script = ExtResource("1_w0u52")
 
 [node name="TopRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 1024.0
 offset_bottom = 96.0
 color = Color(0, 0, 0, 1)
 
 [node name="BottomRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_top = 672.0
 offset_right = 1024.0
