@@ -3,6 +3,7 @@ class_name World
 
 @onready var player : Player = %Player
 @onready var hud : HUD = %HUD
+@onready var menu : Menu = %Menu
 @onready var area_manager : AreaManager = %AreaManager
 
 var leaves_count := {
@@ -15,6 +16,19 @@ func _ready() -> void:
 	player.on_leave_in_backpack.connect(_on_leave_in_backpack)
 	player.on_try_spawn_leaves.connect(_on_player_try_spawn_leaves)
 	_update_leaves_hud(false)
+	_pause_game()
+	menu.play_clicked.connect(_resume_game)
+	hud.open_menu_clicked.connect(_pause_game)
+
+func _resume_game() -> void:
+	get_tree().paused = false
+	menu.hide()
+	hud.show()
+
+func _pause_game() -> void:
+	get_tree().paused = true
+	menu.show()
+	hud.hide()
 
 func _on_player_try_spawn_leaves(leave_type: Leave.LeaveType, pileable_tile: PileableTile) -> void:
 	var cost := 10

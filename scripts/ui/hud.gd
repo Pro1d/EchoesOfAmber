@@ -1,6 +1,9 @@
 extends Control
 class_name HUD
 
+signal open_menu_clicked
+
+@onready var _open_menu_button := %OpenMenuButton as Button
 @onready var _leave_textures : Array[Control] = [
 	%TextureRect1, %TextureRect2, %TextureRect3
 ]
@@ -13,6 +16,7 @@ var _displayed_leave_counts : Array[int] = [0, 0, 0]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_leave_count(_displayed_leave_counts, false)
+	_open_menu_button.pressed.connect(open_menu_clicked.emit)
 
 func update_leave_count(leaves: Array[int], animate: bool) -> void:
 	for i in range(_leave_labels.size()):

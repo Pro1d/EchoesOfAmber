@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://ci2t4q6c7pt6d"]
+[gd_scene load_steps=18 format=4 uid="uid://ci2t4q6c7pt6d"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
 [ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 [ext_resource type="PackedScene" uid="uid://cu7ile13mqjn2" path="res://scenes/ui/hud.tscn" id="2_mlla5"]
+[ext_resource type="PackedScene" uid="uid://dl33ig87h6ep6" path="res://scenes/ui/menu.tscn" id="5_newyv"]
 [ext_resource type="Script" path="res://scripts/ground_tile_map.gd" id="5_ogmdj"]
 [ext_resource type="AudioStream" uid="uid://bkk1kle80fbxg" path="res://assets/ambience/forest1.ogg" id="8_roynp"]
 [ext_resource type="AudioStream" uid="uid://wy5o0imxomo5" path="res://assets/ambience/forest2.ogg" id="9_t3lrt"]
@@ -28,8 +29,12 @@ script = ExtResource("14_0m5pn")
 [node name="CanvasGroup" type="CanvasGroup" parent="AreaManager"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="AreaManager/CanvasGroup"]
+process_mode = 3
 
 [node name="HUD" parent="AreaManager/CanvasGroup/CanvasLayer" instance=ExtResource("2_mlla5")]
+unique_name_in_owner = true
+
+[node name="Menu" parent="AreaManager/CanvasGroup/CanvasLayer" instance=ExtResource("5_newyv")]
 unique_name_in_owner = true
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="AreaManager/CanvasGroup"]
