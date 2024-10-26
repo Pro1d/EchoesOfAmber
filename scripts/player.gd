@@ -15,6 +15,7 @@ const ACCEL := SPEED / 0.15
 @onready var leaves_sound : AudioStreamPlayer2D = %LocalLeavesSound
 @onready var strong_wind_sound : AudioStreamPlayer2D = %StrongWindSound
 @onready var wind_particles : CPUParticles2D = %WindParticles
+@onready var wind_particles_2 : CPUParticles2D = %WindParticles2
 
 @onready var footstep_players : Array[AudioStreamPlayer2D] = [%FootstepL, %FootstepR]
 
@@ -30,6 +31,7 @@ var _attracting_leaves := false :
 		_attracting_leaves = a
 		leaves_attraction_area.monitoring = _attracting_leaves
 		wind_particles.emitting = _attracting_leaves
+		wind_particles_2.emitting = _attracting_leaves
 
 # Footsteps
 var foot_step_period : float    =  0.5
