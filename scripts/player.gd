@@ -80,7 +80,7 @@ func _handle_footstep_sound(delta: float) -> void:
 		
 func _handle_leave_sound(attract_leaves: bool, delta: float) -> void:
 	var max_volume : float = -3
-	var min_volume : float = -28
+	var min_volume : float = -64
 	var leaves_for_full_volume : float = 40
 	var target_volume := lerpf(min_volume, max_volume, clampf(leaves_hooked_count / leaves_for_full_volume, 0, 1))
 	leaves_sound.volume_db = lerp(leaves_sound.volume_db, target_volume, 1.2 * delta)
