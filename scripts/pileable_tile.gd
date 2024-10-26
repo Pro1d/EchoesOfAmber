@@ -112,13 +112,18 @@ func get_building_type() -> BuildingType:
 	return BuildingType.AllStarStuff
 
 # Force the building of a tree on this tile
-func build_tree(leave_type: Leave.LeaveType) -> BuildingType:
+func build_tree(leave_type: Leave.LeaveType) -> void:
+	var building_type := _get_tree_type(leave_type)
+	_build(building_type)
+
+# Gets the building type corresponding to a tree of the givne LeaveType
+func _get_tree_type(leave_type: Leave.LeaveType) -> BuildingType:
 	match leave_type:
 		Leave.LeaveType.RED: return BuildingType.RedTree
 		Leave.LeaveType.GREEN: return BuildingType.GreenTree
 		Leave.LeaveType.YELLOW: return BuildingType.YellowTree
-		_: return BuildingType.RedTree
-
+		_: return BuildingType.RedTree	
+	
 func spread_leaves(leave_type: Leave.LeaveType) -> void:
 	if can_spawn_leave():
 		if is_colored:
