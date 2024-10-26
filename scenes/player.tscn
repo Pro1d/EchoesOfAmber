@@ -42,7 +42,7 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.7),
+"times": PackedFloat32Array(0, 0.166667, 0.533333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 0.122173]
@@ -74,12 +74,15 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dm0b"]
 radius = 5.15349
 
-[sub_resource type="Gradient" id="Gradient_1ys8d"]
-colors = PackedColorArray(1, 1, 1, 0.145098, 1, 1, 1, 0.27451)
+[sub_resource type="Gradient" id="Gradient_oyrvk"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 0.235294, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vftte"]
-gradient = SubResource("Gradient_1ys8d")
-width = 5
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ossfe"]
+gradient = SubResource("Gradient_oyrvk")
+width = 1
+height = 4
+fill_to = Vector2(0, 1)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -87,12 +90,14 @@ motion_mode = 1
 script = ExtResource("1_0guwy")
 
 [node name="Shape" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_gkaol")
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.180392)
 texture = SubResource("GradientTexture2D_sdx1v")
+offset = Vector2(0, 1)
 
 [node name="BodyAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -128,7 +133,7 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_5emc4")
 }
-speed_scale = 0.59
+speed_scale = 0.85
 
 [node name="LeavesAttractionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -178,19 +183,17 @@ parameters/looping = true
 unique_name_in_owner = true
 position = Vector2(1, -4)
 amount = 32
-texture = SubResource("GradientTexture1D_vftte")
-emission_shape = 1
-emission_sphere_radius = 12.21
-direction = Vector2(0, -1)
-spread = 0.5
+lifetime = 2.0
+texture = SubResource("GradientTexture2D_ossfe")
+emission_shape = 2
+emission_sphere_radius = 30.0
+particle_flag_align_y = true
 gravity = Vector2(0, 0)
-initial_velocity_min = 40.0
-initial_velocity_max = 70.25
-angular_velocity_max = 10.0
-linear_accel_max = 10.0
-radial_accel_max = 100.0
-angle_min = 80.0
-angle_max = 110.0
+radial_accel_min = -84.61
+radial_accel_max = -84.61
+tangential_accel_min = -40.0
+tangential_accel_max = -40.0
+color = Color(1, 1, 1, 0.545098)
 
 [node name="FootstepR" type="AudioStreamPlayer2D" parent="Audio"]
 unique_name_in_owner = true

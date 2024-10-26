@@ -24,7 +24,11 @@ const ACCEL := SPEED / 0.15
 # list of PileableTile to which the player currently has contact
 var contacted_pile_tiles : Array[PileableTile] = []
 var leaves_hooked_count := 0
-var _attracting_leaves := false
+var _attracting_leaves := false :
+	set(a):
+		_attracting_leaves = a
+		leaves_attraction_area.monitoring = _attracting_leaves
+		wind_particles.emitting = _attracting_leaves
 
 # Footsteps
 var foot_step_period : float    =  0.5
@@ -36,7 +40,8 @@ func _ready() -> void:
 	leaves_attraction_area.body_exited.connect(_on_leave_exited_area)
 	pile_contact_area.area_entered.connect(_on_enter_pile_area)
 	pile_contact_area.area_exited.connect(_on_exit_pile_area)
-
+	_attracting_leaves = false
+	
 func _physics_process(delta: float) -> void:
 	var command := Vector2(
 		Input.get_axis("move_left", "move_right"),
@@ -175,26 +180,22 @@ func _update_display(move_direction: Vector2) -> void:
 var _staff_tween : Tween
 func _start_attract_leaves() -> void:
 	_attracting_leaves = true
-	leaves_attraction_area.monitoring = _attracting_leaves
-	wind_particles.emitting = _attracting_leaves
 	# Animation
 	if _staff_tween != null:
 		_staff_tween.kill()
 	_staff_tween = create_tween()
-	_staff_tween.tween_property(_staff_sprite, "position", Vector2(0.5, -3), 0.3).from_current() \
+	_staff_tween.tween_property(_staff_sprite, "position", Vector2(0.5, -3), 0.2).from_current() \
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	_staff_tween.tween_callback(_staff_animation.play.bind("magic"))
 
 func _stop_attract_leaves() -> void:
 	_attracting_leaves = false
-	leaves_attraction_area.monitoring = _attracting_leaves
-	wind_particles.emitting = _attracting_leaves
 	# Animation
 	if _staff_tween != null:
 		_staff_tween.kill()
 	_staff_tween = create_tween()
 	_staff_animation.stop(true)
-	_staff_tween.tween_property(_staff_sprite, "position", Vector2.ZERO, 0.3).from_current() \
+	_staff_tween.tween_property(_staff_sprite, "position", Vector2.ZERO, 0.2).from_current() \
 		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
-	_staff_tween.parallel().tween_property(_staff_sprite, "rotation", 0.0, 0.3).from_current() \
+	_staff_tween.parallel().tween_property(_staff_sprite, "rotation", 0.0, 0.2).from_current() \
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
