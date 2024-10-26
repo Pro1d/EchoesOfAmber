@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dl33ig87h6ep6"]
+[gd_scene load_steps=16 format=3 uid="uid://dl33ig87h6ep6"]
 
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_g7n2o"]
 [ext_resource type="Script" path="res://scripts/ui/menu.gd" id="1_ncqvn"]
@@ -10,6 +10,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_48rtn"]
 atlas = ExtResource("1_g7n2o")
 region = Rect2(12, 348, 247, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oew7w"]
+atlas = ExtResource("1_g7n2o")
+region = Rect2(24, 300, 3, 5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rk1qd"]
 atlas = ExtResource("1_g7n2o")
@@ -203,9 +207,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_ti0x8")
 
-[node name="ArrowLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer"]
+[node name="ArrowLabel" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
-text = ">"
+texture = SubResource("AtlasTexture_oew7w")
+stretch_mode = 5
 
 [node name="TextureRect4" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(48, 76)
@@ -268,9 +274,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_1pnf5")
 
-[node name="ArrowLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer2"]
+[node name="ArrowLabel2" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
-text = ">"
+texture = SubResource("AtlasTexture_oew7w")
+stretch_mode = 5
 
 [node name="TextureRect8" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(48, 76)
@@ -333,9 +341,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("4_kp7ho")
 
-[node name="ArrowLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer3"]
+[node name="ArrowLabel2" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
-text = ">"
+texture = SubResource("AtlasTexture_oew7w")
+stretch_mode = 5
 
 [node name="TextureRect12" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(48, 76)
@@ -408,9 +418,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("4_kp7ho")
 
-[node name="ArrowLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer3"]
+[node name="ArrowLabel2" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer3"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
-text = ">"
+texture = SubResource("AtlasTexture_oew7w")
+stretch_mode = 5
 
 [node name="TextureRect24" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer3"]
 custom_minimum_size = Vector2(48, 48)
@@ -473,9 +485,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_ti0x8")
 
-[node name="ArrowLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer4"]
+[node name="ArrowLabel2" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer4"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
-text = ">"
+texture = SubResource("AtlasTexture_oew7w")
+stretch_mode = 5
 
 [node name="TextureRect16" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer4"]
 custom_minimum_size = Vector2(48, 48)
@@ -539,9 +553,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_1pnf5")
 
-[node name="ArrowLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer"]
+[node name="ArrowLabel2" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
-text = ">"
+texture = SubResource("AtlasTexture_oew7w")
+stretch_mode = 5
 
 [node name="TextureRect20" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(48, 48)
@@ -604,9 +620,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_ti0x8")
 
-[node name="ArrowLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer2"]
+[node name="ArrowLabel2" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
-text = ">"
+texture = SubResource("AtlasTexture_oew7w")
+stretch_mode = 5
 
 [node name="TextureRect28" type="TextureRect" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2/RecipeTable/VBoxContainer2/HBoxContainer2"]
 custom_minimum_size = Vector2(48, 48)
