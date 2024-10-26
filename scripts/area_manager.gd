@@ -196,6 +196,3 @@ func on_tile_cleared(tile: Vector2i) -> void:
 	
 		if area_id != 0:
 			print("area " + str(area_id) + " trees left to clear: " + str(len(data.trees_to_clear)))
-			print(data.trees_to_clear)
-		
-		
