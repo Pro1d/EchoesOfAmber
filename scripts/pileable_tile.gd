@@ -148,10 +148,13 @@ func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 	if len(spawned_piles) == 3:
 		is_structure_built = true
 
+		var building_type := get_building_type()
+
 		for p in spawned_piles:
 			await p.animate_build()
 
-		_build(get_building_type())
+		_build(building_type)
+
 		on_tile_state_changed.emit(self)
 
 func _build(building_type: BuildingType) -> void:

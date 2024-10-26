@@ -179,7 +179,6 @@ func on_tile_cleared(tile: Vector2i) -> void:
 	for area_id: int in area_data:
 		var data : AreaData = area_data[area_id]
 		var index := data.tiles_to_clear.find(tile)
-		print("area "+ str(area_id) + " trees left to before: " + str(len(data.trees_to_clear)))
 		
 		if index > 0:
 			data.tiles_to_clear.remove_at(index)
@@ -190,8 +189,8 @@ func on_tile_cleared(tile: Vector2i) -> void:
 			data.trees_to_clear.remove_at(index)
 			_on_area_tree_cleared(area_id, tile)
 	
-		print("area " + str(area_id) + " trees left to clear: " + str(len(data.trees_to_clear)))
 		if area_id != 0:
+			print("area " + str(area_id) + " trees left to clear: " + str(len(data.trees_to_clear)))
 			print(data.trees_to_clear)
 		
 		
