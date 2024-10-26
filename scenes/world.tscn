@@ -93,9 +93,18 @@ texture = SubResource("GradientTexture2D_k5aor")
 texture_scale = Vector2(0.24, 0.24)
 polygon = PackedVector2Array(300, -41, 243, 213, 315, 217, 364, -34)
 
-[node name="Polygon2D" type="Polygon2D" parent="AreaManager/CanvasGroup/MapVisuals"]
-color = Color(0.98, 0.83986, 0.2156, 0.203922)
-polygon = PackedVector2Array(271, -26, -5, 386, 12, 443, 344, -28)
+[node name="Home Alive" type="Node2D" parent="AreaManager/CanvasGroup/MapVisuals" node_paths=PackedStringArray("items")]
+script = ExtResource("9_qtvo4")
+items = [NodePath("Light2")]
+fade_duration = 5.0
+
+[node name="Light2" type="Polygon2D" parent="AreaManager/CanvasGroup/MapVisuals/Home Alive"]
+z_index = 5
+position = Vector2(-71, 14)
+color = Color(0.98, 0.98, 0.98, 1)
+texture = SubResource("GradientTexture2D_k5aor")
+texture_scale = Vector2(0.79, 0.79)
+polygon = PackedVector2Array(317, -54, 227, 99, 270, 100, 362, -45)
 
 [node name="MapAudio" type="Node2D" parent="AreaManager"]
 unique_name_in_owner = true
