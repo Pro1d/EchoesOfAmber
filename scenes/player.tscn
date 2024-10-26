@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="3_rmtxy"]
 [ext_resource type="AudioStream" uid="uid://ba6nk11ak2c3l" path="res://assets/ambience/leaves.ogg" id="4_0s2g2"]
 [ext_resource type="AudioStream" uid="uid://o1lutb43b7kg" path="res://assets/ambience/strong_wind.ogg" id="5_x6iy1"]
-[ext_resource type="PackedScene" uid="uid://b00yny6ebdjjn" path="res://scenes/fx/up_wind_particles.tscn" id="6_eqbvn"]
+[ext_resource type="PackedScene" path="res://scenes/fx/up_wind_particles.tscn" id="6_eqbvn"]
 [ext_resource type="AudioStream" uid="uid://cl6er738dtv06" path="res://assets/sounds/step_leave.ogg" id="6_kdajv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gkaol"]

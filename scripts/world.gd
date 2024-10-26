@@ -5,6 +5,7 @@ class_name World
 @onready var hud : HUD = %HUD
 @onready var menu : Menu = %Menu
 @onready var area_manager : AreaManager = %AreaManager
+@onready var blackbars : BlackBars = %BlackBars
 
 var leaves_count := {
 	Leave.LeaveType.RED: 500,
@@ -16,10 +17,11 @@ func _ready() -> void:
 	player.on_leave_in_backpack.connect(_on_leave_in_backpack)
 	player.on_try_spawn_leaves.connect(_on_player_try_spawn_leaves)
 	area_manager.on_area_cleared.connect(_on_area_cleared)
-	_update_leaves_hud(false)
-	_pause_game()
 	menu.play_clicked.connect(_resume_game)
 	hud.open_menu_clicked.connect(_pause_game)
+
+	_update_leaves_hud(false)
+	_start_introduction()
 
 func _resume_game() -> void:
 	player.lock_player = false
@@ -30,6 +32,7 @@ func _pause_game() -> void:
 	player.lock_player = true
 	menu.show()
 	hud.hide()
+	Config.sfx.play_page_turn_fx()
 
 func _on_area_cleared(area: AreaManager.AreaData) -> void:
 	print("Cleared area: " + str(area.area_id))
@@ -55,3 +58,19 @@ func _update_leaves_hud(animate: bool) -> void:
 		leaves_count[Leave.LeaveType.RED],
 		leaves_count[Leave.LeaveType.YELLOW],
 		leaves_count[Leave.LeaveType.GREEN]], animate)
+
+# ================================================================================================
+# Cinematic stuff starts here
+# ================================================================================================
+
+# Starts the game introduction
+func _start_introduction() -> void:
+	player.lock_player = true
+	await blackbars.set_enabled(true)
+	# TODO: camera movement
+	await get_tree().create_timer(1).timeout
+	# TODO: dialog
+	await blackbars.set_enabled(false)
+	player.lock_player = false
+
+	_pause_game()

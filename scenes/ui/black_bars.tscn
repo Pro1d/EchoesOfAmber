@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4kettjd5lh62"]
+
+[ext_resource type="Script" path="res://scripts/ui/black_bars.gd" id="1_w0u52"]
+
+[node name="BlackBars" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_w0u52")
+
+[node name="TopRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 96.0
+color = Color(0, 0, 0, 1)
+
+[node name="BottomRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 672.0
+offset_right = 1024.0
+offset_bottom = 768.0
+pivot_offset = Vector2(0, 96)
+color = Color(0, 0, 0, 1)

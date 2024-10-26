@@ -1,11 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://dl33ig87h6ep6"]
+[gd_scene load_steps=15 format=3 uid="uid://oro7jitvtaoa"]
 
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_g7n2o"]
 [ext_resource type="Script" path="res://scripts/ui/menu.gd" id="1_ncqvn"]
-[ext_resource type="Texture2D" uid="uid://dgh3js4ws0tm6" path="res://resources/sprite/red.atlastex" id="2_ti0x8"]
-[ext_resource type="Texture2D" uid="uid://es4rh8d3onvu" path="res://resources/sprite/yellow.atlastex" id="3_1pnf5"]
-[ext_resource type="Texture2D" uid="uid://cbejhslhwxckq" path="res://resources/sprite/green.atlastex" id="4_kp7ho"]
-[ext_resource type="Texture2D" uid="uid://cyjrnsb4fpi43" path="res://resources/sprite/white.atlastex" id="5_ufa5r"]
+[ext_resource type="Texture2D" path="res://resources/sprite/red.atlastex" id="2_ti0x8"]
+[ext_resource type="Texture2D" path="res://resources/sprite/yellow.atlastex" id="3_1pnf5"]
+[ext_resource type="Texture2D" path="res://resources/sprite/green.atlastex" id="4_kp7ho"]
+[ext_resource type="Texture2D" path="res://resources/sprite/white.atlastex" id="5_ufa5r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48rtn"]
 atlas = ExtResource("1_g7n2o")
@@ -92,7 +92,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Label2" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Tutoral Text" type="RichTextLabel" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=black]
+Hum it seems my beautiful automnal forest is dying. 
+
+I should get some leaves to bring back its colors.
+
+I should head to the east (=>).
+
+[color=\"red\"]E: Harvest Leaves[/color]
+[/color]"
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
