@@ -24,6 +24,7 @@ enum BuildingType {
 	AllStarStuff
 }
 
+# Building type to coordinate of the tile with the given building. 
 var buildings_map := {
 	BuildingType.RedTree: Vector2i(1, 3),
 	BuildingType.YellowTree: Vector2i(5, 3),
@@ -34,10 +35,17 @@ var buildings_map := {
  	BuildingType.AllStarStuff: Vector2i(4, 7),
 }
 
+# Color to coordinate of the ground tile with the given color.
 var colors_map := {
 	Leave.LeaveType.RED: Vector2i(3, 0),
 	Leave.LeaveType.YELLOW: Vector2i(6, 0),
 	Leave.LeaveType.GREEN: Vector2i(9, 0)
+}
+
+var effects_modulate_map := {
+	Leave.LeaveType.RED: Color(0.9, 0.35, 0.25),
+	Leave.LeaveType.YELLOW: Color(0.8, 0.6, 0.2),
+	Leave.LeaveType.GREEN: Color(0.55, 0.7, 0.4)
 }
 
 static func get_parent_pileable_tile(area: Area2D) -> PileableTile:
@@ -91,6 +99,7 @@ func spread_leaves(leave_type: Leave.LeaveType) -> void:
 	Config.ground_2d.set_cell(tilemap_cell, 0, coords)
 	build_effect.emitting = true
 	build_effect.one_shot = true
+	build_effect.self_modulate = effects_modulate_map[leave_type]
 	is_colored = true
 
 func spawn_pile(leave_type: Leave.LeaveType) -> void:
