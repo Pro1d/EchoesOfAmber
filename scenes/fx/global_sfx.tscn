@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpisql5gja5rw"]
+[gd_scene load_steps=5 format=3 uid="uid://dpisql5gja5rw"]
 
 [ext_resource type="AudioStream" uid="uid://6h7i6q3gyv40" path="res://assets/sounds/area_cleared_fx.ogg" id="1_bmv7q"]
 [ext_resource type="Script" path="res://scripts/fx/global_sfx.gd" id="1_j0yuv"]
+[ext_resource type="AudioStream" uid="uid://b7vyllx53d5ar" path="res://assets/sounds/build_fx.ogg" id="3_5oua0"]
+[ext_resource type="AudioStream" uid="uid://b6kp03lpemcs1" path="res://assets/sounds/grass_fx.ogg" id="4_3e5x5"]
 
 [node name="GlobalSFX" type="Node2D"]
 script = ExtResource("1_j0yuv")
@@ -9,4 +11,16 @@ script = ExtResource("1_j0yuv")
 [node name="AreaCleared" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_bmv7q")
 volume_db = -24.0
+bus = &"SoundFx"
+
+[node name="BuildFx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5oua0")
+volume_db = -25.071
+max_polyphony = 4
+bus = &"SoundFx"
+
+[node name="GrassFx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3e5x5")
+volume_db = -25.071
+max_polyphony = 4
 bus = &"SoundFx"

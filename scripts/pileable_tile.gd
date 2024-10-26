@@ -151,6 +151,7 @@ func _colorize_tile(leave_type: Leave.LeaveType) -> void:
 	is_colored = true
 	_color = leave_type
 	on_tile_state_changed.emit(self)
+	Config.sfx.play_grass_fx()
 
 func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 	var pile : LeavePile = leave_pile_resource.instantiate()
@@ -158,6 +159,7 @@ func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 	pile.global_position = global_position + offsets[len(spawned_piles)]
 	spawned_piles.append(pile)
 	Config.root_2d.add_child(pile)
+	Config.sfx.play_grass_fx()
 	
 	if len(spawned_piles) == 3:
 		is_structure_built = true
@@ -175,6 +177,8 @@ func _build(building_type: BuildingType) -> void:
 	var coords : Vector2i = buildings_map[building_type]
 	var tilemap: TileMapLayer = Config.root_2d
 	tilemap.set_cell(tilemap_cell, 0, coords)
+
+	Config.sfx.play_build_fx()
 	
 	if building_type in [BuildingType.RedTree, BuildingType.GreenTree, BuildingType.YellowTree]:
 		Config.root_2d.add_spawner(tilemap_cell, _get_leave_type(building_type))

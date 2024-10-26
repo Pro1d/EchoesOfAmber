@@ -94,8 +94,6 @@ func _handle_leave_sound(attract_leaves: bool, delta: float) -> void:
 	var interp_speed : float = 1.1 if attract_leaves else 1.5
 	strong_wind_sound.volume_db = lerp(strong_wind_sound.volume_db, wind_target_volume, interp_speed * delta)
 
-	print("target leaves = ", leaves_sound.volume_db, " target wind = ", strong_wind_sound.volume_db)
-
 	# Play / pause to save CPU while pausing.
 	if strong_wind_sound.volume_db <= wind_min_volume and strong_wind_sound.playing:
 		strong_wind_sound.stop()
