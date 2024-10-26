@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://lgcp167hngoh"]
+[gd_scene load_steps=13 format=3 uid="uid://lgcp167hngoh"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0guwy"]
 [ext_resource type="SpriteFrames" uid="uid://bvwnn4cjsqldm" path="res://resources/sprite/player_sprite.tres" id="2_n0gkl"]
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="3_rmtxy"]
+[ext_resource type="AudioStream" uid="uid://ba6nk11ak2c3l" path="res://assets/ambience/leaves.ogg" id="4_0s2g2"]
+[ext_resource type="AudioStream" uid="uid://o1lutb43b7kg" path="res://assets/ambience/strong_wind.ogg" id="5_x6iy1"]
+[ext_resource type="AudioStream" uid="uid://cl6er738dtv06" path="res://assets/sounds/step_leave.ogg" id="6_kdajv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gkaol"]
 radius = 4.0
@@ -16,6 +19,13 @@ filter_clip = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pfu36"]
 size = Vector2(11, 11)
+
+[sub_resource type="Gradient" id="Gradient_1ys8d"]
+colors = PackedColorArray(1, 1, 1, 0.145098, 1, 1, 1, 0.27451)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vftte"]
+gradient = SubResource("Gradient_1ys8d")
+width = 5
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -66,3 +76,54 @@ collision_mask = 8
 position = Vector2(0, -8)
 scale = Vector2(1.965, 1.965)
 shape = SubResource("RectangleShape2D_pfu36")
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="LocalLeavesSound" type="AudioStreamPlayer2D" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("4_0s2g2")
+volume_db = -64.0
+autoplay = true
+max_distance = 50.0
+bus = &"Ambience"
+parameters/looping = true
+
+[node name="StrongWindSound" type="AudioStreamPlayer2D" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("5_x6iy1")
+volume_db = -64.0
+autoplay = true
+max_distance = 50.0
+bus = &"Ambience"
+parameters/looping = true
+
+[node name="WindParticles" type="CPUParticles2D" parent="Audio"]
+unique_name_in_owner = true
+position = Vector2(1, -4)
+amount = 32
+texture = SubResource("GradientTexture1D_vftte")
+emission_shape = 1
+emission_sphere_radius = 12.21
+direction = Vector2(0, -1)
+spread = 0.5
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 70.25
+angular_velocity_max = 10.0
+linear_accel_max = 10.0
+radial_accel_max = 100.0
+angle_min = 80.0
+angle_max = 110.0
+
+[node name="FootstepR" type="AudioStreamPlayer2D" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("6_kdajv")
+volume_db = -12.0
+max_polyphony = 2
+
+[node name="FootstepL" type="AudioStreamPlayer2D" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("6_kdajv")
+volume_db = -12.0
+pitch_scale = 0.8
+max_polyphony = 2

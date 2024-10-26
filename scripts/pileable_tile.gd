@@ -5,8 +5,9 @@ class_name PileableTile
 @onready var sprite : Polygon2D = $Polygon2D
 
 var tilemap_cell : Vector2i # initialized when spawned
-var is_built := false
-var spawned_piles : Array[LeavePile] = []
+var is_structure_built := false
+var is_colored := false
+var spawned_piles : Array[LeavePile] =  []
 static var offsets : Array[Vector2] = [
 									  Vector2(-6, -6), 
 									  Vector2(6, 0), 
@@ -32,6 +33,12 @@ var buildings_map := {
  	BuildingType.AllStarStuff: Vector2i(4, 7),
 }
 
+var colors_map := {
+	Leave.LeaveType.RED: Vector2i(3, 0),
+	Leave.LeaveType.YELLOW: Vector2i(6, 0),
+	Leave.LeaveType.GREEN: Vector2i(9, 0)
+}
+
 static func get_parent_pileable_tile(area: Area2D) -> PileableTile:
 	var parent := area.get_parent()
 	
@@ -44,7 +51,7 @@ func _ready() -> void:
 	set_highlight(false)
 
 func can_spawn_leave() -> bool:
-	return len(spawned_piles) < 3 and not is_built
+	return len(spawned_piles) < 3 and not is_structure_built
 
 func set_highlight(enabled: bool) -> void:
 	sprite.modulate.a = 1.0 if enabled else 0.2 
@@ -74,7 +81,16 @@ func get_building_type() -> BuildingType:
 	
 	return BuildingType.AllStarStuff
 
-func spawn(leave_type: Leave.LeaveType) -> void:
+func spread_leaves(leave_type: Leave.LeaveType) -> void:
+	if is_colored:
+		spawn_pile(leave_type)
+		return
+	
+	var coords : Vector2i = colors_map[leave_type]
+	Config.ground_2d.set_cell(tilemap_cell, 0, coords)
+	is_colored = true
+
+func spawn_pile(leave_type: Leave.LeaveType) -> void:
 	var pile : LeavePile = leave_pile_resource.instantiate()
 	pile.pile_type = leave_type
 	pile.global_position = global_position + offsets[len(spawned_piles)]
@@ -82,7 +98,7 @@ func spawn(leave_type: Leave.LeaveType) -> void:
 	Config.root_2d.add_child(pile)
 	
 	if len(spawned_piles) == 3:
-		is_built = true
+		is_structure_built = true
 
 		var coords : Vector2i = buildings_map[get_building_type()]
 
@@ -90,4 +106,4 @@ func spawn(leave_type: Leave.LeaveType) -> void:
 			await p.animate_build()
 		
 		var tilemap: TileMapLayer = Config.root_2d
-		tilemap.set_cell(tilemap_cell, tilemap.get_cell_source_id(tilemap_cell), coords)
+		tilemap.set_cell(tilemap_cell, 0, coords)
