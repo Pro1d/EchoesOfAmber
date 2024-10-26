@@ -42,10 +42,10 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.533333),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.166667, 0.533333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.122173]
+"values": [0.0, 0.122173]
 }
 
 [sub_resource type="Animation" id="Animation_gahx7"]
@@ -70,6 +70,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7oolu"]
+radius = 70.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dm0b"]
 radius = 5.15349
@@ -115,7 +116,7 @@ offset = Vector2(-3, -22)
 
 [node name="AttractionPoint" type="Marker2D" parent="BodyAnimatedSprite2D/BackpackSprite2D"]
 unique_name_in_owner = true
-position = Vector2(2, -9)
+position = Vector2(2, -10)
 gizmo_extents = 15.0
 
 [node name="StaffAnchor" type="Node2D" parent="BodyAnimatedSprite2D"]
@@ -137,13 +138,11 @@ speed_scale = 0.85
 
 [node name="LeavesAttractionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeavesAttractionArea"]
-scale = Vector2(7, 7)
 shape = SubResource("CircleShape2D_7oolu")
 debug_color = Color(0.2542, 0.62, 0.449293, 0.113725)
 
