@@ -11,6 +11,7 @@ func _ready() -> void:
 	
 func animate_build() -> void:
 	var tween : Tween = create_tween()
-	tween.tween_property(self, 'modulate', Color(1, 1, 1, 0), 0.3)
+	tween.tween_property(self, 'modulate:a', 0.0, 0.3).from(1.0) \
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 	await tween.finished
 	queue_free()

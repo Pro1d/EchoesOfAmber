@@ -73,7 +73,7 @@ _data = {
 radius = 70.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dm0b"]
-radius = 5.15349
+radius = 2.0
 
 [sub_resource type="Gradient" id="Gradient_oyrvk"]
 interpolation_mode = 2
@@ -148,13 +148,11 @@ debug_color = Color(0.2542, 0.62, 0.449293, 0.113725)
 
 [node name="PileContactArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
+position = Vector2(12, 0)
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PileContactArea"]
-position = Vector2(-9, -4.76837e-07)
-scale = Vector2(1.965, 1.965)
 shape = SubResource("CircleShape2D_0dm0b")
 debug_color = Color(0.618173, 0.509802, 0.455737, 0.42)
 

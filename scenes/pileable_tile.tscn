@@ -1,6 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3d3tqsqsvkln"]
+[gd_scene load_steps=9 format=3 uid="uid://d3d3tqsqsvkln"]
 
 [ext_resource type="Script" path="res://scripts/pileable_tile.gd" id="1_m3gff"]
+[ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="2_s0n5a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0rl3"]
+atlas = ExtResource("2_s0n5a")
+region = Rect2(288, 0, 24, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qq0un"]
 
@@ -26,8 +31,15 @@ point_count = 2
 
 [node name="PileableTile" type="Node2D"]
 script = ExtResource("1_m3gff")
+metadata/_edit_vertical_guides_ = [-12.0, 12.0]
+metadata/_edit_horizontal_guides_ = [-12.0, 12.0]
+
+[node name="HightlightSprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = SubResource("AtlasTexture_p0rl3")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 color = Color(1, 1, 1, 0.12549)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 
@@ -37,6 +49,7 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_qq0un")
+debug_color = Color(0, 0.595, 0.7, 0.0352941)
 
 [node name="BuildEffect" type="CPUParticles2D" parent="."]
 emitting = false
@@ -58,3 +71,14 @@ color_ramp = SubResource("Gradient_ti77s")
 hue_variation_min = -0.05
 hue_variation_max = 0.05
 hue_variation_curve = SubResource("Curve_etjba")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Markers"]
+position = Vector2(0, -3)
+
+[node name="Marker2D2" type="Marker2D" parent="Markers"]
+position = Vector2(-4, 2)
+
+[node name="Marker2D3" type="Marker2D" parent="Markers"]
+position = Vector2(4, 3)

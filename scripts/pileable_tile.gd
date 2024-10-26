@@ -4,7 +4,7 @@ class_name PileableTile
 signal on_tile_state_changed(tile: PileableTile)
 
 @onready var leave_pile_resource := preload("res://scenes/leave_pile.tscn")
-@onready var sprite : Polygon2D = $Polygon2D
+@onready var sprite : Node2D = %HightlightSprite2D
 @onready var build_effect : CPUParticles2D = $BuildEffect
 
 var tilemap_cell : Vector2i # initialized when spawned
@@ -15,10 +15,11 @@ var buildable := false # true if a structure can be built on the tile
 
 var _color := Leave.LeaveType.RED
 
-static var offsets : Array[Vector2] = [
-									  Vector2(-6, -6), 
-									  Vector2(6, 0), 
-									  Vector2(-6, 6)]
+@onready var offsets : Array[Vector2] = [
+	($Markers/Marker2D as Node2D).position,
+	($Markers/Marker2D2 as Node2D).position,
+	($Markers/Marker2D3 as Node2D).position
+]
 
 enum BuildingType {
 	RedTree,
@@ -83,7 +84,7 @@ func get_color_type() -> Leave.LeaveType:
 
 
 func set_highlight(enabled: bool) -> void:
-	sprite.modulate.a = 0.8 if enabled else 0.1
+	sprite.modulate.a = 0.1 if enabled else 0.01
 
 
 func get_building_type() -> BuildingType:

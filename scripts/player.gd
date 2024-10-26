@@ -11,6 +11,7 @@ const ACCEL := SPEED / 0.15
 @onready var attraction_point : Node2D = %AttractionPoint
 @onready var leaves_attraction_area : Area2D = %LeavesAttractionArea
 @onready var pile_contact_area : Area2D = %PileContactArea
+@onready var pile_contact_area_offset := pile_contact_area.position
 @onready var leaves_sound : AudioStreamPlayer2D = %LocalLeavesSound
 @onready var strong_wind_sound : AudioStreamPlayer2D = %StrongWindSound
 @onready var wind_particles : CPUParticles2D = %WindParticles
@@ -171,6 +172,8 @@ func _update_display(move_direction: Vector2) -> void:
 	# Orientation
 	if not is_zero_approx(move_direction.x):
 		_body_sprite.scale.x = signf(move_direction.x)
+	if not move_direction.is_zero_approx():
+		pile_contact_area.position = pile_contact_area_offset.rotated(move_direction.angle())
 	# Animation
 	if move_direction.is_zero_approx():
 		_body_sprite.play("idle")
