@@ -22,12 +22,12 @@ func _ready() -> void:
 	hud.open_menu_clicked.connect(_pause_game)
 
 func _resume_game() -> void:
-	get_tree().paused = false
+	player.lock_player = false
 	menu.hide()
 	hud.show()
 
 func _pause_game() -> void:
-	get_tree().paused = true
+	player.lock_player = true
 	menu.show()
 	hud.hide()
 

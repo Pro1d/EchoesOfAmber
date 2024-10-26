@@ -38,6 +38,8 @@ var foot_step_period : float    =  0.5
 var foot_step_countdown : float =  0
 var last_foot                   := 0 # 0 = left, 1 = right
 
+var lock_player := false
+
 func _ready() -> void:
 	leaves_attraction_area.body_entered.connect(_on_leave_entered_area)
 	leaves_attraction_area.body_exited.connect(_on_leave_exited_area)
@@ -50,6 +52,8 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down"),
 	)
+	if lock_player:
+		command = Vector2.ZERO
 	
 	_update_display(command)
 	
