@@ -1,14 +1,20 @@
 extends Node2D
 class_name PileableTile
 
+signal on_tile_state_changed(tile: PileableTile)
+
 @onready var leave_pile_resource := preload("res://scenes/leave_pile.tscn")
 @onready var sprite : Polygon2D = $Polygon2D
 @onready var build_effect : CPUParticles2D = $BuildEffect
 
 var tilemap_cell : Vector2i # initialized when spawned
-var is_structure_built := false
-var is_colored := false
+var is_structure_built := false # true when a structure has been built on the tile
+var is_colored := false # true when the tile has been colored
 var spawned_piles : Array[LeavePile] =  []
+var buildable := false # true if a structure can be built on the tile
+
+var _color := Leave.LeaveType.RED
+
 static var offsets : Array[Vector2] = [
 									  Vector2(-6, -6), 
 									  Vector2(6, 0), 
@@ -56,14 +62,29 @@ static func get_parent_pileable_tile(area: Area2D) -> PileableTile:
 	
 	return null
 
+
 func _ready() -> void:
 	set_highlight(false)
 
+
 func can_spawn_leave() -> bool:
-	return len(spawned_piles) < 3 and not is_structure_built
+	if buildable:
+		return len(spawned_piles) < 3 and not is_structure_built
+	else:
+		return not is_colored
+
+
+func get_color_type() -> Leave.LeaveType:
+	if is_colored:
+		return _color
+	
+	printerr("get_color_type() called on an uncolored tile")
+	return Leave.LeaveType.RED # default value
+
 
 func set_highlight(enabled: bool) -> void:
 	sprite.modulate.a = 0.8 if enabled else 0.1
+
 
 func get_building_type() -> BuildingType:
 	var red_piles := len(spawned_piles.filter(func (p: LeavePile) -> bool: return p.pile_type == Leave.LeaveType.RED))
@@ -90,19 +111,34 @@ func get_building_type() -> BuildingType:
 	
 	return BuildingType.AllStarStuff
 
+# Force the building of a tree on this tile
+func build_tree(leave_type: Leave.LeaveType) -> BuildingType:
+	match leave_type:
+		Leave.LeaveType.RED: return BuildingType.RedTree
+		Leave.LeaveType.GREEN: return BuildingType.GreenTree
+		Leave.LeaveType.YELLOW: return BuildingType.YellowTree
+		_: return BuildingType.RedTree
+
 func spread_leaves(leave_type: Leave.LeaveType) -> void:
-	if is_colored:
-		spawn_pile(leave_type)
-		return
+	if can_spawn_leave():
+		if is_colored:
+			_spawn_pile(leave_type)
+		else:
+			_colorize_tile(leave_type)
 	
+	sprite.visible = can_spawn_leave()
+
+func _colorize_tile(leave_type: Leave.LeaveType) -> void:
 	var coords : Vector2i = colors_map[leave_type]
 	Config.ground_2d.set_cell(tilemap_cell, 0, coords)
 	build_effect.emitting = true
 	build_effect.one_shot = true
 	build_effect.self_modulate = effects_modulate_map[leave_type]
 	is_colored = true
+	_color = leave_type
+	on_tile_state_changed.emit(self)
 
-func spawn_pile(leave_type: Leave.LeaveType) -> void:
+func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 	var pile : LeavePile = leave_pile_resource.instantiate()
 	pile.pile_type = leave_type
 	pile.global_position = global_position + offsets[len(spawned_piles)]
@@ -112,13 +148,13 @@ func spawn_pile(leave_type: Leave.LeaveType) -> void:
 	if len(spawned_piles) == 3:
 		is_structure_built = true
 
-		var coords : Vector2i = buildings_map[get_building_type()]
-
 		for p in spawned_piles:
 			await p.animate_build()
-		
-		var tilemap: TileMapLayer = Config.root_2d
-		tilemap.set_cell(tilemap_cell, 0, coords)
-		
-		# Hide construction marker when done
-		sprite.visible = false
+
+		_build(get_building_type())
+		on_tile_state_changed.emit(self)
+
+func _build(building_type: BuildingType) -> void:
+	var coords : Vector2i = buildings_map[building_type]
+	var tilemap: TileMapLayer = Config.root_2d
+	tilemap.set_cell(tilemap_cell, 0, coords)

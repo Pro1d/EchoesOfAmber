@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3d3tqsqsvkln"]
+[gd_scene load_steps=4 format=3 uid="uid://bv0mag745ri5a"]
 
 [ext_resource type="Script" path="res://scripts/pileable_tile.gd" id="1_m3gff"]
 
