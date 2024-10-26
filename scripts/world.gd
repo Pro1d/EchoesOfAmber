@@ -5,9 +5,9 @@ class_name World
 @onready var hud : HUD = %HUD
 
 var leaves_count := {
-	Leave.LeaveType.RED: 50,
-	Leave.LeaveType.YELLOW: 50,
-	Leave.LeaveType.GREEN: 50
+	Leave.LeaveType.RED: 500,
+	Leave.LeaveType.YELLOW: 500,
+	Leave.LeaveType.GREEN: 500
 }
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _on_player_try_spawn_leaves(leave_type: Leave.LeaveType, pileable_tile: Pil
 	
 	if has_enough_leaves and pileable_tile.can_spawn_leave():
 		leaves_count[leave_type] -= cost
-		pileable_tile.spawn(leave_type)
+		pileable_tile.spread_leaves(leave_type)
 		_update_leaves_hud(true)
 
 	player.play_pile_desposit_animation(leave_type, has_enough_leaves)
