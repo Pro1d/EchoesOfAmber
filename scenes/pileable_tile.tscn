@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bv0mag745ri5a"]
+[gd_scene load_steps=4 format=3 uid="uid://bv0mag745ri5a"]
 
 [ext_resource type="Script" path="res://scripts/pileable_tile.gd" id="1_m3gff"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qq0un"]
+
+[sub_resource type="Gradient" id="Gradient_ti77s"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.0196078)
 
 [node name="PileableTile" type="Node2D"]
 script = ExtResource("1_m3gff")
@@ -17,3 +20,23 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_qq0un")
+
+[node name="BuildEffect" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.313726)
+emitting = false
+amount = 128
+one_shot = true
+speed_scale = 1.64
+explosiveness = 0.88
+emission_shape = 3
+emission_rect_extents = Vector2(8.985, 10.83)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 64)
+initial_velocity_min = 25.05
+initial_velocity_max = 61.85
+angular_velocity_min = -86.4
+angular_velocity_max = 43.5
+color = Color(0.921787, 0.906392, 1, 1)
+color_ramp = SubResource("Gradient_ti77s")
+hue_variation_min = -0.51
+hue_variation_max = 0.15

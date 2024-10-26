@@ -1,7 +1,12 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://gb6xs51pfjky"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://gb6xs51pfjky"]
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_eeyjl"]
+resource_name = "Amplify"
+volume_db = 24.0
 
 [resource]
-bus/0/send = &"Ambience"
+bus/0/effect/0/effect = SubResource("AudioEffectAmplify_eeyjl")
+bus/0/effect/0/enabled = true
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false

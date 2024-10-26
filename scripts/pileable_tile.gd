@@ -3,6 +3,7 @@ class_name PileableTile
 
 @onready var leave_pile_resource := preload("res://scenes/leave_pile.tscn")
 @onready var sprite : Polygon2D = $Polygon2D
+@onready var build_effect : CPUParticles2D = $BuildEffect
 
 var tilemap_cell : Vector2i # initialized when spawned
 var is_structure_built := false
@@ -88,6 +89,9 @@ func spread_leaves(leave_type: Leave.LeaveType) -> void:
 	
 	var coords : Vector2i = colors_map[leave_type]
 	Config.ground_2d.set_cell(tilemap_cell, 0, coords)
+	build_effect.emitting = true
+	build_effect.one_shot = true
+	#build_effect.modulate = 
 	is_colored = true
 
 func spawn_pile(leave_type: Leave.LeaveType) -> void:
