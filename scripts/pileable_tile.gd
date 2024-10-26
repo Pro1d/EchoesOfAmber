@@ -138,7 +138,7 @@ func _colorize_tile(leave_type: Leave.LeaveType) -> void:
 	Config.ground_2d.set_cell(tilemap_cell, 0, coords)
 	build_effect.emitting = true
 	build_effect.one_shot = true
-	build_effect.self_modulate = effects_modulate_map[leave_type]
+	build_effect.color = Config.leaf_colors[leave_type].lightened(0.1)
 	is_colored = true
 	_color = leave_type
 	on_tile_state_changed.emit(self)
