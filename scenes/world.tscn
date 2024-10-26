@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://ci2t4q6c7pt6d"]
+[gd_scene load_steps=18 format=4 uid="uid://ci2t4q6c7pt6d"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cu7ile13mqjn2" path="res://scenes/ui/hud.tscn" id="2_mlla5"]
 [ext_resource type="Script" path="res://scripts/ground_tile_map.gd" id="5_ogmdj"]
 [ext_resource type="AudioStream" uid="uid://bkk1kle80fbxg" path="res://assets/ambience/forest1.ogg" id="8_roynp"]
-[ext_resource type="Script" path="res://scripts/area_ambience_visual.gd" id="9_qtvo4"]
+[ext_resource type="PackedScene" uid="uid://jfsucfljdrhs" path="res://scenes/map_visuals.tscn" id="9_ibfbd"]
 [ext_resource type="AudioStream" uid="uid://wy5o0imxomo5" path="res://assets/ambience/forest2.ogg" id="9_t3lrt"]
 [ext_resource type="Script" path="res://scripts/area_ambience_node.gd" id="10_vqmp0"]
 [ext_resource type="AudioStream" uid="uid://dtenods174brs" path="res://assets/ambience/forest3.ogg" id="10_wnl7t"]
@@ -17,13 +17,6 @@
 [ext_resource type="AudioStream" uid="uid://d1dk4agy80k6n" path="res://assets/ambience/crows1.ogg" id="13_vdco3"]
 [ext_resource type="Script" path="res://scripts/area_manager.gd" id="14_0m5pn"]
 [ext_resource type="PackedScene" uid="uid://dpisql5gja5rw" path="res://scenes/fx/global_sfx.tscn" id="16_58ayc"]
-
-[sub_resource type="Gradient" id="Gradient_pk6aw"]
-colors = PackedColorArray(0.98, 0.83986, 0.2156, 0.541176, 0.98, 0.83986, 0.2156, 0.0392157)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_k5aor"]
-gradient = SubResource("Gradient_pk6aw")
-fill_to = Vector2(1, 1)
 
 [node name="World" type="Node2D"]
 material = ExtResource("1_j486f")
@@ -76,35 +69,8 @@ limit_bottom = 408
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="MapVisuals" type="Node2D" parent="AreaManager/CanvasGroup"]
+[node name="MapVisuals" parent="AreaManager/CanvasGroup" instance=ExtResource("9_ibfbd")]
 unique_name_in_owner = true
-
-[node name="Area1 Alive" type="Node2D" parent="AreaManager/CanvasGroup/MapVisuals" node_paths=PackedStringArray("items")]
-script = ExtResource("9_qtvo4")
-area_id = 1
-items = [NodePath("Light1")]
-fade_duration = 5.0
-
-[node name="Light1" type="Polygon2D" parent="AreaManager/CanvasGroup/MapVisuals/Area1 Alive"]
-z_index = 5
-position = Vector2(208, -24)
-color = Color(0.98, 0.98, 0.98, 1)
-texture = SubResource("GradientTexture2D_k5aor")
-texture_scale = Vector2(0.24, 0.24)
-polygon = PackedVector2Array(300, -41, 243, 213, 315, 217, 364, -34)
-
-[node name="Home Alive" type="Node2D" parent="AreaManager/CanvasGroup/MapVisuals" node_paths=PackedStringArray("items")]
-script = ExtResource("9_qtvo4")
-items = [NodePath("Light2")]
-fade_duration = 5.0
-
-[node name="Light2" type="Polygon2D" parent="AreaManager/CanvasGroup/MapVisuals/Home Alive"]
-z_index = 5
-position = Vector2(-71, 14)
-color = Color(0.98, 0.98, 0.98, 1)
-texture = SubResource("GradientTexture2D_k5aor")
-texture_scale = Vector2(0.79, 0.79)
-polygon = PackedVector2Array(317, -54, 227, 99, 270, 100, 362, -45)
 
 [node name="MapAudio" type="Node2D" parent="AreaManager"]
 unique_name_in_owner = true
