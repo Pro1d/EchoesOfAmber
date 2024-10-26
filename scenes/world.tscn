@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
-[ext_resource type="Material" path="res://resources/shaders/palette.material" id="1_j486f"]
+[ext_resource type="Material" uid="uid://bgh3hchthpa67" path="res://resources/shaders/palette.material" id="1_j486f"]
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
 [ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 [ext_resource type="PackedScene" uid="uid://cu7ile13mqjn2" path="res://scenes/ui/hud.tscn" id="2_mlla5"]
-[ext_resource type="PackedScene" uid="uid://dl33ig87h6ep6" path="res://scenes/ui/menu.tscn" id="5_newyv"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menu.tscn" id="5_newyv"]
 [ext_resource type="Script" path="res://scripts/ground_tile_map.gd" id="5_ogmdj"]
 [ext_resource type="AudioStream" uid="uid://bkk1kle80fbxg" path="res://assets/ambience/forest1.ogg" id="8_roynp"]
-[ext_resource type="PackedScene" path="res://scenes/map_visuals.tscn" id="9_ibfbd"]
+[ext_resource type="PackedScene" uid="uid://jfsucfljdrhs" path="res://scenes/map_visuals.tscn" id="9_ibfbd"]
 [ext_resource type="AudioStream" uid="uid://wy5o0imxomo5" path="res://assets/ambience/forest2.ogg" id="9_t3lrt"]
 [ext_resource type="Script" path="res://scripts/area_ambience_node.gd" id="10_vqmp0"]
 [ext_resource type="AudioStream" uid="uid://dtenods174brs" path="res://assets/ambience/forest3.ogg" id="10_wnl7t"]
@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://cl2uxega7w4dm" path="res://assets/ambience/water2.ogg" id="12_kcgy7"]
 [ext_resource type="AudioStream" uid="uid://d1dk4agy80k6n" path="res://assets/ambience/crows1.ogg" id="13_vdco3"]
 [ext_resource type="Script" path="res://scripts/area_manager.gd" id="14_0m5pn"]
-[ext_resource type="PackedScene" path="res://scenes/fx/global_sfx.tscn" id="16_58ayc"]
+[ext_resource type="PackedScene" uid="uid://dpisql5gja5rw" path="res://scenes/fx/global_sfx.tscn" id="16_58ayc"]
 
 [node name="World" type="Node2D"]
 material = ExtResource("1_j486f")
