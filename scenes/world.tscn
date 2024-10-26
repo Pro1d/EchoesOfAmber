@@ -1,11 +1,12 @@
-[gd_scene load_steps=20 format=4 uid="uid://ci2t4q6c7pt6d"]
+[gd_scene load_steps=21 format=4 uid="uid://ci2t4q6c7pt6d"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
-[ext_resource type="Material" uid="uid://bgh3hchthpa67" path="res://resources/shaders/palette.material" id="1_j486f"]
+[ext_resource type="Material" path="res://resources/shaders/palette.material" id="1_j486f"]
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
 [ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 [ext_resource type="PackedScene" uid="uid://cu7ile13mqjn2" path="res://scenes/ui/hud.tscn" id="2_mlla5"]
+[ext_resource type="PackedScene" uid="uid://dl33ig87h6ep6" path="res://scenes/ui/menu.tscn" id="5_newyv"]
 [ext_resource type="Script" path="res://scripts/ground_tile_map.gd" id="5_ogmdj"]
 [ext_resource type="AudioStream" uid="uid://bkk1kle80fbxg" path="res://assets/ambience/forest1.ogg" id="8_roynp"]
 [ext_resource type="Script" path="res://scripts/area_ambience_visual.gd" id="9_qtvo4"]
@@ -16,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://cl2uxega7w4dm" path="res://assets/ambience/water2.ogg" id="12_kcgy7"]
 [ext_resource type="AudioStream" uid="uid://d1dk4agy80k6n" path="res://assets/ambience/crows1.ogg" id="13_vdco3"]
 [ext_resource type="Script" path="res://scripts/area_manager.gd" id="14_0m5pn"]
-[ext_resource type="PackedScene" uid="uid://dpisql5gja5rw" path="res://scenes/fx/global_sfx.tscn" id="16_58ayc"]
+[ext_resource type="PackedScene" path="res://scenes/fx/global_sfx.tscn" id="16_58ayc"]
 
 [sub_resource type="Gradient" id="Gradient_pk6aw"]
 colors = PackedColorArray(0.98, 0.83986, 0.2156, 0.541176, 0.98, 0.83986, 0.2156, 0.0392157)
@@ -36,8 +37,12 @@ script = ExtResource("14_0m5pn")
 [node name="CanvasGroup" type="CanvasGroup" parent="AreaManager"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="AreaManager/CanvasGroup"]
+process_mode = 3
 
 [node name="HUD" parent="AreaManager/CanvasGroup/CanvasLayer" instance=ExtResource("2_mlla5")]
+unique_name_in_owner = true
+
+[node name="Menu" parent="AreaManager/CanvasGroup/CanvasLayer" instance=ExtResource("5_newyv")]
 unique_name_in_owner = true
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="AreaManager/CanvasGroup"]
