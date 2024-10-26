@@ -3,6 +3,7 @@ class_name World
 
 @onready var player : Player = %Player
 @onready var hud : HUD = %HUD
+@onready var area_manager : AreaManager = %AreaManager
 
 var leaves_count := {
 	Leave.LeaveType.RED: 500,
