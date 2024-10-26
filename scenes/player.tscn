@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://lgcp167hngoh"]
+[gd_scene load_steps=12 format=3 uid="uid://lgcp167hngoh"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0guwy"]
 [ext_resource type="SpriteFrames" uid="uid://bvwnn4cjsqldm" path="res://resources/sprite/player_sprite.tres" id="2_n0gkl"]
@@ -18,6 +18,13 @@ filter_clip = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pfu36"]
 size = Vector2(11, 11)
+
+[sub_resource type="Gradient" id="Gradient_1ys8d"]
+colors = PackedColorArray(1, 1, 1, 0.145098, 1, 1, 1, 0.27451)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vftte"]
+gradient = SubResource("Gradient_1ys8d")
+width = 5
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -86,3 +93,21 @@ autoplay = true
 max_distance = 50.0
 bus = &"Ambience"
 parameters/looping = true
+
+[node name="WindParticles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -4)
+amount = 32
+texture = SubResource("GradientTexture1D_vftte")
+emission_shape = 1
+emission_sphere_radius = 12.21
+direction = Vector2(0, -1)
+spread = 0.5
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 70.25
+angular_velocity_max = 10.0
+linear_accel_max = 10.0
+radial_accel_max = 100.0
+angle_min = 80.0
+angle_max = 110.0

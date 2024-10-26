@@ -13,6 +13,7 @@ const ACCEL := SPEED / 0.2
 @onready var pile_contact_area : Area2D = %PileContactArea
 @onready var leaves_sound : AudioStreamPlayer2D = %LocalLeavesSound
 @onready var strong_wind_sound : AudioStreamPlayer2D = %StrongWindSound
+@onready var wind_particles : CPUParticles2D = %WindParticles
 
 # list of PileableTile to which the player currently has contact
 var contacted_pile_tiles : Array[PileableTile] = []
@@ -42,7 +43,9 @@ func _physics_process(delta: float) -> void:
 	
 	_handle_pile_deposit_input()
 	_handle_leave_sound(attract_leaves, delta)
-
+	
+	wind_particles.emitting = attract_leaves
+	
 	move_and_slide()
 
 func _handle_leave_sound(attract_leaves: bool, delta: float) -> void:
