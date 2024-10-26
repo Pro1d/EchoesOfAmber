@@ -56,23 +56,20 @@ func _ready() -> void:
 	
 	match type:
 		LeaveType.RED:
-			Color(0.871, 0.329, 0.243)
-			self.sprite.modulate = Color(
-				randf_range(0.85, 0.95), 
-				randf_range(0.30, 0.4), 
-				randf_range(0.2, 0.3))
+			sprite.modulate = Color(
+				0.871 + randf_range(-.05, .05),
+				0.329 + randf_range(-.05, .05),
+				0.243 + randf_range(-.05, .05))
 		LeaveType.GREEN:
-			Color(0.612, 0.686, 0.227)
-			self.sprite.modulate = Color(
-				randf_range(0.5, 0.6), 
-				randf_range(0.6, 0.8), 
-				randf_range(0.35, 0.45))
+			sprite.modulate = Color(
+				0.612 + randf_range(-.05, .05),
+				0.686 + randf_range(-.05, .05),
+				0.227 + randf_range(-.05, .05))
 		LeaveType.YELLOW:
-			Color(0.82, 0.596, 0.153)
-			self.sprite.modulate = Color(
-				randf_range(0.75, 0.85), 
-				randf_range(0.55, 0.65), 
-				randf_range(0.15, 0.25))
+			sprite.modulate = Color(
+				0.82 + randf_range(-.05, .05),
+				0.596 + randf_range(-.05, .05),
+				0.153 + randf_range(-.05, .05))
 
 	elevation_z = elevation_z  # ensure elevation initialization
 	_animation_spawn()
