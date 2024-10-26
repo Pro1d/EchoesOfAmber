@@ -55,7 +55,7 @@ func can_spawn_leave() -> bool:
 	return len(spawned_piles) < 3 and not is_structure_built
 
 func set_highlight(enabled: bool) -> void:
-	sprite.modulate.a = 1.0 if enabled else 0.2 
+	sprite.modulate.a = 0.8 if enabled else 0.1
 
 func get_building_type() -> BuildingType:
 	var red_piles := len(spawned_piles.filter(func (p: LeavePile) -> bool: return p.pile_type == Leave.LeaveType.RED))
@@ -91,7 +91,6 @@ func spread_leaves(leave_type: Leave.LeaveType) -> void:
 	Config.ground_2d.set_cell(tilemap_cell, 0, coords)
 	build_effect.emitting = true
 	build_effect.one_shot = true
-	#build_effect.modulate = 
 	is_colored = true
 
 func spawn_pile(leave_type: Leave.LeaveType) -> void:
@@ -111,3 +110,6 @@ func spawn_pile(leave_type: Leave.LeaveType) -> void:
 		
 		var tilemap: TileMapLayer = Config.root_2d
 		tilemap.set_cell(tilemap_cell, 0, coords)
+		
+		# Hide construction marker when done
+		sprite.visible = false
