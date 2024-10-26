@@ -14,6 +14,7 @@ class AreaData:
 		return trees_to_clear.is_empty()
 
 @onready var map_audio := %MapAudio
+@onready var global_sfx : GlobalSFX = %GlobalSFX
 
 # map of: area ID => area data
 var area_data := {}
@@ -141,7 +142,7 @@ func refresh_area_state(data: AreaData, animate: bool) -> void:
 	all_audios.append_array(data.dead_area_ambiance)
 	all_audios.append_array(data.alive_area_ambiance)
 	var tween := get_tree().create_tween()
-	var tween_duration := 0
+	var tween_duration := 3
 	
 	# Audio transition
 	for audio: AreaAmbienceNode in all_audios:
@@ -149,9 +150,9 @@ func refresh_area_state(data: AreaData, animate: bool) -> void:
 		
 		if animate:
 			if play:
-				tween.tween_property(audio, 'volume_db', audio.nominal_volume_db, tween_duration)
+				tween.parallel().tween_property(audio, 'volume_db', audio.nominal_volume_db, tween_duration)
 			else:
-				tween.tween_property(audio, 'volume_db', min_volume, tween_duration)
+				tween.parallel().tween_property(audio, 'volume_db', min_volume, tween_duration)
 		else:
 			if play:
 				audio.volume_db = audio.nominal_volume_db
@@ -163,6 +164,10 @@ func refresh_area_state(data: AreaData, animate: bool) -> void:
 	
 	if animate:
 		await tween.finished
+		
+		# Play sound effect when area is cleared.q
+		if is_cleared:
+			global_sfx.play_area_cleared()
 	
 	for audio: AreaAmbienceNode in all_audios:
 		var play := is_cleared != audio.is_desolated 
@@ -180,12 +185,12 @@ func on_tile_cleared(tile: Vector2i) -> void:
 		var data : AreaData = area_data[area_id]
 		var index := data.tiles_to_clear.find(tile)
 		
-		if index > 0:
+		if index >= 0:
 			data.tiles_to_clear.remove_at(index)
 			_on_area_tile_cleared(area_id, tile)
 		
 		index = data.trees_to_clear.find(tile)
-		if index > 0:
+		if index >= 0:
 			data.trees_to_clear.remove_at(index)
 			_on_area_tree_cleared(area_id, tile)
 	
