@@ -15,9 +15,17 @@ const ACCEL := SPEED / 0.2
 @onready var strong_wind_sound : AudioStreamPlayer2D = %StrongWindSound
 @onready var wind_particles : CPUParticles2D = %WindParticles
 
+@onready var footstep_players : Array[AudioStreamPlayer2D] = [%FootstepL, %FootstepR]
+
+
 # list of PileableTile to which the player currently has contact
 var contacted_pile_tiles : Array[PileableTile] = []
 var leaves_hooked_count := 0
+
+# Footsteps
+var foot_step_period : float    =  0.5
+var foot_step_countdown : float =  0
+var last_foot                   := 0 # 0 = left, 1 = right
 
 func _ready() -> void:
 	leaves_attraction_area.body_entered.connect(_on_leave_entered_area)
@@ -42,12 +50,25 @@ func _physics_process(delta: float) -> void:
 	leaves_attraction_area.monitoring = attract_leaves
 	
 	_handle_pile_deposit_input()
+	_handle_footstep_sound(delta)
 	_handle_leave_sound(attract_leaves, delta)
 	
 	wind_particles.emitting = attract_leaves
 	
 	move_and_slide()
 
+func _handle_footstep_sound(delta: float) -> void:
+	if velocity.length_squared() == 0:
+		foot_step_countdown = 0
+		return
+	
+	foot_step_countdown -= delta
+	
+	if foot_step_countdown <= 0:
+		footstep_players[last_foot].play()
+		foot_step_countdown = foot_step_period
+		last_foot = (last_foot + 1) % len(footstep_players)
+		
 func _handle_leave_sound(attract_leaves: bool, delta: float) -> void:
 	var max_volume : float = 0
 	var min_volume : float = -28
@@ -66,6 +87,7 @@ func _handle_leave_sound(attract_leaves: bool, delta: float) -> void:
 		strong_wind_sound.stop()
 	elif strong_wind_sound.volume_db > wind_min_volume and not strong_wind_sound.playing:
 		strong_wind_sound.play()
+
 
 func _handle_pile_deposit_input() -> void:
 	var contacted_tile := get_contacted_pileable_tile()
