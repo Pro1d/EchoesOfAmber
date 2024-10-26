@@ -9,12 +9,12 @@ region = Rect2(288, 0, 24, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qq0un"]
 
-[sub_resource type="Gradient" id="Gradient_cssjg"]
+[sub_resource type="Gradient" id="Gradient_4t7ap"]
 interpolation_mode = 1
 colors = PackedColorArray(1, 1, 1, 1, 0.929715, 0.929715, 0.929715, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mjhb3"]
-gradient = SubResource("Gradient_cssjg")
+gradient = SubResource("Gradient_4t7ap")
 width = 2
 height = 2
 fill_to = Vector2(0, 1)
