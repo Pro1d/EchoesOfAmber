@@ -16,7 +16,8 @@ func set_enabled(enabled: bool) -> void:
 		rect.visible = true
 		rect.scale = Vector2(1, start_value)
 
-		tween.parallel().tween_property(rect, "scale", Vector2(1, end_value), 1.0)
+		tween.parallel().tween_property(rect, "scale", Vector2(1, end_value), 1.0). \
+			set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	
 	await tween.finished
 	
