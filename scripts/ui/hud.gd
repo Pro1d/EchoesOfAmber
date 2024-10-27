@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func update_leave_count(leaves: Array[int], animate: bool) -> void:
 	for i in range(_leave_labels.size()):
-		_leave_labels[i].text = str(leaves[i] / 10)
+		_leave_labels[i].text = str(leaves[i] / Config.LEAVES_PER_PILE)
 		
 		# Animation
 		if _displayed_leave_counts[i] != leaves[i] and animate:

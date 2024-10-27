@@ -7,6 +7,8 @@ var ground_2d: GroundTileMap
 var water_2d: WaterTileMap
 var sfx : GlobalSFX
 
+const LEAVES_PER_PILE := 10
+
 const leaf_colors : Array[Color] = [
 	Color(0.871, 0.329, 0.243),
 	Color(0.82, 0.596, 0.153),
