@@ -8,18 +8,15 @@ class_name AreaAmbienceVisual
 @export var is_desolated: bool = false
 
 var items : Array[CanvasItem] = []
-@export var fade_duration: float = 1
+@export var fade_duration: float = 1.0
 
 func _ready() -> void:
 	items.append_array(get_children())
 
 func transition(animate: bool, shown: bool) -> void:
 	if animate:
-		print("TRANSITION FX: ", name, " shown = ", shown)
-
-	if animate:
 		var tween := get_tree().create_tween()
-
+		tween.tween_interval(0.5)
 		var ease_type := Tween.EASE_OUT if shown else Tween.EASE_IN
 		var final_val := Color(1, 1, 1, 1) if shown else Color(1, 1, 1, 0)
 		var start_val := Color(1, 1, 1, 1) if not shown else Color(1, 1, 1, 0)
