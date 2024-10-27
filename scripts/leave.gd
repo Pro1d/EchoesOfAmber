@@ -120,7 +120,7 @@ func _physics_process(delta: float) -> void:
 			const max_dist := 70.0
 			var distance_ratio := clampf(distance / max_dist, 0.0, 1.0)
 			
-			var pull_force := 300.0 * maxf((1.0 - distance_ratio), 0.4)
+			var pull_force := 270.0 * maxf((1.0 - distance_ratio), 0.5)
 			var tangential_force := 150.0 * minf(distance_ratio, 0.95)
 			linear_velocity += (pull_vector * pull_force + tangent * tangential_force) * delta
 			global_position += linear_velocity * delta

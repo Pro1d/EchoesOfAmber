@@ -1,7 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu7ile13mqjn2"]
+[gd_scene load_steps=17 format=3 uid="uid://cu7ile13mqjn2"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_uwui3"]
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_xt31b"]
+[ext_resource type="Texture2D" uid="uid://dgh3js4ws0tm6" path="res://resources/sprite/red.atlastex" id="3_u3b2n"]
+[ext_resource type="Texture2D" uid="uid://es4rh8d3onvu" path="res://resources/sprite/yellow.atlastex" id="4_bqnft"]
+[ext_resource type="Texture2D" uid="uid://cbejhslhwxckq" path="res://resources/sprite/green.atlastex" id="5_ssmtw"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_d0dfw"]
 device = -1
@@ -22,22 +25,31 @@ region = Rect2(360, 408, 96, 96)
 atlas = ExtResource("1_xt31b")
 region = Rect2(264, 408, 96, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nhaqv"]
-atlas = ExtResource("1_xt31b")
-region = Rect2(0, 264, 12, 12)
-
 [sub_resource type="LabelSettings" id="LabelSettings_hiog1"]
 font_size = 26
 outline_size = 17
 outline_color = Color(0.148989, 0.148989, 0.148989, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rmjed"]
-atlas = ExtResource("1_xt31b")
-region = Rect2(12, 264, 12, 12)
+[sub_resource type="Gradient" id="Gradient_ra7nl"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.148989, 0.148989, 0.148989, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lmxjg"]
-atlas = ExtResource("1_xt31b")
-region = Rect2(24, 264, 12, 12)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mv0fl"]
+gradient = SubResource("Gradient_ra7nl")
+width = 48
+height = 12
+
+[sub_resource type="Gradient" id="Gradient_q53n8"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_087ao"]
+gradient = SubResource("Gradient_q53n8")
+width = 10
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2gvj"]
+atlas = SubResource("GradientTexture1D_087ao")
+region = Rect2(0, 0, 40, 4)
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -67,6 +79,7 @@ custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+tooltip_text = "Open spell book"
 shortcut = SubResource("Shortcut_xsh78")
 texture_normal = SubResource("AtlasTexture_sh0ee")
 texture_pressed = SubResource("AtlasTexture_54f1i")
@@ -78,77 +91,94 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 12
 
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="Control1" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="TextureRect1" type="TextureRect" parent="MarginContainer/HBoxContainer/Control"]
+[node name="Leave1Label" type="Label" parent="MarginContainer/HBoxContainer/Control1"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 1
-offset_right = 48.0
-offset_bottom = 48.0
-texture = SubResource("AtlasTexture_nhaqv")
-
-[node name="Leave1Label" type="Label" parent="MarginContainer/HBoxContainer/Control/TextureRect1"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 text = "10"
 label_settings = SubResource("LabelSettings_hiog1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control2" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="TextureRect1" type="TextureRect" parent="MarginContainer/HBoxContainer/Control1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 40)
+layout_mode = 2
+texture = ExtResource("3_u3b2n")
+
+[node name="TextureProgressBar1" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Control1"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 9.0
+value = 9.0
+texture_under = SubResource("GradientTexture2D_mv0fl")
+texture_progress = SubResource("AtlasTexture_u2gvj")
+texture_progress_offset = Vector2(4, 4)
+tint_over = Color(1, 1, 1, 0.317647)
+tint_progress = Color(0.566705, 0.824429, 0.911904, 1)
+
+[node name="Control2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Leave2Label" type="Label" parent="MarginContainer/HBoxContainer/Control2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_hiog1")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/Control2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 1
-offset_right = 48.0
-offset_bottom = 48.0
-texture = SubResource("AtlasTexture_rmjed")
+custom_minimum_size = Vector2(48, 40)
+layout_mode = 2
+texture = ExtResource("4_bqnft")
 
-[node name="Leave2Label" type="Label" parent="MarginContainer/HBoxContainer/Control2/TextureRect2"]
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Control2"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+max_value = 9.0
+value = 9.0
+texture_under = SubResource("GradientTexture2D_mv0fl")
+texture_progress = SubResource("AtlasTexture_u2gvj")
+texture_progress_offset = Vector2(4, 4)
+tint_progress = Color(0.566705, 0.824429, 0.911904, 1)
+
+[node name="Control3" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Leave3Label" type="Label" parent="MarginContainer/HBoxContainer/Control3"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "10"
 label_settings = SubResource("LabelSettings_hiog1")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Control3" type="Control" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
 
 [node name="TextureRect3" type="TextureRect" parent="MarginContainer/HBoxContainer/Control3"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 1
-offset_right = 48.0
-offset_bottom = 48.0
-texture = SubResource("AtlasTexture_lmxjg")
+custom_minimum_size = Vector2(48, 40)
+layout_mode = 2
+texture = ExtResource("5_ssmtw")
 
-[node name="Leave3Label" type="Label" parent="MarginContainer/HBoxContainer/Control3/TextureRect3"]
+[node name="TextureProgressBar3" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Control3"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "10"
-label_settings = SubResource("LabelSettings_hiog1")
-horizontal_alignment = 1
-vertical_alignment = 1
+layout_mode = 2
+max_value = 9.0
+value = 9.0
+texture_under = SubResource("GradientTexture2D_mv0fl")
+texture_progress = SubResource("AtlasTexture_u2gvj")
+texture_progress_offset = Vector2(4, 4)
+tint_over = Color(1, 1, 1, 0.317647)
+tint_progress = Color(0.566705, 0.824429, 0.911904, 1)
