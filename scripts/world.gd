@@ -163,7 +163,6 @@ func _on_q1_leaves_quest_finished() -> void:
 	await menu.display_current_quest_text(_q2_text)
 	
 
-
 func _update_leaves_quest() -> void:
 	if Quests.Q1_GET_LEAVES not in current_quests:
 		return
