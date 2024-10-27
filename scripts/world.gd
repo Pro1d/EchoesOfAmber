@@ -182,8 +182,8 @@ func _on_q1_leaves_quest_finished() -> void:
 	# Wait for the squirrel :)
 	await get_tree().create_timer(0.5).timeout
 	Config.sfx.play_area_cleared()
+	Config.sfx.play_music_layer_1()
 	await Config.water_2d.build_north_bridge()
-
 	await _cinematic_move_end(3)
 
 	await blackbars.set_enabled(false)
