@@ -13,7 +13,7 @@ script = ExtResource("1_j0yuv")
 
 [node name="AreaCleared" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_bmv7q")
-volume_db = -24.0
+volume_db = -6.0
 bus = &"SoundFx"
 
 [node name="BuildFx" type="AudioStreamPlayer" parent="."]
