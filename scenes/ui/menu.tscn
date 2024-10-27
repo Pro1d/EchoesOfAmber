@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://oro7jitvtaoa"]
+[gd_scene load_steps=17 format=3 uid="uid://oro7jitvtaoa"]
 
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_g7n2o"]
 [ext_resource type="Script" path="res://scripts/ui/menu.gd" id="1_ncqvn"]
@@ -11,13 +11,6 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_48rtn"]
 atlas = ExtResource("1_g7n2o")
 region = Rect2(12, 348, 247, 156)
-
-[sub_resource type="InputEventKey" id="InputEventKey_rvep5"]
-device = -1
-keycode = 4194306
-
-[sub_resource type="Shortcut" id="Shortcut_0xf5i"]
-events = [SubResource("InputEventKey_rvep5")]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oew7w"]
 atlas = ExtResource("1_g7n2o")
@@ -117,7 +110,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 0
-shortcut = SubResource("Shortcut_0xf5i")
 text = "Continue"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer"]
