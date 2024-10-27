@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
-[ext_resource type="Material" path="res://resources/shaders/palette.material" id="1_j486f"]
+[ext_resource type="Material" uid="uid://bgh3hchthpa67" path="res://resources/shaders/palette.material" id="1_j486f"]
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
 [ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 [ext_resource type="PackedScene" uid="uid://cu7ile13mqjn2" path="res://scenes/ui/hud.tscn" id="2_mlla5"]
@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bvt878utrwp3l" path="res://scenes/squirrel_area_ambience_visual.tscn" id="11_pld7y"]
 [ext_resource type="AudioStream" uid="uid://cckt5onkn2opv" path="res://assets/ambience/water.ogg" id="12_0dg57"]
 [ext_resource type="AudioStream" uid="uid://cl2uxega7w4dm" path="res://assets/ambience/water2.ogg" id="12_kcgy7"]
-[ext_resource type="PackedScene" path="res://scenes/crow.tscn" id="13_jv8t0"]
+[ext_resource type="PackedScene" uid="uid://b7etqquqbdcpu" path="res://scenes/crow.tscn" id="13_jv8t0"]
 [ext_resource type="AudioStream" uid="uid://d1dk4agy80k6n" path="res://assets/ambience/crows1.ogg" id="13_vdco3"]
 [ext_resource type="Script" path="res://scripts/area_manager.gd" id="14_0m5pn"]
 [ext_resource type="PackedScene" uid="uid://drc4bdbe6spo6" path="res://scenes/blue_birdie.tscn" id="14_qwiyh"]
@@ -90,12 +90,96 @@ limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
 
-[node name="SquirrelArea" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+[node name="D SquirrelArea" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
 position = Vector2(444, 192)
 area_id = 100
 
+[node name="H Crow High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
+position = Vector2(310, 16)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
+is_desolated = true
+
+[node name="high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H Crow High"]
+position = Vector2(-16, 8)
+
+[node name="H Crow High2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
+position = Vector2(336, 11)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
+is_desolated = true
+
+[node name="high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H Crow High2"]
+position = Vector2(-16, 16)
+
+[node name="H Crow High3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
+position = Vector2(300, 77)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
+is_desolated = true
+
+[node name="high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H Crow High3"]
+position = Vector2(-121, 1)
+
+[node name="H GreenBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
+position = Vector2(296, 17)
+is_desolated = false
+
+[node name="high2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H GreenBirdie"]
+position = Vector2(48, 2)
+
+[node name="H GreenBirdie2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
+position = Vector2(316, 13)
+is_desolated = false
+
+[node name="high2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H GreenBirdie2"]
+position = Vector2(20, 15)
+
+[node name="H RedBirdie High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
+position = Vector2(309, 9)
+is_desolated = false
+
+[node name="high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H RedBirdie High"]
+position = Vector2(3, 12)
+
+[node name="H RedBirdie High2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
+position = Vector2(334, 20)
+is_desolated = false
+
+[node name="high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H RedBirdie High2"]
+position = Vector2(-33, -4)
+
+[node name="H BlueBirdie High4" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(299, 7)
+cycle_away_duration = 6.0
+is_desolated = false
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H BlueBirdie High4"]
+position = Vector2(27, 6)
+
+[node name="H BlueBirdie High5" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(299, 26)
+cycle_away_duration = 6.0
+is_desolated = false
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H BlueBirdie High5"]
+position = Vector2(49, 0)
+
+[node name="H BlueBirdie High6" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(342, 10)
+cycle_away_duration = 6.0
+is_desolated = false
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/H BlueBirdie High6"]
+position = Vector2(12, 2)
+
+[node name="A1 SquirrelArea2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(516, -54)
+area_id = 1
+
 [node name="A1 Crow" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(480, 69)
+cycle_away_duration = 6.0
 area_id = 1
 is_desolated = true
 
@@ -104,27 +188,95 @@ position = Vector2(-49, 4)
 
 [node name="A1 Crow2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(517, 26)
+cycle_away_duration = 6.0
 area_id = 1
 is_desolated = true
 
 [node name="LandingSpot1" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A1 Crow2"]
 position = Vector2(26, 64)
 
+[node name="A1 BlueBirdie High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(468, 39)
+cycle_away_duration = 6.0
+area_id = 1
+is_desolated = false
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A1 BlueBirdie High"]
+position = Vector2(48, 18)
+
+[node name="A1 BlueBirdie High2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(444, 8)
+cycle_away_duration = 6.0
+area_id = 1
+is_desolated = false
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A1 BlueBirdie High2"]
+position = Vector2(48, 83)
+
+[node name="A1 BlueBirdie High3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(492, -31)
+cycle_away_duration = 6.0
+area_id = 1
+is_desolated = false
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A1 BlueBirdie High3"]
+position = Vector2(96, 37)
+
 [node name="D BlueBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
 position = Vector2(469, 303)
+cycle_away_duration = 6.0
+area_id = 100
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie"]
+position = Vector2(46, -11)
 
 [node name="BirdPos" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie"]
-position = Vector2(47, -5)
-
-[node name="BirdPos2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie"]
-position = Vector2(-77, -47)
+position = Vector2(-70, -47)
 
 [node name="BirdPos3" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie"]
-position = Vector2(3, -98)
+position = Vector2(4, -97)
+
+[node name="D BlueBirdie2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(469, 246)
+cycle_away_duration = 6.0
+area_id = 100
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie2"]
+position = Vector2(73, -1)
+
+[node name="BirdPos" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie2"]
+position = Vector2(-55, 86)
+
+[node name="BirdPos3" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie2"]
+position = Vector2(-2, 118)
+
+[node name="D BlueBirdie high" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(33, 346)
+cycle_away_duration = 6.0
+area_id = 100
+is_desolated = false
+
+[node name="BirdPos high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie high"]
+position = Vector2(51, 45)
+
+[node name="high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie high"]
+position = Vector2(2, 69)
+
+[node name="high2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie high"]
+position = Vector2(-2, 118)
+
+[node name="A3 SquirrelArea" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(204, 187)
+area_id = 3
+
+[node name="A3 SquirrelArea2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(325, 304)
+area_id = 3
 
 [node name="A3 Crow High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
-position = Vector2(180, 224)
-cycle_grounded_duration = 4.725
+position = Vector2(181, 223)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 3.0
 area_id = 3
 is_desolated = true
 
@@ -135,8 +287,9 @@ position = Vector2(72, 37)
 position = Vector2(47, 9)
 
 [node name="A3 Crow High3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
-position = Vector2(253, 203)
-cycle_grounded_duration = 4.725
+position = Vector2(253, 179)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 3.0
 area_id = 3
 is_desolated = true
 
@@ -148,7 +301,8 @@ position = Vector2(36, -6)
 
 [node name="A3 Crow High2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(204, 291)
-cycle_grounded_duration = 4.725
+cycle_grounded_duration = 8.0
+cycle_away_duration = 3.0
 area_id = 3
 is_desolated = true
 
@@ -159,8 +313,9 @@ position = Vector2(23, 38)
 position = Vector2(88, 2)
 
 [node name="A3 Crow High4" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
-position = Vector2(217, 220)
-cycle_grounded_duration = 4.725
+position = Vector2(300, 302)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 3.0
 area_id = 3
 is_desolated = true
 
@@ -171,71 +326,109 @@ position = Vector2(23, 38)
 position = Vector2(88, 2)
 
 [node name="A3 Crow High5" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
-position = Vector2(158, 300)
-cycle_grounded_duration = 4.725
+position = Vector2(255, 344)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 3.0
 area_id = 3
 is_desolated = true
 
 [node name="LandingSpot1" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 Crow High5"]
-position = Vector2(23, 38)
+position = Vector2(24, 22)
 
 [node name="LandingSpot2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 Crow High5"]
-position = Vector2(88, 2)
+position = Vector2(16, -30)
 
-[node name="A3 RedBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
-position = Vector2(204, 327)
+[node name="A3 GreenBirdie High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
+position = Vector2(252, 350)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
 area_id = 3
 is_desolated = false
 
-[node name="Bird5" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie"]
-position = Vector2(6, -48)
+[node name="Bird" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 GreenBirdie High"]
+position = Vector2(-39, -7)
 
-[node name="Bird6" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie"]
-position = Vector2(101, -48)
-
-[node name="A3 RedBirdie2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
-position = Vector2(253, 208)
-area_id = 3
-is_desolated = false
-
-[node name="Bird3" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie2"]
-position = Vector2(-47, 66)
-
-[node name="Bird4" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie2"]
-position = Vector2(-29, -11)
-
-[node name="A3 GreenBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
-position = Vector2(252, 378)
-area_id = 3
-is_desolated = false
-
-[node name="Bird" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 GreenBirdie"]
-position = Vector2(-31, -14)
-
-[node name="Bird2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 GreenBirdie"]
+[node name="Bird2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 GreenBirdie High"]
 position = Vector2(-80, -86)
 
-[node name="A2 GreenBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
-position = Vector2(12, 158)
+[node name="A3 RedBirdie High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
+position = Vector2(204, 297)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
+area_id = 3
+is_desolated = false
+
+[node name="Bird5" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie High"]
+position = Vector2(16, -37)
+
+[node name="Bird6" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie High"]
+position = Vector2(88, -25)
+
+[node name="A3 BlueBirdie High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(204, 237)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
+area_id = 3
+is_desolated = false
+
+[node name="high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 BlueBirdie High"]
+position = Vector2(96, -6)
+
+[node name="A3 BlueBirdie High2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(156, 304)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
+area_id = 3
+is_desolated = false
+
+[node name="high" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 BlueBirdie High2"]
+position = Vector2(26, 86)
+
+[node name="A3 RedBirdie2 High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
+position = Vector2(258, 191)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
+area_id = 3
+is_desolated = false
+
+[node name="Bird3" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie2 High"]
+position = Vector2(-107, 32)
+
+[node name="Bird4" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie2 High"]
+position = Vector2(-83, -34)
+
+[node name="A3 SquirrelArea3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(84, 164)
+area_id = 2
+
+[node name="A3 SquirrelArea4" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(60, 92)
+area_id = 2
+
+[node name="A2 GreenBirdie high" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
+position = Vector2(13, 126)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
-[node name="A2 GreenBirdie2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
-position = Vector2(12, 158)
+[node name="A2 GreenBirdie2 high" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
+position = Vector2(-13, 133)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
-[node name="Marker2D" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A2 GreenBirdie2"]
-position = Vector2(17, -58)
+[node name="Marker2D" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A2 GreenBirdie2 high"]
+position = Vector2(26, 50)
 
-[node name="Marker2D2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A2 GreenBirdie2"]
-position = Vector2(21, 10)
-
-[node name="Marker2D3" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A2 GreenBirdie2"]
-position = Vector2(-13, 22)
+[node name="Marker2D3" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A2 GreenBirdie2 high"]
+position = Vector2(-28, 22)
 
 [node name="A2 GreenBirdie3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
 position = Vector2(84, 184)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
@@ -250,6 +443,8 @@ position = Vector2(-13, 22)
 
 [node name="A2 GreenBirdie4" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
 position = Vector2(12, 84)
+cycle_grounded_duration = 10.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
@@ -264,31 +459,43 @@ position = Vector2(-13, 22)
 
 [node name="A2 RedBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
 position = Vector2(36, 233)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
 [node name="A2 RedBirdie2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
 position = Vector2(61, 254)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
 [node name="A2 RedBirdie3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
 position = Vector2(60, 184)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
 [node name="A2 RedBirdie4" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
 position = Vector2(59, 111)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
 [node name="A2 RedBirdie5" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
 position = Vector2(61, 62)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
 [node name="A2 BlueBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
 position = Vector2(-13, 160)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
@@ -297,6 +504,8 @@ position = Vector2(75, -30)
 
 [node name="A2 BlueBirdie2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
 position = Vector2(12, 258)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
@@ -305,6 +514,8 @@ position = Vector2(-42, -14)
 
 [node name="A2 BlueBirdie3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
 position = Vector2(108, 163)
+cycle_grounded_duration = 8.0
+cycle_away_duration = 6.0
 area_id = 2
 is_desolated = false
 
@@ -313,31 +524,37 @@ position = Vector2(-42, -14)
 
 [node name="A2 Crow" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(38, 127)
+cycle_away_duration = 3.0
 area_id = 2
 is_desolated = true
 
 [node name="A2 Crow High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(60, 156)
+cycle_away_duration = 3.0
 area_id = 2
 is_desolated = true
 
 [node name="A2 Crow High2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(88, 140)
+cycle_away_duration = 3.0
 area_id = 2
 is_desolated = true
 
 [node name="A2 Crow High3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(109, 181)
+cycle_away_duration = 3.0
 area_id = 2
 is_desolated = true
 
 [node name="A2 Crow High4" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(37, 205)
+cycle_away_duration = 3.0
 area_id = 2
 is_desolated = true
 
 [node name="A2 Crow High5" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(61, 222)
+cycle_away_duration = 3.0
 area_id = 2
 is_desolated = true
 

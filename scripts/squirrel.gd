@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		position = position.move_toward(food_left_position, SPEED * delta)
 		if (position.distance_squared_to(food_left_position) < DISTANCE_THRESHOLD):
 			state = State.EATING_LEFT
-			eating_start_time = Time.get_ticks_msec()
+			eating_start_time = Time.get_ticks_msec() + randi_range(-1000, 1000)
 			animation.play("idle_eat")
 		
 	if (state == State.EATING_LEFT):
@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
 		position = position.move_toward(food_right_position, SPEED * delta)
 		if (position.distance_squared_to(food_right_position) < DISTANCE_THRESHOLD):
 			state = State.EATING_RIGHT
-			eating_start_time = Time.get_ticks_msec()
+			eating_start_time = Time.get_ticks_msec() + randi_range(-1000, 1000)
 			animation.play("idle_eat")
 			
 	if (state == State.EATING_RIGHT):
