@@ -14,6 +14,7 @@ func _ready() -> void:
 	items.append_array(get_children())
 
 func transition(animate: bool, shown: bool) -> void:
+	print(name, " shown = ", shown)
 	if animate:
 		var tween := get_tree().create_tween()
 

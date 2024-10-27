@@ -146,6 +146,12 @@ func _on_q1_leaves_quest_finished() -> void:
 	await blackbars.set_enabled(true)
 	await _cinematic_move_start(open_bridge_marker.global_position, 3)
 	Config.sfx.play_area_cleared()
+	
+	# Transition "leaves" area.
+	var leaves_area : AreaManager.AreaData = area_manager.area_data[AreaManager.AREA_ID_LEAVES]
+	leaves_area.force_mark_cleared = true
+	area_manager.refresh_area_state(AreaManager.AREA_ID_LEAVES, true)
+
 	await get_tree().create_timer(1).timeout
 	await _cinematic_move_end(3)
 
@@ -155,6 +161,7 @@ func _on_q1_leaves_quest_finished() -> void:
 	current_quests.append(Quests.Q2_CLEAR_AREA_1)
 	_set_menu_visible(true)
 	await menu.display_current_quest_text(_q2_text)
+	
 
 
 func _update_leaves_quest() -> void:
