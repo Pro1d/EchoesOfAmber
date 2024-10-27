@@ -67,6 +67,7 @@ custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+tooltip_text = "Open spell book"
 shortcut = SubResource("Shortcut_xsh78")
 texture_normal = SubResource("AtlasTexture_sh0ee")
 texture_pressed = SubResource("AtlasTexture_54f1i")
