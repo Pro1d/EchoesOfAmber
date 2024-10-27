@@ -8,12 +8,12 @@ class_name World
 @onready var blackbars : BlackBars = %BlackBars
 @onready var camera : Camera2D = %Camera2D
 
-static var SKIP_INTRO := true
+static var SKIP_INTRO := false
 
 var leaves_count := {
-	Leave.LeaveType.RED: 500,
-	Leave.LeaveType.YELLOW: 500,
-	Leave.LeaveType.GREEN: 500
+	Leave.LeaveType.RED: 0,
+	Leave.LeaveType.YELLOW: 0,
+	Leave.LeaveType.GREEN: 0
 }
 
 enum Quests {
@@ -85,40 +85,34 @@ func _update_leaves_hud(animate: bool) -> void:
 
 var current_quests : Array[Quests] = [Quests.Q1_GET_LEAVES]
 var q1_leaves_count := 0
-var q1_target_leaves := 20
+var q1_target_leaves := 100
 
-var _q1_text : String = """[color=black]
-It seems this summer hit hard on my beautiful forest. 
+var _q1_text : String = """
+It seems this summer hit hard on my beautiful forest.
 
 I should get some leaves to bring back its colors.
 
-[color="red"]E: Harvest Leaves[/color]
-[/color]"""
-
-var _q2_text : String = """[color=black]
-Mmm, I think I have enough leaves to work my magic.
-
-I should head North and use my leaves to expand the beauty
-of automn.
-
-[color="#CC293C"]J: Spread RED leaves[/color]
-[color="#D19827"]K: Spread ORANGE leaves[/color]
-[color="#8A9335"]L: Spread GREEN leaves[/color]
-
-[/color]
+[img=26x26,center,center]res://resources/sprite/keys/E.atlastex[/img][color="red"] Harvest Leaves[/color]
 """
 
-var _q3_text : String = """[color=black]
-I should add some life to these lands.
-I could try the formulas I have kept in my spellbook for this...
+var _q2_text : String = """
+Hmm, I think I have enough leaves to work my magic.
+
+I should head North and use my leaves to expand the beauty of automn.
+
+[img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img][color="#CC293C"] Spread RED leaves[/color]
+[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img][color="#D19827"] Spread ORANGE leaves[/color]
+[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img][color="#8A9335"] Spread GREEN leaves[/color]
+"""
+
+var _q3_text : String = """
+I should add some life to these lands. I could try the formulas I have kept in my spellbook for this...
 
 And then I could liven up the forest around the house too...
 
 [color="#D19827"]
-Use J, K, L to spread leaves around the house, after coloring the ground create
-leave piles. Combining 3 leave piles builds vegetation. 
-[/color]
-
+Use [img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img] to spread leaves around the house.
+After coloring the ground, place leaf piles. Combine 3 leaf piles to grow vegetation.
 [/color]
 """
 

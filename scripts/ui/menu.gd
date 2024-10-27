@@ -16,8 +16,10 @@ func display_current_quest_text(txt: String) -> void:
 	_quest_label.visible_characters = 0
 	_writing_sfx.play()
 	
-	for i in range(0, len(txt), 1):
+	for i in range(0, _quest_label.get_total_character_count(), 1):
 		_quest_label.visible_characters = i
 
 		for _f in range(2):
 			await get_tree().process_frame
+	
+	_writing_sfx.stop()
