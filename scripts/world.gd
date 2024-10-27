@@ -85,42 +85,43 @@ func _update_leaves_hud(animate: bool) -> void:
 @onready var q3_area3_marker : Marker2D = %CinematicMarkers/Q3Area3
 
 var current_quests : Array[Quests] = [Quests.Q1_GET_LEAVES]
-var q1_piles_count := 10
+var q1_piles_count := 8
 
 var _q1_text : String = """
 It seems this summer hit hard on my beautiful forest.
 
-I should get some leaves to bring back its colors.
+I must gather leaves to restore its colors.
 
-[img=26x26,center,center]res://resources/sprite/keys/E.atlastex[/img][color="red"] Harvest Leaves[/color]
-"""
+[color="#26262699"]
+[img=26x26,center,center]res://resources/sprite/keys/E.atlastex[/img] Harvest Leaves
+[/color]"""
 
 var _q2_text : String = """
-Hmm, I think I have enough leaves to work my magic.
+Hmm, I believe I have gathered enough leaves to work my magic.
 
-I should head North and use my leaves to expand the beauty of automn.
+I should head North and expand the beauty of automn with my leaves.
 
-[img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img][color="#CC293C"] Spread RED leaves[/color]
-[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img][color="#D19827"] Spread ORANGE leaves[/color]
-[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img][color="#8A9335"] Spread GREEN leaves[/color]
-"""
+[color="#26262699"]
+[img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img] Spread [img=36x30,center,center]res://resources/sprite/red.atlastex[/img] red leaves
+[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img] Spread [img=36x30,center,center]res://resources/sprite/yellow.atlastex[/img] orange leaves
+[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img] Spread [img=36x30,center,center]res://resources/sprite/green.atlastex[/img] green leaves
+[/color]"""
 
 var _q3_text : String = """
-I should add some life to these lands. I could try the formulas I have kept in my spellbook for this...
+These lands need a breath of life again. Perhaps my old spellbook holds the right formulas...
 
-And then I could liven up the forest around the house too...
+And then, I could liven up the forest around my home too.
 
-[color="#D19827"]
-Use [img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img] to spread leaves around the house.
+[color="#26262699"]
+Use [img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img] to scatter leaves around the house.
 After coloring the ground, place leaf piles. Combine 3 leaf piles to grow vegetation.
 [/color]
 """
 
 var _q4_text : String = """
-At last my forest has been restored.
+At last, my forest is restored.
 
-I think I am going to stay and relax for a bit...
-Maybe grow some more pumpkins around my house.
+I think I'll stay and relax for a bit... maybe plant a few more pumpkins around my home.
 """
 
 func _cinematic_move_start(target_pos: Vector2, duration: float) -> void:
