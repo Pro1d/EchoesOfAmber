@@ -8,7 +8,7 @@ class_name World
 @onready var blackbars : BlackBars = %BlackBars
 @onready var camera : Camera2D = %Camera2D
 
-static var SKIP_INTRO := false
+static var SKIP_INTRO := true
 
 var leaves_count := {
 	Leave.LeaveType.RED: 0,

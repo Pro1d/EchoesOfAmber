@@ -161,7 +161,8 @@ func refresh_area_state(area_id: int, animate: bool) -> void:
 
 	if is_cleared:
 		on_area_cleared.emit(data)
-
+	
+	print("Refresh area state: id=", area_id, ", cleared = ", is_cleared, ", animate = ", animate)
 	_refresh_area_visual_state(data, animate)
 	_refresh_area_audio_state(data, animate)
 
