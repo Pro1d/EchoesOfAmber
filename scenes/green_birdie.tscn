@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bustaierjh87f"]
+[gd_scene load_steps=7 format=3 uid="uid://bsgueivvvl8mv"]
 
-[ext_resource type="Texture2D" uid="uid://cvgwgqljwwj8m" path="res://assets/textures/red_bird.png" id="1_lc0jj"]
+[ext_resource type="Script" path="res://scripts/bird.gd" id="1_jgk47"]
+[ext_resource type="Texture2D" uid="uid://drv5xvnjyh77p" path="res://assets/textures/green_bird.png" id="2_70327"]
 
 [sub_resource type="Animation" id="Animation_gnxxx"]
 resource_name = "Fly"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -58,12 +60,18 @@ _data = {
 "RESET": SubResource("Animation_vdo2l")
 }
 
-[node name="RedBird" type="Sprite2D"]
-texture = ExtResource("1_lc0jj")
-hframes = 3
-vframes = 2
+[node name="GreenBirdie" type="Node2D"]
+script = ExtResource("1_jgk47")
+is_desolated = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
 libraries = {
 "": SubResource("AnimationLibrary_vl3h6")
 }
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_70327")
+offset = Vector2(0, -36)
+hframes = 3
+vframes = 2

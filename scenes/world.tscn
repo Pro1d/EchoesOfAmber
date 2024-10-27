@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=4 uid="uid://ci2t4q6c7pt6d"]
+[gd_scene load_steps=24 format=4 uid="uid://ci2t4q6c7pt6d"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
-[ext_resource type="Material" path="res://resources/shaders/palette.material" id="1_j486f"]
+[ext_resource type="Material" uid="uid://bgh3hchthpa67" path="res://resources/shaders/palette.material" id="1_j486f"]
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
 [ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 [ext_resource type="PackedScene" uid="uid://cu7ile13mqjn2" path="res://scenes/ui/hud.tscn" id="2_mlla5"]
@@ -18,8 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://bvt878utrwp3l" path="res://scenes/squirrel_area_ambience_visual.tscn" id="11_pld7y"]
 [ext_resource type="AudioStream" uid="uid://cckt5onkn2opv" path="res://assets/ambience/water.ogg" id="12_0dg57"]
 [ext_resource type="AudioStream" uid="uid://cl2uxega7w4dm" path="res://assets/ambience/water2.ogg" id="12_kcgy7"]
+[ext_resource type="PackedScene" uid="uid://b7etqquqbdcpu" path="res://scenes/crow.tscn" id="13_jv8t0"]
 [ext_resource type="AudioStream" uid="uid://d1dk4agy80k6n" path="res://assets/ambience/crows1.ogg" id="13_vdco3"]
 [ext_resource type="Script" path="res://scripts/area_manager.gd" id="14_0m5pn"]
+[ext_resource type="PackedScene" uid="uid://drc4bdbe6spo6" path="res://scenes/blue_birdie.tscn" id="14_qwiyh"]
 [ext_resource type="PackedScene" uid="uid://dpisql5gja5rw" path="res://scenes/fx/global_sfx.tscn" id="16_58ayc"]
 
 [node name="World" type="Node2D"]
@@ -89,6 +91,34 @@ editor_draw_limits = true
 [node name="SquirrelArea" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
 position = Vector2(444, 192)
 area_id = 100
+
+[node name="A1 Crow" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
+position = Vector2(480, 69)
+area_id = 1
+is_desolated = true
+
+[node name="LandingSpot1" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A1 Crow"]
+position = Vector2(-49, 4)
+
+[node name="A1 Crow2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
+position = Vector2(517, 26)
+area_id = 1
+is_desolated = true
+
+[node name="LandingSpot1" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A1 Crow2"]
+position = Vector2(26, 64)
+
+[node name="D BlueBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("14_qwiyh")]
+position = Vector2(469, 303)
+
+[node name="BirdPos" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie"]
+position = Vector2(47, -5)
+
+[node name="BirdPos2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie"]
+position = Vector2(-77, -47)
+
+[node name="BirdPos3" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie"]
+position = Vector2(3, -98)
 
 [node name="MapVisuals" parent="AreaManager/CanvasGroup" instance=ExtResource("9_ibfbd")]
 unique_name_in_owner = true
