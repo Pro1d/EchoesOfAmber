@@ -209,12 +209,12 @@ parameters/looping = true
 [node name="FootstepR" type="AudioStreamPlayer2D" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("6_kdajv")
-volume_db = -12.0
+volume_db = -6.0
 max_polyphony = 2
 
 [node name="FootstepL" type="AudioStreamPlayer2D" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("6_kdajv")
-volume_db = -12.0
+volume_db = -6.0
 pitch_scale = 0.8
 max_polyphony = 2

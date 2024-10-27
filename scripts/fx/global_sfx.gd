@@ -7,9 +7,13 @@ class_name GlobalSFX
 @onready var page_turn_sfx : AudioStreamPlayer = $PageTurnFx
 @onready var music_layer_1 : AudioStreamPlayer = $MusicLayer1
 @onready var music_layer_2 : AudioStreamPlayer = $MusicLayer2
+@onready var beep_sfx : AudioStreamPlayer = $Beep
 
 func _enter_tree() -> void:
 	Config.sfx = self
+
+func play_beep() -> void:
+	beep_sfx.play()
 
 func play_area_cleared() -> void:
 	var music_bus_id := AudioServer.get_bus_index("Music")

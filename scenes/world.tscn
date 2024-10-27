@@ -265,14 +265,6 @@ position = Vector2(2, 69)
 [node name="high2" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/D BlueBirdie high"]
 position = Vector2(-2, 118)
 
-[node name="A3 SquirrelArea" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
-position = Vector2(204, 187)
-area_id = 3
-
-[node name="A3 SquirrelArea2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
-position = Vector2(300, 306)
-area_id = 3
-
 [node name="A3 Crow High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
 position = Vector2(181, 223)
 cycle_grounded_duration = 8.0
@@ -397,13 +389,13 @@ position = Vector2(-107, 32)
 [node name="Bird4" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A3 RedBirdie2 High"]
 position = Vector2(-83, -34)
 
-[node name="A3 SquirrelArea3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
-position = Vector2(84, 164)
-area_id = 2
+[node name="A3 SquirrelArea" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(204, 187)
+area_id = 3
 
-[node name="A3 SquirrelArea4" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
-position = Vector2(60, 92)
-area_id = 2
+[node name="A3 SquirrelArea2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(300, 306)
+area_id = 3
 
 [node name="A2 GreenBirdie high" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("16_f25t0")]
 position = Vector2(13, 126)
@@ -456,6 +448,14 @@ position = Vector2(21, 10)
 
 [node name="Marker2D3" type="Marker2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/A2 GreenBirdie4"]
 position = Vector2(-13, 22)
+
+[node name="A2 SquirrelArea3" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(84, 164)
+area_id = 2
+
+[node name="A2 SquirrelArea4" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
+position = Vector2(60, 92)
+area_id = 2
 
 [node name="A2 RedBirdie" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("15_770yd")]
 position = Vector2(36, 233)
@@ -691,7 +691,7 @@ max_polyphony = 4
 bus = &"Ambience"
 
 [node name="Water (2)2" type="AudioStreamPlayer2D" parent="AreaManager/MapAudio/Water"]
-position = Vector2(361, 260)
+position = Vector2(361, 264)
 stream = ExtResource("12_kcgy7")
 volume_db = -12.0
 autoplay = true
@@ -705,17 +705,17 @@ position = Vector2(444, 167)
 stream = ExtResource("12_0dg57")
 volume_db = -12.0
 autoplay = true
-max_distance = 200.0
+max_distance = 150.0
 attenuation = 2.37841
 max_polyphony = 4
 bus = &"Ambience"
 
 [node name="Water (1)6" type="AudioStreamPlayer2D" parent="AreaManager/MapAudio/Water"]
-position = Vector2(381, 109)
+position = Vector2(384, 109)
 stream = ExtResource("12_0dg57")
 volume_db = -12.0
 autoplay = true
-max_distance = 200.0
+max_distance = 150.0
 attenuation = 2.37841
 max_polyphony = 4
 bus = &"Ambience"
@@ -800,7 +800,7 @@ position = Vector2(301, 20)
 gizmo_extents = 16.5
 
 [node name="Q3Area3" type="Marker2D" parent="AreaManager/CinematicMarkers"]
-position = Vector2(228, 200)
+position = Vector2(278, 317)
 gizmo_extents = 16.5
 
 [node name="Q3Area2" type="Marker2D" parent="AreaManager/CinematicMarkers"]
