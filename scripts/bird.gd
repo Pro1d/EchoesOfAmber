@@ -113,6 +113,7 @@ func be_idle() -> void:
 
 
 func fly_in() -> void:
+	print("fly inq")
 	sub_state = SubState.Transitioning
 	visible = true
 	anim.play('Fly')
