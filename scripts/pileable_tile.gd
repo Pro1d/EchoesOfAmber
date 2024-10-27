@@ -89,7 +89,7 @@ func set_highlight(enabled: bool) -> void:
 
 
 func get_building_type() -> BuildingType:
-	if is_structure_built != null:
+	if is_structure_built:
 		return built_structure
 
 	var red_piles := len(spawned_piles.filter(func (p: LeavePile) -> bool: return p.pile_type == Leave.LeaveType.RED))
@@ -137,11 +137,11 @@ func _get_leave_type(tree_type: BuildingType) -> Leave.LeaveType:
 		_: return Leave.LeaveType.RED	
 	
 
-func spread_leaves(leave_type: Leave.LeaveType) -> void:
+func spread_leaves(leave_type: Leave.LeaveType, allow_piles: bool) -> void:
 	if can_spawn_leave():
-		if is_colored:
+		if is_colored and allow_piles:
 			_spawn_pile(leave_type)
-		else:
+		elif not is_colored:
 			_colorize_tile(leave_type)
 	
 	sprite.visible = can_spawn_leave()
@@ -166,9 +166,9 @@ func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 	Config.sfx.play_grass_fx()
 	
 	if len(spawned_piles) == 3:
-		is_structure_built = true
-
 		var building_type := get_building_type()
+		is_structure_built = true
+		printt("buildin ", building_type)
 		
 		spawned_piles[0].animate_build()
 		await get_tree().create_timer(0.07).timeout
@@ -176,7 +176,6 @@ func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 		await get_tree().create_timer(0.07).timeout
 		spawned_piles[2].animate_build()
 		await get_tree().create_timer(0.15).timeout
-
 		_build(building_type)
 
 # Propagate leaves around this building.
@@ -198,11 +197,13 @@ func propagate_leaves() -> void:
 			if built_structure and built_structure in [BuildingType.RedTree, BuildingType.GreenTree, BuildingType.YellowTree]:
 				color = _get_leave_type(built_structure)
 
-			propagated_tile.spread_leaves(color)
+			propagated_tile.spread_leaves(color, false)
 			await get_tree().create_timer(0.1).timeout
 
 
 func _build(building_type: BuildingType) -> void:
+	built_structure = building_type
+
 	var coords : Vector2i = buildings_map[building_type]
 	var tilemap: TileMapLayer = Config.root_2d
 	tilemap.set_cell(tilemap_cell, 0, coords)

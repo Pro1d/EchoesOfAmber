@@ -14,7 +14,7 @@ var leaves_count := {
 	Leave.LeaveType.GREEN: 500
 }
 
-static var SKIP_INTRO := false
+static var SKIP_INTRO := true
 
 func _ready() -> void:
 	player.on_leave_in_backpack.connect(_on_leave_in_backpack)
@@ -44,7 +44,7 @@ func _on_player_try_spawn_leaves(leave_type: Leave.LeaveType, pileable_tile: Pil
 	
 	if has_enough_leaves and pileable_tile.can_spawn_leave():
 		leaves_count[leave_type] -= cost
-		pileable_tile.spread_leaves(leave_type)
+		pileable_tile.spread_leaves(leave_type, true)
 		_update_leaves_hud(true)
 
 	player.play_pile_desposit_animation(leave_type, has_enough_leaves)
