@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://lgcp167hngoh"]
+[gd_scene load_steps=20 format=3 uid="uid://lgcp167hngoh"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0guwy"]
 [ext_resource type="SpriteFrames" uid="uid://bvwnn4cjsqldm" path="res://resources/sprite/player_sprite.tres" id="2_n0gkl"]
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="3_rmtxy"]
 [ext_resource type="AudioStream" uid="uid://ba6nk11ak2c3l" path="res://assets/ambience/leaves.ogg" id="4_0s2g2"]
 [ext_resource type="AudioStream" uid="uid://o1lutb43b7kg" path="res://assets/ambience/strong_wind.ogg" id="5_x6iy1"]
+[ext_resource type="PackedScene" path="res://scenes/fx/up_wind_particles.tscn" id="6_eqbvn"]
 [ext_resource type="AudioStream" uid="uid://cl6er738dtv06" path="res://assets/sounds/step_leave.ogg" id="6_kdajv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gkaol"]
@@ -32,6 +33,21 @@ atlas = ExtResource("3_rmtxy")
 region = Rect2(0, 241, 6, 23)
 filter_clip = true
 
+[sub_resource type="Animation" id="Animation_gahx7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_ertig"]
 resource_name = "magic"
 loop_mode = 1
@@ -48,21 +64,6 @@ tracks/0/keys = {
 "values": [0.0, 0.122173]
 }
 
-[sub_resource type="Animation" id="Animation_gahx7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5emc4"]
 _data = {
 "RESET": SubResource("Animation_gahx7"),
@@ -73,7 +74,7 @@ _data = {
 radius = 70.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dm0b"]
-radius = 5.15349
+radius = 2.0
 
 [sub_resource type="Gradient" id="Gradient_oyrvk"]
 interpolation_mode = 2
@@ -89,6 +90,9 @@ fill_to = Vector2(0, 1)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_0guwy")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 visible = false
@@ -148,15 +152,37 @@ debug_color = Color(0.2542, 0.62, 0.449293, 0.113725)
 
 [node name="PileContactArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
+position = Vector2(18, 0)
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PileContactArea"]
-position = Vector2(-9, -4.76837e-07)
-scale = Vector2(1.965, 1.965)
 shape = SubResource("CircleShape2D_0dm0b")
 debug_color = Color(0.618173, 0.509802, 0.455737, 0.42)
+
+[node name="WindParticles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(1, -3)
+amount = 16
+lifetime = 1.2
+texture = SubResource("GradientTexture2D_ossfe")
+emission_shape = 3
+emission_rect_extents = Vector2(30, 10)
+particle_flag_align_y = true
+gravity = Vector2(0, -40)
+radial_accel_min = -84.61
+radial_accel_max = -84.61
+tangential_accel_min = -40.0
+tangential_accel_max = -40.0
+damping_min = 10.995
+damping_max = 10.995
+color = Color(1, 1, 1, 0.545098)
+
+[node name="WindParticles2" parent="." instance=ExtResource("6_eqbvn")]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(0, -12)
 
 [node name="Audio" type="Node2D" parent="."]
 
@@ -166,6 +192,7 @@ stream = ExtResource("4_0s2g2")
 volume_db = -64.0
 autoplay = true
 max_distance = 50.0
+max_polyphony = 4
 bus = &"Ambience"
 parameters/looping = true
 
@@ -175,24 +202,9 @@ stream = ExtResource("5_x6iy1")
 volume_db = -64.0
 autoplay = true
 max_distance = 50.0
+max_polyphony = 4
 bus = &"Ambience"
 parameters/looping = true
-
-[node name="WindParticles" type="CPUParticles2D" parent="Audio"]
-unique_name_in_owner = true
-position = Vector2(1, -4)
-amount = 32
-lifetime = 2.0
-texture = SubResource("GradientTexture2D_ossfe")
-emission_shape = 2
-emission_sphere_radius = 30.0
-particle_flag_align_y = true
-gravity = Vector2(0, 0)
-radial_accel_min = -84.61
-radial_accel_max = -84.61
-tangential_accel_min = -40.0
-tangential_accel_max = -40.0
-color = Color(1, 1, 1, 0.545098)
 
 [node name="FootstepR" type="AudioStreamPlayer2D" parent="Audio"]
 unique_name_in_owner = true

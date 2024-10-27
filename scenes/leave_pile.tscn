@@ -1,7 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwar32xtalh7b"]
+[gd_scene load_steps=7 format=3 uid="uid://bvfg8262c6eup"]
 
 [ext_resource type="Script" path="res://scripts/leave_pile.gd" id="1_ed7ub"]
 [ext_resource type="SpriteFrames" uid="uid://bxxsmml1seumo" path="res://resources/sprite/leave_pile.tres" id="1_hmvmw"]
+
+[sub_resource type="Gradient" id="Gradient_cssjg"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 1, 0.929715, 0.929715, 0.929715, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2ky13"]
+gradient = SubResource("Gradient_cssjg")
+width = 2
+height = 2
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_5gige"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.595808, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.0196078)
+
+[sub_resource type="Curve" id="Curve_5gos7"]
+min_value = -1.0
+_data = [Vector2(0, -0.00429189), 0.0, 0.0, 0, 0, Vector2(1, 0.00965667), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="LeavePile" type="Node2D"]
 script = ExtResource("1_ed7ub")
@@ -10,3 +30,48 @@ script = ExtResource("1_ed7ub")
 unique_name_in_owner = true
 sprite_frames = ExtResource("1_hmvmw")
 animation = &"0"
+offset = Vector2(0, -4)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -2)
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.7
+texture = SubResource("GradientTexture2D_2ky13")
+emission_shape = 3
+emission_rect_extents = Vector2(2, 0.5)
+direction = Vector2(0, -1)
+spread = 10.0
+gravity = Vector2(0, 150)
+initial_velocity_min = 50.0
+initial_velocity_max = 70.0
+angular_velocity_min = -70.0
+angular_velocity_max = 70.0
+color_ramp = SubResource("Gradient_5gige")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+hue_variation_curve = SubResource("Curve_5gos7")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -2)
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 0.9
+texture = SubResource("GradientTexture2D_2ky13")
+direction = Vector2(0, -1)
+spread = 80.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 15.0
+initial_velocity_max = 30.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+damping_min = 26.178
+damping_max = 26.178
+color_ramp = SubResource("Gradient_5gige")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+hue_variation_curve = SubResource("Curve_5gos7")

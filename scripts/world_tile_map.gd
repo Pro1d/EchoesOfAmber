@@ -16,7 +16,10 @@ func _ready() -> void:
 			continue
 		
 		if spawner_type in ['red', 'green', 'yellow']:
-			var spawner : Spawner = leaves_spawner.instantiate()
-			spawner.type = Leave.str_to_leave_type(spawner_type)
-			spawner.global_position = to_global(map_to_local(cell))
-			add_child(spawner)
+			add_spawner(cell, Leave.str_to_leave_type(spawner_type))
+
+func add_spawner(cell: Vector2i, leave_type: Leave.LeaveType) -> void: 
+	var spawner : Spawner = leaves_spawner.instantiate()
+	spawner.type = leave_type
+	spawner.global_position = to_global(map_to_local(cell))
+	add_child(spawner)

@@ -2,11 +2,11 @@
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_eeyjl"]
 resource_name = "Amplify"
-volume_db = 24.0
+volume_db = 12.0
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectAmplify_eeyjl")
-bus/0/effect/0/enabled = true
+bus/0/effect/0/enabled = false
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
