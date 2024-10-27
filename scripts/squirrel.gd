@@ -25,9 +25,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	if (state == State.IDLE):
-		state = State.LOOKING_FOR_FOOD_LEFT
-		animation.play(("walk_right"))
+	if (state == State.IDLE):		
+		if (visible):
+			state = State.LOOKING_FOR_FOOD_LEFT
+			animation.play(("walk_right"))
 	
 	# Animation loop
 	if (state == State.LOOKING_FOR_FOOD_LEFT):
