@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://jfsucfljdrhs"]
+[gd_scene load_steps=6 format=3 uid="uid://jfsucfljdrhs"]
 
 [ext_resource type="Script" path="res://scripts/area_ambience_visual.gd" id="1_gwjuh"]
+[ext_resource type="Script" path="res://scripts/shader_modifier_ambience_visual.gd" id="2_eghau"]
+[ext_resource type="Material" uid="uid://ugbtvwcmntpe" path="res://resources/materials/desolated.material" id="3_kwfy4"]
 
 [sub_resource type="Gradient" id="Gradient_pk6aw"]
 colors = PackedColorArray(0.98, 0.83986, 0.2156, 0.541176, 0.98, 0.83986, 0.2156, 0.0392157)
@@ -74,3 +76,8 @@ color = Color(0.98, 0.98, 0.98, 1)
 texture = SubResource("GradientTexture2D_k5aor")
 texture_scale = Vector2(0.79, 0.79)
 polygon = PackedVector2Array(23, -144, 225, 150, 461, 153, 116, -143)
+
+[node name="ShaderModifierAmbienceVisual" type="Node2D" parent="."]
+script = ExtResource("2_eghau")
+shader = ExtResource("3_kwfy4")
+fade_duration = 5.0
