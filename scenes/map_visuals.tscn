@@ -28,7 +28,7 @@ position = Vector2(369, -98)
 color = Color(0.98, 0.98, 0.98, 1)
 texture = SubResource("GradientTexture2D_fx0jb")
 texture_scale = Vector2(1.29, 1.29)
-polygon = PackedVector2Array(-23, 3, 88, 199, 171, 199, 0, 4)
+polygon = PackedVector2Array(-23, 8, 88, 199, 219, 200, 8, 7)
 
 [node name="Home Alive" type="Node2D" parent="."]
 script = ExtResource("1_gwjuh")
@@ -40,15 +40,15 @@ position = Vector2(289, -94)
 color = Color(0.98, 0.98, 0.98, 1)
 texture = SubResource("GradientTexture2D_fx0jb")
 texture_scale = Vector2(2, 2)
-polygon = PackedVector2Array(-19, 0, -5, 135, 91, 128, 28, -1)
+polygon = PackedVector2Array(-28, 3, -16, 133, 95, 127, 27, 3)
 
 [node name="Light5" type="Polygon2D" parent="Home Alive"]
 z_index = 5
-position = Vector2(214, -95)
+position = Vector2(190, -95)
 color = Color(0.98, 0.98, 0.98, 1)
 texture = SubResource("GradientTexture2D_fx0jb")
 texture_scale = Vector2(1.635, 1.635)
-polygon = PackedVector2Array(-16, 1, -36, 160, 11, 158, 5, 1)
+polygon = PackedVector2Array(-23, 1, -42, 154, -6, 153, -3, 1)
 
 [node name="Area 2" type="Node2D" parent="."]
 script = ExtResource("1_gwjuh")
@@ -61,7 +61,7 @@ position = Vector2(108, -94)
 color = Color(0.98, 0.98, 0.98, 1)
 texture = SubResource("GradientTexture2D_fx0jb")
 texture_scale = Vector2(1.84, 1.84)
-polygon = PackedVector2Array(-11, -1, -111, 145, -75, 145, -1, 0)
+polygon = PackedVector2Array(-11, -1, -128, 144, -83, 144, -1, 0)
 
 [node name="Light5" type="Polygon2D" parent="Area 2"]
 z_index = 5
@@ -69,7 +69,7 @@ position = Vector2(140, -94)
 color = Color(0.98, 0.98, 0.98, 1)
 texture = SubResource("GradientTexture2D_fx0jb")
 texture_scale = Vector2(0.77, 0.77)
-polygon = PackedVector2Array(-25, 0, -156, 327, -89, 326, -12, 0)
+polygon = PackedVector2Array(-25, 0, -170, 328, -83, 328, -12, 0)
 
 [node name="Area 3" type="Node2D" parent="."]
 position = Vector2(98, 528)
