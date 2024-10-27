@@ -142,9 +142,9 @@ size_flags_vertical = 3
 bbcode_enabled = true
 text = "[img=26x26,center,center]res://resources/sprite/keys/W.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/A.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/S.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/D.atlastex[/img] Move
 [img=26x26,center,center]res://resources/sprite/keys/E.atlastex[/img] Harvest leaves (Hold)
-[img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img] Put [img=36x30,center,center]res://resources/sprite/red.atlastex[/img] RED leaves
-[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img] Put [img=36x30,center,center]res://resources/sprite/yellow.atlastex[/img] ORANGE leaves
-[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img] Put [img=36x30,center,center]res://resources/sprite/green.atlastex[/img] GREEN leaves"
+[img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img] Put [img=36x30,center,center]res://resources/sprite/red.atlastex[/img] red leaves
+[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img] Put [img=36x30,center,center]res://resources/sprite/yellow.atlastex[/img] orange leaves
+[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img] Put [img=36x30,center,center]res://resources/sprite/green.atlastex[/img] green leaves"
 
 [node name="RecipeLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
