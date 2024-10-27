@@ -12,14 +12,14 @@ const EAT_TIME_MS := 5000
 
 
 var state := State.LOOKING_FOR_FOOD_LEFT
-var spawn_position := position
-var food_left_position := position - Vector2(24, 0)
-var food_right_position := position + Vector2(24, 0)
+@onready var spawn_position := position
+@onready var food_left_position := position - Vector2(24, 0)
+@onready var food_right_position := position + Vector2(24, 0)
 var eating_start_time := Time.get_ticks_msec()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

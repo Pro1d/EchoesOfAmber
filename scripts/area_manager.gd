@@ -2,6 +2,7 @@ extends Node2D
 class_name AreaManager
 
 static var AREA_ID_BASE := 0
+static var AREA_ID_LEAVES := 100
 
 class AreaData:
 	var area_id : int = -1
@@ -13,13 +14,19 @@ class AreaData:
 	
 	# True when the transition from dead to alive has been done on the area
 	var is_in_cleared_state : bool = false
+	var force_mark_cleared : bool = false
 	
 	func is_cleared() -> bool:
-		if area_id != AreaManager.AREA_ID_BASE:
-			return trees_to_clear.is_empty()
+		if force_mark_cleared:
+			return true
+		
+		if area_id >= AreaManager.AREA_ID_LEAVES:
+			return false
+		elif area_id == AreaManager.AREA_ID_BASE:
+			return tiles_to_clear.is_empty()
 		else:
 			# print("tiles to clear " + str(tiles_to_clear))
-			return tiles_to_clear.is_empty()
+			return trees_to_clear.is_empty()
 
 # Signal launched when an area is completely cleared.
 signal on_area_cleared(data: AreaData)
@@ -86,8 +93,13 @@ func _register_audio_ambience_nodes() -> void:
 		else:
 			data.alive_area_ambiance.append(amb)
 
+
 func _register_visual_ambience_nodes() -> void:
-	for node in map_visuals.get_children():
+	var children_to_look: Array[Node2D] = []
+	children_to_look.append_array(map_visuals.get_children())
+	children_to_look.append_array(Config.root_2d.get_children())
+
+	for node in children_to_look:
 		if not node is AreaAmbienceVisual:
 			continue
 
@@ -96,14 +108,17 @@ func _register_visual_ambience_nodes() -> void:
 		
 		data.area_visuals.append(amb)
 
+
 func _ready() -> void:
+	# Make sure area data for the first area is created.
+	_get_area_data(AREA_ID_LEAVES)
+	
 	_register_tiles_to_clear()
 	_register_audio_ambience_nodes()
 	_register_visual_ambience_nodes()
 	
 	for area_id: int in area_data:
-		var data : AreaData = area_data[area_id]
-		refresh_area_state(data, false)
+		refresh_area_state(area_id, false)
 
 	for tile_id: Vector2i in Config.ground_2d.pileable_tiles:
 		var tile : PileableTile = Config.ground_2d.pileable_tiles[tile_id]
@@ -116,14 +131,12 @@ func _on_tile_state_changed(tile: PileableTile) -> void:
 	
 # Called when a tile has been cleared in an area
 func _on_area_tile_cleared(area_id: int, _tile: Vector2i) -> void:
-	var data : AreaData = area_data[area_id]
-	refresh_area_state(data, true)
+	refresh_area_state(area_id, true)
 
 # Called when a tree has been cleared in an area
 func _on_area_tree_cleared(area_id: int, tile: Vector2i) -> void:
-	var data : AreaData = area_data[area_id]
 	_propagate_leaves(tile)
-	refresh_area_state(data, true)
+	refresh_area_state(area_id, true)
 
 func _propagate_leaves(tile: Vector2i) -> void:
 	var center_tile := Config.ground_2d.get_pileable_tile_at(tile)
@@ -137,13 +150,15 @@ func _propagate_leaves(tile: Vector2i) -> void:
 
 
 # Refreshes the whole area state
-func refresh_area_state(data: AreaData, animate: bool) -> void:
+func refresh_area_state(area_id: int, animate: bool) -> void:
+	var data : AreaData = area_data[area_id]
 	var is_cleared := data.is_cleared()
 	
 	# Avoid multiple refreshes when animating
 	if animate and data.is_in_cleared_state == is_cleared:
 		return
 	
+	print("area id: ", area_id, " refreshing, is_cleared = ", is_cleared, " is_cleared_state ", data.is_in_cleared_state)
 	data.is_in_cleared_state = is_cleared
 
 	if is_cleared:
