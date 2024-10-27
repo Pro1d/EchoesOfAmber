@@ -6,12 +6,15 @@ class_name World
 @onready var menu : Menu = %Menu
 @onready var area_manager : AreaManager = %AreaManager
 @onready var blackbars : BlackBars = %BlackBars
+@onready var camera : Camera2D = %Camera2D
 
 var leaves_count := {
 	Leave.LeaveType.RED: 500,
 	Leave.LeaveType.YELLOW: 500,
 	Leave.LeaveType.GREEN: 500
 }
+
+static var SKIP_INTRO := false
 
 func _ready() -> void:
 	player.on_leave_in_backpack.connect(_on_leave_in_backpack)
@@ -69,14 +72,43 @@ func _on_area_cleared(area: AreaManager.AreaData) -> void:
 	await blackbars.set_enabled(false)
 	player.lock_player = false
 	
+var _first_quest_text : String = """[color=black]
+Hum it seems my beautiful automnal forest is dying. 
+
+I should get some leaves to bring back its colors.
+
+I should head to the east (=>).
+
+[color="red"]E: Harvest Leaves[/color]
+[/color]"""
+
 # Starts the game introduction
 func _start_introduction() -> void:
+	if SKIP_INTRO:
+		return
+
 	player.lock_player = true
 	await blackbars.set_enabled(true)
-	# TODO: camera movement
+
+	# Camera movement to the side
+	var offset := -192
+	player.set_listening(false) # move listen to camera
+	var tween := get_tree().create_tween()
+	tween.tween_property(camera, "offset",  camera.offset + Vector2(offset, 0), 3)
+	await tween.finished
+	
+	await get_tree().create_timer(2).timeout
+
+	# Make the camera go back.
+	tween = get_tree().create_tween()
+	tween.tween_property(camera, "offset",  camera.offset + Vector2(-offset, 0), 3)
+	await tween.finished
 	await get_tree().create_timer(1).timeout
-	# TODO: dialog
+	player.set_listening(true)
+	
+	# Remove blackbars
 	await blackbars.set_enabled(false)
-	player.lock_player = false
 
 	_pause_game()
+	await menu.display_current_quest_text(_first_quest_text)
+	

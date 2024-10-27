@@ -103,19 +103,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Tutoral Text" type="RichTextLabel" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="QuestLabel" type="RichTextLabel" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[color=black]
-Hum it seems my beautiful automnal forest is dying. 
-
-I should get some leaves to bring back its colors.
-
-I should head to the east (=>).
-
-[color=\"red\"]E: Harvest Leaves[/color]
-[/color]"
 
 [node name="Label3" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

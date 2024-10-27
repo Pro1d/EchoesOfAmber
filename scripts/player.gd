@@ -22,6 +22,7 @@ const ACCEL := SPEED / 0.15
 @onready var _body_sprite := %BodyAnimatedSprite2D as AnimatedSprite2D
 @onready var _staff_sprite := %StaffSprite2D as Sprite2D
 @onready var _staff_animation := %StaffAnimationPlayer as AnimationPlayer
+@onready var _listener : AudioListener2D = $AudioListener2D
 
 # list of PileableTile to which the player currently has contact
 var contacted_pile_tiles : Array[PileableTile] = []
@@ -72,6 +73,14 @@ func _physics_process(delta: float) -> void:
 	_handle_leave_sound(_attracting_leaves, delta)
 	
 	move_and_slide()
+
+# If set to true, the player will be listening himself to sounds.
+# Otherwise, the camera will be the receiver for the sounds.
+func set_listening(enabled: bool) -> void:
+	if enabled:
+		_listener.make_current()
+	else:
+		_listener.clear_current()
 
 func _handle_footstep_sound(delta: float) -> void:
 	if velocity.length_squared() == 0:

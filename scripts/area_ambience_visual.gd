@@ -26,8 +26,6 @@ func transition(animate: bool, shown: bool) -> void:
 		await tween.finished
 		
 		tween.kill()
-	print("animate: ", animate, " shown ", shown)
 	
 	for item in items:
-		print("animate: ", animate, " shown ", shown)
 		item.visible = shown

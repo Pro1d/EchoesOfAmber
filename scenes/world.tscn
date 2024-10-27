@@ -71,6 +71,7 @@ unique_name_in_owner = true
 position = Vector2(401, 304)
 
 [node name="Camera2D" type="Camera2D" parent="AreaManager/CanvasGroup/WorldTileMapLayer/Player"]
+unique_name_in_owner = true
 zoom = Vector2(4, 4)
 limit_left = -24
 limit_top = -24
