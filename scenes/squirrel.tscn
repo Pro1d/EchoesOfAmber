@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://exa7uhmc2q6d"]
+
+[ext_resource type="Texture2D" uid="uid://bprei3a6d8bou" path="res://assets/textures/squirrel.png" id="1_x5sey"]
+[ext_resource type="Script" path="res://scripts/squirrel.gd" id="2_0m85k"]
+
+[sub_resource type="Animation" id="Animation_an45n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_hesma"]
+resource_name = "idle_eat"
+length = 1.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 5, 6, 7, 8, 5, 6, 7, 8, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_nsuhc"]
+resource_name = "walk_right"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_warod"]
+_data = {
+"RESET": SubResource("Animation_an45n"),
+"idle_eat": SubResource("Animation_hesma"),
+"walk_right": SubResource("Animation_nsuhc")
+}
+
+[node name="Squirrel" type="Sprite2D"]
+texture = ExtResource("1_x5sey")
+hframes = 5
+vframes = 3
+frame = 1
+script = ExtResource("2_0m85k")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_warod")
+}
