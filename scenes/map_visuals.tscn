@@ -4,78 +4,78 @@
 [ext_resource type="Script" path="res://scripts/shader_modifier_ambience_visual.gd" id="2_eghau"]
 [ext_resource type="Material" uid="uid://ugbtvwcmntpe" path="res://resources/materials/desolated.material" id="3_kwfy4"]
 
-[sub_resource type="Gradient" id="Gradient_pk6aw"]
-colors = PackedColorArray(0.98, 0.83986, 0.2156, 0.541176, 0.98, 0.83986, 0.2156, 0.0392157)
+[sub_resource type="Gradient" id="Gradient_epqjj"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.340491, 1)
+colors = PackedColorArray(0.98, 0.83986, 0.2156, 0.278431, 0.98, 0.83986, 0.2156, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_k5aor"]
-gradient = SubResource("Gradient_pk6aw")
-fill_to = Vector2(1, 1)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fx0jb"]
+gradient = SubResource("Gradient_epqjj")
+width = 16
+height = 256
+fill_to = Vector2(0, 1)
 
 [node name="MapVisuals" type="Node2D"]
 
-[node name="Area1 Alive" type="Node2D" parent="." node_paths=PackedStringArray("items")]
+[node name="Area1 Alive" type="Node2D" parent="."]
 script = ExtResource("1_gwjuh")
 area_id = 1
-items = [NodePath("Light1")]
 fade_duration = 5.0
 
-[node name="Light1" type="Polygon2D" parent="Area1 Alive"]
+[node name="Light2" type="Polygon2D" parent="Area1 Alive"]
 z_index = 5
-position = Vector2(208, -24)
+position = Vector2(369, -98)
 color = Color(0.98, 0.98, 0.98, 1)
-texture = SubResource("GradientTexture2D_k5aor")
-texture_scale = Vector2(0.24, 0.24)
-polygon = PackedVector2Array(300, -41, 243, 213, 315, 217, 364, -34)
+texture = SubResource("GradientTexture2D_fx0jb")
+texture_scale = Vector2(1.29, 1.29)
+polygon = PackedVector2Array(-23, 3, 88, 199, 171, 199, 0, 4)
 
-[node name="Home Alive" type="Node2D" parent="." node_paths=PackedStringArray("items")]
+[node name="Home Alive" type="Node2D" parent="."]
 script = ExtResource("1_gwjuh")
-items = [NodePath("Light2")]
 fade_duration = 5.0
 
-[node name="Light2" type="Polygon2D" parent="Home Alive"]
+[node name="Light4" type="Polygon2D" parent="Home Alive"]
 z_index = 5
-position = Vector2(-71, 14)
+position = Vector2(289, -94)
 color = Color(0.98, 0.98, 0.98, 1)
-texture = SubResource("GradientTexture2D_k5aor")
-texture_scale = Vector2(0.79, 0.79)
-polygon = PackedVector2Array(317, -54, 227, 99, 270, 100, 362, -45)
+texture = SubResource("GradientTexture2D_fx0jb")
+texture_scale = Vector2(2, 2)
+polygon = PackedVector2Array(-19, 0, -5, 135, 91, 128, 28, -1)
 
-[node name="Area 2" type="Node2D" parent="." node_paths=PackedStringArray("items")]
+[node name="Light5" type="Polygon2D" parent="Home Alive"]
+z_index = 5
+position = Vector2(214, -95)
+color = Color(0.98, 0.98, 0.98, 1)
+texture = SubResource("GradientTexture2D_fx0jb")
+texture_scale = Vector2(1.635, 1.635)
+polygon = PackedVector2Array(-16, 1, -36, 160, 11, 158, 5, 1)
+
+[node name="Area 2" type="Node2D" parent="."]
 script = ExtResource("1_gwjuh")
 area_id = 2
-items = [NodePath("Light2"), NodePath("Light3")]
 fade_duration = 5.0
 
-[node name="Light2" type="Polygon2D" parent="Area 2"]
+[node name="Light4" type="Polygon2D" parent="Area 2"]
 z_index = 5
-position = Vector2(-228, -8)
+position = Vector2(108, -94)
 color = Color(0.98, 0.98, 0.98, 1)
-texture = SubResource("GradientTexture2D_k5aor")
-texture_scale = Vector2(0.79, 0.79)
-polygon = PackedVector2Array(317, -54, 227, 99, 270, 100, 362, -45)
+texture = SubResource("GradientTexture2D_fx0jb")
+texture_scale = Vector2(1.84, 1.84)
+polygon = PackedVector2Array(-11, -1, -111, 145, -75, 145, -1, 0)
 
-[node name="Light3" type="Polygon2D" parent="Area 2"]
+[node name="Light5" type="Polygon2D" parent="Area 2"]
 z_index = 5
-position = Vector2(-223, 55)
+position = Vector2(140, -94)
 color = Color(0.98, 0.98, 0.98, 1)
-texture = SubResource("GradientTexture2D_k5aor")
-texture_scale = Vector2(0.79, 0.79)
-polygon = PackedVector2Array(350, -97, 227, 99, 270, 100, 388, -97)
+texture = SubResource("GradientTexture2D_fx0jb")
+texture_scale = Vector2(0.77, 0.77)
+polygon = PackedVector2Array(-25, 0, -156, 327, -89, 326, -12, 0)
 
-[node name="Area 3" type="Node2D" parent="." node_paths=PackedStringArray("items")]
+[node name="Area 3" type="Node2D" parent="."]
 position = Vector2(98, 528)
 script = ExtResource("1_gwjuh")
 area_id = 3
-items = [NodePath("Light2")]
 fade_duration = 5.0
-
-[node name="Light2" type="Polygon2D" parent="Area 3"]
-z_index = 5
-position = Vector2(-265, -2)
-color = Color(0.98, 0.98, 0.98, 1)
-texture = SubResource("GradientTexture2D_k5aor")
-texture_scale = Vector2(0.79, 0.79)
-polygon = PackedVector2Array(23, -144, 225, 150, 461, 153, 116, -143)
 
 [node name="ShaderModifierAmbienceVisual" type="Node2D" parent="."]
 script = ExtResource("2_eghau")
