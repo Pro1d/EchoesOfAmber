@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
-[ext_resource type="Material" path="res://resources/shaders/palette.material" id="1_j486f"]
+[ext_resource type="Material" uid="uid://bgh3hchthpa67" path="res://resources/shaders/palette.material" id="1_j486f"]
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
 [ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 [ext_resource type="PackedScene" uid="uid://cu7ile13mqjn2" path="res://scenes/ui/hud.tscn" id="2_mlla5"]
@@ -43,7 +43,6 @@ visible = false
 
 [node name="BlackBars" parent="AreaManager/CanvasGroup/CanvasLayer" instance=ExtResource("6_g3rxi")]
 unique_name_in_owner = true
-visible = false
 
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="AreaManager/CanvasGroup"]
 z_index = -100

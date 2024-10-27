@@ -142,6 +142,7 @@ func _on_q1_leaves_quest_finished() -> void:
 	current_quests.append(Quests.Q2_CLEAR_AREA_1)
 	_set_menu_visible(true)
 	await menu.display_current_quest_text(_q2_text)
+	Config.sfx.play_music_layer_1()
 
 
 func _update_leaves_quest() -> void:
@@ -163,3 +164,5 @@ func _on_area_cleared(area: AreaManager.AreaData) -> void:
 	await get_tree().create_timer(5).timeout
 	await blackbars.set_enabled(false)
 	player.lock_player = false
+	
+	Config.sfx.play_music_layer_2()
