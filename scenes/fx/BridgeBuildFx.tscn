@@ -1,0 +1,186 @@
+[gd_scene load_steps=8 format=3 uid="uid://3gcidr1ghcxj"]
+
+[ext_resource type="Script" path="res://scripts/fx/bridge_build_fx.gd" id="1_1i1pr"]
+[ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_6odrq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nh1fh"]
+atlas = ExtResource("1_6odrq")
+region = Rect2(78, 270, 2, 2)
+
+[sub_resource type="Gradient" id="Gradient_xvpf3"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.658683, 1)
+colors = PackedColorArray(0.462623, 0.733257, 0.843183, 1, 0.7912, 0.87492, 0.92, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_2rt4a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:lifetime")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BurstAudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_f8g7g"]
+resource_name = "geiser"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.86667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:lifetime")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.43333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.3, 0.5]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.43333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_emit_burst"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CPUParticles2D2:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.43333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BurstAudioStreamPlayer2D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.43333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gphi7"]
+_data = {
+"RESET": SubResource("Animation_2rt4a"),
+"geiser": SubResource("Animation_f8g7g")
+}
+
+[node name="BridgeBuildFx" type="Node2D"]
+script = ExtResource("1_1i1pr")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 24
+lifetime = 0.4
+texture = SubResource("AtlasTexture_nh1fh")
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+direction = Vector2(0, -1)
+spread = 10.0
+gravity = Vector2(0, 60)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = 30.15
+angular_velocity_max = 192.47
+angle_max = 720.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_xvpf3")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.67
+texture = SubResource("AtlasTexture_nh1fh")
+emission_shape = 3
+emission_rect_extents = Vector2(12, 12)
+direction = Vector2(0, -1)
+spread = 75.0
+gravity = Vector2(0, 60)
+initial_velocity_min = 35.0
+initial_velocity_max = 55.0
+angular_velocity_min = 30.15
+angular_velocity_max = 192.47
+angle_max = 720.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_xvpf3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gphi7")
+}
+
+[node name="BurstAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
