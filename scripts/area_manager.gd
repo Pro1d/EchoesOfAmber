@@ -25,7 +25,6 @@ class AreaData:
 		elif area_id == AreaManager.AREA_ID_BASE:
 			return tiles_to_clear.is_empty()
 		else:
-			# print("tiles to clear " + str(tiles_to_clear))
 			return trees_to_clear.is_empty()
 
 # Signal launched when an area is completely cleared.
@@ -231,6 +230,3 @@ func on_tile_cleared(tile: Vector2i) -> void:
 		if index >= 0:
 			data.trees_to_clear.remove_at(index)
 			_on_area_tree_cleared(area_id, tile)
-	
-#		if area_id != 0:
-#			print("area " + str(area_id) + " trees left to clear: " + str(len(data.trees_to_clear)))

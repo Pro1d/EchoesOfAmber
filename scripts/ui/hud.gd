@@ -3,7 +3,7 @@ class_name HUD
 
 signal open_menu_clicked
 
-@onready var _open_menu_button := %OpenMenuButton as Button
+@onready var _open_menu_button := %OpenMenuButton as TextureButton
 @onready var _leave_textures : Array[Control] = [
 	%TextureRect1, %TextureRect2, %TextureRect3
 ]

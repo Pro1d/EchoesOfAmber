@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7mn6k"]
 [ext_resource type="Script" path="res://scripts/world_tile_map.gd" id="1_e02pw"]
-[ext_resource type="Material" uid="uid://bgh3hchthpa67" path="res://resources/shaders/palette.material" id="1_j486f"]
+[ext_resource type="Material" path="res://resources/shaders/palette.material" id="1_j486f"]
 [ext_resource type="PackedScene" uid="uid://lgcp167hngoh" path="res://scenes/player.tscn" id="1_ldq18"]
 [ext_resource type="TileSet" uid="uid://casje4m86vrqj" path="res://resources/sprite/tileset.tres" id="1_wbhuw"]
 [ext_resource type="PackedScene" uid="uid://cu7ile13mqjn2" path="res://scenes/ui/hud.tscn" id="2_mlla5"]
@@ -325,6 +325,18 @@ gizmo_extents = 16.5
 
 [node name="Q2Bridge" type="Marker2D" parent="AreaManager/CinematicMarkers"]
 position = Vector2(359, 106)
+gizmo_extents = 16.5
+
+[node name="Q3House" type="Marker2D" parent="AreaManager/CinematicMarkers"]
+position = Vector2(301, 20)
+gizmo_extents = 16.5
+
+[node name="Q3Area3" type="Marker2D" parent="AreaManager/CinematicMarkers"]
+position = Vector2(228, 200)
+gizmo_extents = 16.5
+
+[node name="Q3Area2" type="Marker2D" parent="AreaManager/CinematicMarkers"]
+position = Vector2(40, 71)
 gizmo_extents = 16.5
 
 [node name="Intro" type="Marker2D" parent="AreaManager/CinematicMarkers"]
