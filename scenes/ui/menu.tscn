@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://oro7jitvtaoa"]
+[gd_scene load_steps=19 format=3 uid="uid://oro7jitvtaoa"]
 
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_g7n2o"]
 [ext_resource type="Script" path="res://scripts/ui/menu.gd" id="1_ncqvn"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" path="res://resources/sprite/yellow.atlastex" id="3_1pnf5"]
 [ext_resource type="Texture2D" path="res://resources/sprite/green.atlastex" id="4_kp7ho"]
 [ext_resource type="Texture2D" path="res://resources/sprite/white.atlastex" id="5_ufa5r"]
+[ext_resource type="AudioStream" uid="uid://gqwi5b2hp2rx" path="res://assets/sounds/writing.ogg" id="7_cs3gx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48rtn"]
 atlas = ExtResource("1_g7n2o")
@@ -644,3 +645,8 @@ stretch_mode = 5
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 texture = SubResource("AtlasTexture_jf8na")
+
+[node name="WritingFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_cs3gx")
+bus = &"SoundFx"
