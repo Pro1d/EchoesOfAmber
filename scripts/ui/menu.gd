@@ -12,7 +12,7 @@ func _ready() -> void:
 	_play_button.pressed.connect(play_clicked.emit)
 
 func display_current_quest_text(txt: String) -> void:
-	_quest_label.append_text(txt)
+	_quest_label.text = txt
 	_quest_label.visible_characters = 0
 	_writing_sfx.play()
 	

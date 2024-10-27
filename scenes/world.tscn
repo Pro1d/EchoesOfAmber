@@ -308,4 +308,16 @@ bus = &"Ambience"
 [node name="GlobalSFX" parent="AreaManager" instance=ExtResource("16_58ayc")]
 unique_name_in_owner = true
 
+[node name="CinematicMarkers" type="Node2D" parent="AreaManager"]
+unique_name_in_owner = true
+position = Vector2(25, 3)
+
+[node name="OpenBridge" type="Marker2D" parent="AreaManager/CinematicMarkers"]
+position = Vector2(443, 168)
+gizmo_extents = 16.5
+
+[node name="Intro" type="Marker2D" parent="AreaManager/CinematicMarkers"]
+position = Vector2(226, 289)
+gizmo_extents = 16.5
+
 [node name="CinematicAnim" type="AnimationPlayer" parent="."]
