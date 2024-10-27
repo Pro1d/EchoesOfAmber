@@ -1,6 +1,6 @@
 extends AreaAmbienceVisual
 
-@onready var sprite : Sprite2D = $Squirrel
+@onready var sprite : Squirrel = $Squirrel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +11,9 @@ func _process(_delta: float) -> void:
 	pass
 
 func transition(_animate: bool, shown: bool) -> void:
+	sprite.visible = shown
+	
 	if shown:
-		sprite.visible = true
-		
+		# Make the squirrel eat faster =p
+		sprite.eating_start_time = Time.get_ticks_msec() - 4500
+		sprite.reset_anim_to_right()

@@ -158,7 +158,6 @@ func refresh_area_state(area_id: int, animate: bool) -> void:
 	if animate and data.is_in_cleared_state == is_cleared:
 		return
 	
-	print("area id: ", area_id, " refreshing, is_cleared = ", is_cleared, " is_cleared_state ", data.is_in_cleared_state)
 	data.is_in_cleared_state = is_cleared
 
 	if is_cleared:
