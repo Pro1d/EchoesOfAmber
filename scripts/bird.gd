@@ -61,6 +61,9 @@ func _process(delta: float) -> void:
 
 		return
 	
+	if name == "D BlueBirdie":
+		print("state changed ", prev_state, " => ", state)
+
 	# State change!
 	if state == State.FlyingIn:
 		fly_in()
@@ -74,6 +77,9 @@ func _process(delta: float) -> void:
 	prev_state = state
 
 func transition(animate: bool, shown: bool) -> void:
+	if name == "D BlueBirdie":
+		print(name, " transition : animate = ", animate, " shown = ", shown)
+
 	if animate:
 		if shown:
 			state = State.FlyinOutCyle
@@ -95,14 +101,18 @@ func start_cycle() -> void:
 
 func update_cycle(delta: float) -> void:
 	time_since_last_change += delta
-	
+
 	if sub_state == SubState.Transitioning:
 		return
 	
 	if sub_state == SubState.Grounded and time_since_last_change >= cycle_grounded_duration:
+		if name == "D BlueBirdie":
+			print("fly away ", time_since_last_change)
 		await fly_away()
 		time_since_last_change = randf_range(-cycle_away_duration * cycle_random_percentage, cycle_away_duration * cycle_random_percentage)
 	elif sub_state == SubState.Away and time_since_last_change >= cycle_away_duration:
+		if name == "D BlueBirdie":
+			print("fly in ", time_since_last_change)
 		await fly_in()
 		time_since_last_change = randf_range(-cycle_grounded_duration * cycle_random_percentage, cycle_grounded_duration * cycle_random_percentage)
 		
@@ -113,7 +123,6 @@ func be_idle() -> void:
 
 
 func fly_in() -> void:
-	print("fly inq")
 	sub_state = SubState.Transitioning
 	visible = true
 	anim.play('Fly')
