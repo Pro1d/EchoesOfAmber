@@ -257,7 +257,7 @@ func _check_q3_complete() -> void:
 		_on_game_finished()
 
 func _on_game_finished() -> void:
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(15.0).timeout
 
 	player.lock_player = true
 	await blackbars.set_enabled(true)
