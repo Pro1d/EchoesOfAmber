@@ -270,7 +270,7 @@ position = Vector2(204, 187)
 area_id = 3
 
 [node name="A3 SquirrelArea2" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("11_pld7y")]
-position = Vector2(325, 304)
+position = Vector2(300, 306)
 area_id = 3
 
 [node name="A3 Crow High" parent="AreaManager/CanvasGroup/WorldTileMapLayer" instance=ExtResource("13_jv8t0")]
