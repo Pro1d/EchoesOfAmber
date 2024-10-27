@@ -44,10 +44,11 @@ func _pause_game() -> void:
 	_set_menu_visible(true)
 
 func _set_menu_visible(v: bool) -> void:
-	menu.visible = v
 	hud.visible = not v
 	if v:
-		Config.sfx.play_page_turn_fx()
+		menu.animate_show()
+	else:
+		menu.animate_hide()
 
 func _on_player_try_spawn_leaves(leave_type: Leave.LeaveType, pileable_tile: PileableTile) -> void:
 	var cost := 10
