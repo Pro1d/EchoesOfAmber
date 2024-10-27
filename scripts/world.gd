@@ -85,8 +85,7 @@ func _update_leaves_hud(animate: bool) -> void:
 @onready var q3_area3_marker : Marker2D = %CinematicMarkers/Q3Area3
 
 var current_quests : Array[Quests] = [Quests.Q1_GET_LEAVES]
-var q1_leaves_count := 0
-var q1_target_leaves := 100
+var q1_piles_count := 10
 
 var _q1_text : String = """
 It seems this summer hit hard on my beautiful forest.
@@ -215,11 +214,11 @@ func _update_leaves_quest() -> void:
 	if Quests.Q1_GET_LEAVES not in current_quests:
 		return
 
-	var all_leaves := 0
+	var all_piles := 0
 	for c: int in leaves_count.values():
-		all_leaves += c
+		all_piles += c / Config.LEAVES_PER_PILE
 	
-	if all_leaves >= q1_leaves_count:
+	if all_piles >= q1_piles_count:
 		_on_q1_leaves_quest_finished()
 
 func _on_q3_area_2_finished() -> void:
