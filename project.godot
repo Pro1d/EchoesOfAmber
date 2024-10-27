@@ -70,6 +70,7 @@ shader_language/warnings/treat_warnings_as_errors=true
 window/size/viewport_width=1024
 window/size/viewport_height=768
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [gui]
 

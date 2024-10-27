@@ -171,9 +171,9 @@ func _spawn_pile(leave_type: Leave.LeaveType) -> void:
 		printt("buildin ", building_type)
 		
 		spawned_piles[0].animate_build()
-		await get_tree().create_timer(0.07).timeout
+		await get_tree().create_timer(0.1).timeout
 		spawned_piles[1].animate_build()
-		await get_tree().create_timer(0.07).timeout
+		await get_tree().create_timer(0.1).timeout
 		spawned_piles[2].animate_build()
 		await get_tree().create_timer(0.15).timeout
 		_build(building_type)
