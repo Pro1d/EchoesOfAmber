@@ -327,6 +327,18 @@ gizmo_extents = 16.5
 position = Vector2(359, 106)
 gizmo_extents = 16.5
 
+[node name="Q3House" type="Marker2D" parent="AreaManager/CinematicMarkers"]
+position = Vector2(301, 20)
+gizmo_extents = 16.5
+
+[node name="Q3Area3" type="Marker2D" parent="AreaManager/CinematicMarkers"]
+position = Vector2(228, 200)
+gizmo_extents = 16.5
+
+[node name="Q3Area2" type="Marker2D" parent="AreaManager/CinematicMarkers"]
+position = Vector2(40, 71)
+gizmo_extents = 16.5
+
 [node name="Intro" type="Marker2D" parent="AreaManager/CinematicMarkers"]
 position = Vector2(226, 289)
 gizmo_extents = 16.5

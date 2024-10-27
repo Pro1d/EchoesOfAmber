@@ -79,13 +79,16 @@ func _update_leaves_hud(animate: bool) -> void:
 @onready var intro_area_marker : Marker2D = %CinematicMarkers/Intro
 @onready var open_bridge_marker : Marker2D = %CinematicMarkers/OpenBridge
 @onready var q2_bridge_marker : Marker2D = %CinematicMarkers/Q2Bridge
+@onready var q3_house_marker : Marker2D = %CinematicMarkers/Q3House
+@onready var q3_area2_marker : Marker2D = %CinematicMarkers/Q3Area2
+@onready var q3_area3_marker : Marker2D = %CinematicMarkers/Q3Area3
 
 var current_quests : Array[Quests] = [Quests.Q1_GET_LEAVES]
 var q1_leaves_count := 0
 var q1_target_leaves := 100
 
 var _q1_text : String = """
-Hum it seems my beautiful automnal forest is dying. 
+It seems this summer hit hard on my beautiful forest.
 
 I should get some leaves to bring back its colors.
 
@@ -109,8 +112,15 @@ And then I could liven up the forest around the house too...
 
 [color="#D19827"]
 Use [img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img] to spread leaves around the house.
-After coloring the ground, create leave piles. Combining 3 leaf piles builds vegetation. 
+After coloring the ground, place leaf piles. Combine 3 leaf piles to grow vegetation.
 [/color]
+"""
+
+var _q4_text : String = """
+At last my forest has been restored.
+
+I think I am going to stay and relax for a bit...
+Maybe grow some more pumpkins around my house.
 """
 
 func _cinematic_move_start(target_pos: Vector2, duration: float) -> void:
@@ -209,6 +219,60 @@ func _update_leaves_quest() -> void:
 	if all_leaves >= q1_leaves_count:
 		_on_q1_leaves_quest_finished()
 
+func _on_q3_area_2_finished() -> void:
+	if Quests.Q3_CLEAR_AREA_2 in current_quests:
+		current_quests.remove_at(current_quests.find(Quests.Q3_CLEAR_AREA_2))
+	
+	await _generic_area_finished(q3_area2_marker)
+
+	_check_q3_complete()
+
+func _on_q3_area_3_finished() -> void:
+	if Quests.Q3_CLEAR_AREA_3 in current_quests:
+		current_quests.remove_at(current_quests.find(Quests.Q3_CLEAR_AREA_3))
+	
+	await _generic_area_finished(q3_area3_marker)
+	
+	_check_q3_complete()
+
+func _on_q3_area_0_finished() -> void:
+	if Quests.Q3_CLEAR_HOUSE in current_quests:
+		current_quests.remove_at(current_quests.find(Quests.Q3_CLEAR_HOUSE))
+
+	await _generic_area_finished(q3_house_marker)
+
+	_check_q3_complete()
+
+func _check_q3_complete() -> void:
+	if len(current_quests) == 0:
+		_on_game_finished()
+
+func _on_game_finished() -> void:
+	await get_tree().create_timer(5.0).timeout
+
+	player.lock_player = true
+	await blackbars.set_enabled(true)
+	await get_tree().create_timer(1.0).timeout
+
+	_set_menu_visible(true)
+	await menu.display_current_quest_text(_q4_text)
+
+func _generic_area_finished(marker: Marker2D = null) -> void:
+	# Default implementation
+	player.lock_player = true
+	await blackbars.set_enabled(true)
+	
+	if marker != null:
+		await _cinematic_move_start(marker.global_position, 3.0)
+		await get_tree().create_timer(2.0).timeout
+		await _cinematic_move_end(3.0)
+	else:
+		# Let the transitions happen in the world
+		await get_tree().create_timer(5).timeout
+	
+	await blackbars.set_enabled(false)
+	player.lock_player = false
+
 func _on_area_cleared(area: AreaManager.AreaData) -> void:
 	print("Cleared area: " + str(area.area_id))
 
@@ -217,12 +281,11 @@ func _on_area_cleared(area: AreaManager.AreaData) -> void:
 	
 	if area.area_id == 1:
 		_on_q2_area_1_finished()
+	elif area.area_id == 2:
+		_on_q3_area_2_finished()
+	elif area.area_id == 3:
+		_on_q3_area_3_finished()
+	elif area.area_id == 0:
+		_on_q3_area_0_finished()
 	else:
-		# Default implementation
-		player.lock_player = true
-		await blackbars.set_enabled(true)
-		# Let the transitions happen in the world
-		await get_tree().create_timer(5).timeout
-		await blackbars.set_enabled(false)
-		player.lock_player = false
-		
+		_generic_area_finished()

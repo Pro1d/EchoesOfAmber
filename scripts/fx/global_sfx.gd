@@ -35,7 +35,7 @@ func fadein_track(track: AudioStreamPlayer, volume: float, duration: float = 5.0
 	if track.playing:
 		return
 	
-	print("playing")
+	print("playing track: ", track.name)
 
 	track.volume_db = -64
 	
