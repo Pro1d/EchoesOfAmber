@@ -1,4 +1,5 @@
 extends Sprite2D
+class_name Squirrel
 
 # Squirel state machine types
 enum State {IDLE, LOOKING_FOR_FOOD_LEFT, EATING_LEFT, LOOKING_FOR_FOOD_RIGHT, EATING_RIGHT}
@@ -21,6 +22,9 @@ var eating_start_time := Time.get_ticks_msec()
 func _ready() -> void:
 	pass
 
+func reset_anim_to_right() -> void:
+	state = State.EATING_RIGHT
+	position = food_right_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
