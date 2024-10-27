@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu7ile13mqjn2"]
+[gd_scene load_steps=12 format=3 uid="uid://cu7ile13mqjn2"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_uwui3"]
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_xt31b"]
@@ -10,9 +10,17 @@ keycode = 4194306
 [sub_resource type="Shortcut" id="Shortcut_xsh78"]
 events = [SubResource("InputEventKey_d0dfw")]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lhwed"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh0ee"]
 atlas = ExtResource("1_xt31b")
-region = Rect2(0, 302, 23, 20)
+region = Rect2(264, 312, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54f1i"]
+atlas = ExtResource("1_xt31b")
+region = Rect2(360, 408, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfx34"]
+atlas = ExtResource("1_xt31b")
+region = Rect2(264, 408, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhaqv"]
 atlas = ExtResource("1_xt31b")
@@ -53,16 +61,16 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="OpenMenuButton" type="Button" parent="MarginContainer"]
+[node name="OpenMenuButton" type="TextureButton" parent="MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 shortcut = SubResource("Shortcut_xsh78")
-icon = SubResource("AtlasTexture_lhwed")
-icon_alignment = 1
-expand_icon = true
+texture_normal = SubResource("AtlasTexture_sh0ee")
+texture_pressed = SubResource("AtlasTexture_54f1i")
+texture_hover = SubResource("AtlasTexture_vfx34")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2

@@ -10,7 +10,6 @@ signal play_clicked
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_play_button.pressed.connect(play_clicked.emit)
-	_play_button.pressed.connect(_play_button.set_text.bind("Continue"))
 
 func display_current_quest_text(txt: String) -> void:
 	_quest_label.text = txt

@@ -118,7 +118,7 @@ layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 0
 shortcut = SubResource("Shortcut_0xf5i")
-text = "Start"
+text = "Continue"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
