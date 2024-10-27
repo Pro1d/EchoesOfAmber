@@ -59,6 +59,9 @@ func _on_player_try_spawn_leaves(leave_type: Leave.LeaveType, pileable_tile: Pil
 		leaves_count[leave_type] -= cost
 		pileable_tile.spread_leaves(leave_type, true)
 		_update_leaves_hud(true)
+	elif not has_enough_leaves and pileable_tile.can_spawn_leave():
+		Config.sfx.play_beep()
+		hud.ui_fuzz_fx(leave_type)
 
 	player.play_pile_desposit_animation(leave_type, has_enough_leaves)
 
