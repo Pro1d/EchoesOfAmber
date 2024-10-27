@@ -33,6 +33,7 @@ var attraction_point: Node2D =  null
 var leave_gravity  := 10 # px/s
 var type: LeaveType   = LeaveType.RED # red, green, yellow
 var _state := State.FREE
+var linear_velocity := Vector2.ZERO
 
 # Leave dying on ground mechanic
 var current_time_on_ground := 0.0 # seconds
@@ -75,7 +76,7 @@ func _ready() -> void:
 	_animation_spawn()
 
 func _process(delta: float) -> void:
-	sprite.rotation = lerp_angle(sprite.rotation, velocity.angle(), 0.3)
+	sprite.rotation = lerp_angle(sprite.rotation, linear_velocity.angle(), 0.3)
 	match _state:
 		State.FREE:
 			if not is_zero_approx(elevation_z):
@@ -105,26 +106,29 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	velocity *= 1.0 - delta * 1.3 #pow(0.5, delta)
-	if velocity.length_squared() <  1.0:
-		velocity = Vector2.ZERO
+	if linear_velocity.length_squared() <  1.0:
+		linear_velocity = Vector2.ZERO
+	else:
+		linear_velocity *= 1.0 - delta * 1.3
 	match _state:
 		State.ATTRACTED:
 			var target := attraction_point.global_position
-			var pull_vector := (target - global_position).normalized()
+			var offset := target - global_position
+			var distance := offset.length()
+			var pull_vector := offset / distance
 			var tangent := Vector2(-pull_vector.y, pull_vector.x)
-			var max_dist := 70.0
-			var distance_ratio := clampf((target - global_position).length() / max_dist, 0.0, 1.0)
+			const max_dist := 70.0
+			var distance_ratio := clampf(distance / max_dist, 0.0, 1.0)
 			
-			var pull_force := 300.0 * (1.0 - distance_ratio)
-			var tangential_force := 150.0 * distance_ratio
-			velocity += pull_vector * pull_force * delta
-			velocity += tangent * tangential_force * delta
-			global_position += velocity * delta
+			var pull_force := 300.0 * maxf((1.0 - distance_ratio), 0.4)
+			var tangential_force := 150.0 * minf(distance_ratio, 0.95)
+			linear_velocity += (pull_vector * pull_force + tangent * tangential_force) * delta
+			global_position += linear_velocity * delta
 			var target_elevation := lerpf(0.5, attracted_elevation_z, (1 - distance_ratio) ** 1.0)
 			self.elevation_z = move_toward(elevation_z, target_elevation, delta * 20.0)
 		State.FREE:
-			self.elevation_z = maxf(0, self.elevation_z - (delta * leave_gravity))
+			if elevation_z > 0:
+				elevation_z = move_toward(elevation_z, 0, delta * leave_gravity)
 
 func set_attraction_point(obj: Node2D) -> void:
 	match _state:
