@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpisql5gja5rw"]
+[gd_scene load_steps=9 format=3 uid="uid://dpisql5gja5rw"]
 
 [ext_resource type="AudioStream" uid="uid://6h7i6q3gyv40" path="res://assets/sounds/area_cleared_fx.ogg" id="1_bmv7q"]
 [ext_resource type="Script" path="res://scripts/fx/global_sfx.gd" id="1_j0yuv"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b6kp03lpemcs1" path="res://assets/sounds/grass_fx.ogg" id="4_3e5x5"]
 [ext_resource type="AudioStream" uid="uid://srwckt3yevwm" path="res://assets/sounds/page_turn.ogg" id="5_ik7ys"]
 [ext_resource type="AudioStream" uid="uid://dn4i7krf3eqo1" path="res://assets/musics/piano_track.ogg" id="6_6r1jk"]
+[ext_resource type="AudioStream" uid="uid://bnctolvc5l80l" path="res://assets/sounds/beep.ogg" id="6_tnqjd"]
 [ext_resource type="AudioStream" uid="uid://b8dst0148e2fm" path="res://assets/musics/strings_track.ogg" id="7_hakrh"]
 
 [node name="GlobalSFX" type="Node2D"]
@@ -31,6 +32,12 @@ bus = &"SoundFx"
 [node name="PageTurnFx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ik7ys")
 volume_db = -33.692
+max_polyphony = 4
+bus = &"SoundFx"
+
+[node name="Beep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_tnqjd")
+volume_db = -20.079
 max_polyphony = 4
 bus = &"SoundFx"
 
