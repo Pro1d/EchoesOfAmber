@@ -17,5 +17,5 @@ func display_current_quest_text(txt: String) -> void:
 	for i in range(0, len(txt), 1):
 		_quest_label.visible_characters = i
 
-		await get_tree().process_frame
-		await get_tree().process_frame
+		for _f in range(3):
+			await get_tree().process_frame

@@ -8,13 +8,18 @@ class_name World
 @onready var blackbars : BlackBars = %BlackBars
 @onready var camera : Camera2D = %Camera2D
 
+static var SKIP_INTRO := true
+
 var leaves_count := {
 	Leave.LeaveType.RED: 500,
 	Leave.LeaveType.YELLOW: 500,
 	Leave.LeaveType.GREEN: 500
 }
 
-static var SKIP_INTRO := true
+enum Quests {
+	Q1_GET_LEAVES,
+	Q2_CLEAR_AREA_1
+}
 
 func _ready() -> void:
 	player.on_leave_in_backpack.connect(_on_leave_in_backpack)
@@ -28,14 +33,17 @@ func _ready() -> void:
 
 func _resume_game() -> void:
 	player.lock_player = false
-	menu.hide()
-	hud.show()
+	_set_menu_visible(false)
 
 func _pause_game() -> void:
 	player.lock_player = true
-	menu.show()
-	hud.hide()
-	Config.sfx.play_page_turn_fx()
+	_set_menu_visible(true)
+
+func _set_menu_visible(v: bool) -> void:
+	menu.visible = v
+	hud.visible = not v
+	if v:
+		Config.sfx.play_page_turn_fx()
 
 func _on_player_try_spawn_leaves(leave_type: Leave.LeaveType, pileable_tile: PileableTile) -> void:
 	var cost := 10
@@ -52,6 +60,7 @@ func _on_player_try_spawn_leaves(leave_type: Leave.LeaveType, pileable_tile: Pil
 func _on_leave_in_backpack(leave_type: Leave.LeaveType) -> void:
 	leaves_count[leave_type] += 1
 	_update_leaves_hud(true)
+	_update_leaves_quest()
 	
 func _update_leaves_hud(animate: bool) -> void:
 	hud.update_leave_count([
@@ -60,27 +69,33 @@ func _update_leaves_hud(animate: bool) -> void:
 		leaves_count[Leave.LeaveType.GREEN]], animate)
 
 # ================================================================================================
-# Cinematic stuff starts here
+# Cinematic / QUEST stuff starts here
 # ================================================================================================
 
-func _on_area_cleared(area: AreaManager.AreaData) -> void:
-	print("Cleared area: " + str(area.area_id))
-	player.lock_player = true
-	await blackbars.set_enabled(true)
-	# Let the transitions happen in the world
-	await get_tree().create_timer(5).timeout
-	await blackbars.set_enabled(false)
-	player.lock_player = false
-	
-var _first_quest_text : String = """[color=black]
+var current_quests : Array[Quests] = [Quests.Q1_GET_LEAVES]
+var q1_leaves_count := 0
+var q1_target_leaves := 20
+
+var _q1_text : String = """[color=black]
 Hum it seems my beautiful automnal forest is dying. 
 
 I should get some leaves to bring back its colors.
 
-I should head to the east (=>).
-
 [color="red"]E: Harvest Leaves[/color]
 [/color]"""
+
+var _q2_text : String = """[color=black]
+Mmm, I think I have enough leaves to work my magic.
+
+I should head North and use my leaves to expand the beauty
+of automn.
+
+[color="#CC293C"]J: Spread RED leaves[/color]
+[color="#D19827"]K: Spread ORANGE leaves[/color]
+[color="#8A9335"]L: Spread GREEN leaves[/color]
+
+[/color]
+"""
 
 # Starts the game introduction
 func _start_introduction() -> void:
@@ -110,5 +125,41 @@ func _start_introduction() -> void:
 	await blackbars.set_enabled(false)
 
 	_pause_game()
-	await menu.display_current_quest_text(_first_quest_text)
+	await menu.display_current_quest_text(_q1_text)
+
+# Called when the first quest is finished
+func _on_q1_leaves_quest_finished() -> void:
+	current_quests.remove_at(current_quests.find(Quests.Q1_GET_LEAVES))
 	
+	# Show black bars
+	player.lock_player = true
+	await blackbars.set_enabled(true)
+	Config.sfx.play_area_cleared()
+	await get_tree().create_timer(1).timeout
+	await blackbars.set_enabled(false)
+
+	# Add the new quest
+	current_quests.append(Quests.Q2_CLEAR_AREA_1)
+	_set_menu_visible(true)
+	await menu.display_current_quest_text(_q2_text)
+
+
+func _update_leaves_quest() -> void:
+	if Quests.Q1_GET_LEAVES not in current_quests:
+		return
+
+	var all_leaves := 0
+	for c: int in leaves_count.values():
+		all_leaves += c
+	
+	if all_leaves >= q1_leaves_count:
+		_on_q1_leaves_quest_finished()
+
+func _on_area_cleared(area: AreaManager.AreaData) -> void:
+	print("Cleared area: " + str(area.area_id))
+	player.lock_player = true
+	await blackbars.set_enabled(true)
+	# Let the transitions happen in the world
+	await get_tree().create_timer(5).timeout
+	await blackbars.set_enabled(false)
+	player.lock_player = false
