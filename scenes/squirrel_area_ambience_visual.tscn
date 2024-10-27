@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvt878utrwp3l"]
+
+[ext_resource type="Script" path="res://scripts/squirrel_area_ambience_visual.gd" id="1_r4s2x"]
+[ext_resource type="PackedScene" uid="uid://exa7uhmc2q6d" path="res://scenes/squirrel.tscn" id="2_phuw3"]
+
+[node name="SquirrelArea" type="Node2D"]
+script = ExtResource("1_r4s2x")
+
+[node name="Squirrel" parent="." instance=ExtResource("2_phuw3")]

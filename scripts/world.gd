@@ -18,7 +18,10 @@ var leaves_count := {
 
 enum Quests {
 	Q1_GET_LEAVES,
-	Q2_CLEAR_AREA_1
+	Q2_CLEAR_AREA_1,
+	Q3_CLEAR_AREA_2,
+	Q3_CLEAR_AREA_3,
+	Q3_CLEAR_HOUSE
 }
 
 func _ready() -> void:
@@ -75,6 +78,7 @@ func _update_leaves_hud(animate: bool) -> void:
 
 @onready var intro_area_marker : Marker2D = %CinematicMarkers/Intro
 @onready var open_bridge_marker : Marker2D = %CinematicMarkers/OpenBridge
+@onready var q2_bridge_marker : Marker2D = %CinematicMarkers/Q2Bridge
 
 var current_quests : Array[Quests] = [Quests.Q1_GET_LEAVES]
 var q1_leaves_count := 0
@@ -97,6 +101,20 @@ of automn.
 [color="#CC293C"]J: Spread RED leaves[/color]
 [color="#D19827"]K: Spread ORANGE leaves[/color]
 [color="#8A9335"]L: Spread GREEN leaves[/color]
+
+[/color]
+"""
+
+var _q3_text : String = """[color=black]
+I should add some life to these lands.
+I could try the formulas I have kept in my spellbook for this...
+
+And then I could liven up the forest around the house too...
+
+[color="#D19827"]
+Use J, K, L to spread leaves around the mouse, after coloring the ground create
+leave piles. Combining 3 leave piles builds vegetation. 
+[/color]
 
 [/color]
 """
@@ -145,14 +163,17 @@ func _on_q1_leaves_quest_finished() -> void:
 	player.lock_player = true
 	await blackbars.set_enabled(true)
 	await _cinematic_move_start(open_bridge_marker.global_position, 3)
-	Config.sfx.play_area_cleared()
 	
 	# Transition "leaves" area.
 	var leaves_area : AreaManager.AreaData = area_manager.area_data[AreaManager.AREA_ID_LEAVES]
 	leaves_area.force_mark_cleared = true
 	area_manager.refresh_area_state(AreaManager.AREA_ID_LEAVES, true)
+	
+	# Wait for the squirrel :)
+	await get_tree().create_timer(0.5).timeout
+	Config.sfx.play_area_cleared()
+	await Config.water_2d.build_north_bridge()
 
-	await get_tree().create_timer(1).timeout
 	await _cinematic_move_end(3)
 
 	await blackbars.set_enabled(false)
@@ -162,6 +183,26 @@ func _on_q1_leaves_quest_finished() -> void:
 	_set_menu_visible(true)
 	await menu.display_current_quest_text(_q2_text)
 	
+# Called when the first area (north east) quest is finished
+func _on_q2_area_1_finished() -> void:
+	current_quests.remove_at(current_quests.find(Quests.Q2_CLEAR_AREA_1))
+	
+	# Show black bars
+	player.lock_player = true
+	await blackbars.set_enabled(true)
+	await _cinematic_move_start(q2_bridge_marker.global_position, 3)
+
+	# Wait for the squirrel :)
+	await get_tree().create_timer(1).timeout
+	await Config.water_2d.build_west_bridge()
+
+	await _cinematic_move_end(3)
+	await blackbars.set_enabled(false)
+
+	# Add the new quest
+	current_quests.append_array([Quests.Q3_CLEAR_AREA_2, Quests.Q3_CLEAR_AREA_3, Quests.Q3_CLEAR_HOUSE])
+	_set_menu_visible(true)
+	await menu.display_current_quest_text(_q3_text)
 
 func _update_leaves_quest() -> void:
 	if Quests.Q1_GET_LEAVES not in current_quests:
@@ -174,13 +215,20 @@ func _update_leaves_quest() -> void:
 	if all_leaves >= q1_leaves_count:
 		_on_q1_leaves_quest_finished()
 
-
 func _on_area_cleared(area: AreaManager.AreaData) -> void:
 	print("Cleared area: " + str(area.area_id))
-	player.lock_player = true
-	await blackbars.set_enabled(true)
-	# Let the transitions happen in the world
-	await get_tree().create_timer(5).timeout
-	await blackbars.set_enabled(false)
-	player.lock_player = false
+
+	if area.area_id >= AreaManager.AREA_ID_LEAVES:
+		return
 	
+	if area.area_id == 1:
+		_on_q2_area_1_finished()
+	else:
+		# Default implementation
+		player.lock_player = true
+		await blackbars.set_enabled(true)
+		# Let the transitions happen in the world
+		await get_tree().create_timer(5).timeout
+		await blackbars.set_enabled(false)
+		player.lock_player = false
+		
