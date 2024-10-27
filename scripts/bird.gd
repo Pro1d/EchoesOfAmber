@@ -87,7 +87,7 @@ func transition(animate: bool, shown: bool) -> void:
 		else:
 			state = State.FlyingOut
 	else:
-		sprite.visible = shown
+		visible = shown
 		if shown:
 			state = State.FlyinOutCyle
 			sub_state = SubState.Grounded
