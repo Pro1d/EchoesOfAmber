@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://cc60q0nys63y4" path="res://assets/textures/sprites.png" id="1_g7n2o"]
 [ext_resource type="Script" path="res://scripts/ui/menu.gd" id="1_ncqvn"]
-[ext_resource type="Texture2D" path="res://resources/sprite/red.atlastex" id="2_ti0x8"]
-[ext_resource type="Texture2D" path="res://resources/sprite/yellow.atlastex" id="3_1pnf5"]
-[ext_resource type="Texture2D" path="res://resources/sprite/green.atlastex" id="4_kp7ho"]
-[ext_resource type="Texture2D" path="res://resources/sprite/white.atlastex" id="5_ufa5r"]
+[ext_resource type="Texture2D" uid="uid://dgh3js4ws0tm6" path="res://resources/sprite/red.atlastex" id="2_ti0x8"]
+[ext_resource type="Texture2D" uid="uid://es4rh8d3onvu" path="res://resources/sprite/yellow.atlastex" id="3_1pnf5"]
+[ext_resource type="Texture2D" uid="uid://cbejhslhwxckq" path="res://resources/sprite/green.atlastex" id="4_kp7ho"]
+[ext_resource type="Texture2D" uid="uid://cyjrnsb4fpi43" path="res://resources/sprite/white.atlastex" id="5_ufa5r"]
 [ext_resource type="AudioStream" uid="uid://gqwi5b2hp2rx" path="res://assets/sounds/writing.ogg" id="7_cs3gx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48rtn"]
@@ -88,18 +88,19 @@ theme_override_constants/margin_bottom = 25
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 90
+theme_override_constants/separation = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "Game Title"
+theme_override_font_sizes/font_size = 40
+text = "Echoes of Amber"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
@@ -109,24 +110,20 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Lore & goals"
-clip_text = true
+visible_characters_behavior = 1
 
 [node name="PlayButton" type="Button" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 focus_mode = 0
 shortcut = SubResource("Shortcut_0xf5i")
-text = "Play (find a RP text)"
+text = "Start"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 12
 
 [node name="ControlLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -138,16 +135,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label3" type="RichTextLabel" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "[WASD] Move
-[E] Harvest leaves
-[J] Put RED leaves
-[K] Put YELLOW leaves
-[L] Put GREEN leaves"
-clip_text = true
+bbcode_enabled = true
+text = "[img=26x26,center,center]res://resources/sprite/keys/W.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/A.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/S.atlastex[/img]|[img=26x26,center,center]res://resources/sprite/keys/D.atlastex[/img] Move
+[img=26x26,center,center]res://resources/sprite/keys/E.atlastex[/img] Harvest leaves (Hold)
+[img=26x26,center,center]res://resources/sprite/keys/J.atlastex[/img] Put [img=36x36,center,center]res://resources/sprite/red.atlastex[/img] RED leaves
+[img=26x26,center,center]res://resources/sprite/keys/K.atlastex[/img] Put [img=36x36scenter,center]res://resources/sprite/yellow.atlastex[/img] ORANGE leaves
+[img=26x26,center,center]res://resources/sprite/keys/L.atlastex[/img] Put [img=36x36,center,center]res://resources/sprite/green.atlastex[/img] GREEN leaves"
 
 [node name="RecipeLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -649,4 +645,5 @@ texture = SubResource("AtlasTexture_jf8na")
 [node name="WritingFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_cs3gx")
+volume_db = -5.0
 bus = &"SoundFx"
